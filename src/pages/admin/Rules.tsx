@@ -15,8 +15,8 @@ import { Loading, Modal, useToast } from "../../components/ui";
 /** Rules: changes go to a branch and PR/MR, applied after approval by another admin of the area. */
 export function RulesAdmin() {
   const { t } = useTranslation();
-  const { me, has } = useSession();
-  const visible = AREAS.filter((a) => me.globalAdmin || has("admin", a));
+  const { me, isAreaAdmin } = useSession();
+  const visible = AREAS.filter((a) => me.globalAdmin || isAreaAdmin(a));
   const [area, setArea] = useState<Area>(visible[0] ?? "product");
   if (visible.length === 0) return <p className="muted">{t("admin.noAccess")}</p>;
   return (

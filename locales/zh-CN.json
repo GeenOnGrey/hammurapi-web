@@ -9,10 +9,24 @@
     "remove": "移除",
     "clear": "清除",
     "back": "返回",
-    "home": "返回首页"
+    "home": "返回首页",
+    "agent": "智能体",
+    "tokens": "{n} 个 token"
   },
-  "areas": { "product": "产品", "design": "设计", "arch": "架构", "tech": "技术规范", "qa": "测试" },
-  "areasShort": { "product": "产品", "design": "设计", "arch": "架构", "tech": "技术", "qa": "测试" },
+  "areas": {
+    "product": "产品",
+    "design": "设计",
+    "arch": "架构",
+    "tech": "技术规范",
+    "qa": "测试"
+  },
+  "areasShort": {
+    "product": "产品",
+    "design": "设计",
+    "arch": "架构",
+    "tech": "技术",
+    "qa": "测试"
+  },
   "status": {
     "draft": "草稿",
     "in_review": "待审批",
@@ -28,9 +42,15 @@
     "approverRow": "审批人",
     "adminRow": "领域管理员",
     "globalAdmin": "全局管理员",
-    "readerOnly": "只读"
+    "readerOnly": "只读",
+    "owner": "服务负责人"
   },
-  "tones": { "business": "商务", "friendly": "友好", "concise": "简洁", "mentor": "导师" },
+  "tones": {
+    "business": "商务",
+    "friendly": "友好",
+    "concise": "简洁",
+    "mentor": "导师"
+  },
   "login": {
     "slogan": "太初有规范……",
     "signIn": "使用 {provider} 登录",
@@ -41,15 +61,27 @@
       "failed": "登录失败。请重试或联系管理员。"
     }
   },
-  "top": { "search": "搜索功能和 ID", "import": "导入", "newFeature": "新建功能" },
+  "top": {
+    "search": "搜索功能和 ID",
+    "import": "导入",
+    "newFeature": "新建功能",
+    "newIssue": "新建任务"
+  },
   "home": {
     "awaiting": "等待您审批",
     "allApproved": "全部已审批",
     "allApprovedHint": "新的待审批文档会显示在这里。",
     "domains": "领域",
     "status": "状态",
-    "domain": { "mine": "我的", "all": "全部" },
-    "statusFilter": { "in_progress": "进行中", "handed_off": "已移交", "all": "全部" },
+    "domain": {
+      "mine": "我的",
+      "all": "全部"
+    },
+    "statusFilter": {
+      "in_progress": "进行中",
+      "handed_off": "已移交",
+      "all": "全部"
+    },
     "searching": "搜索：{q}",
     "emptyMine": "您的领域中没有进行中的功能",
     "emptyFiltered": "没有符合筛选条件的功能",
@@ -110,7 +142,29 @@
       "approved": "由 {name} 于 {when} 审批。任何修改都会使关卡回到草稿。",
       "draftAfterApproval": "自上次审批后有修改。",
       "draft": "草稿。完成后请提交审批。"
-    }
+    },
+    "issues": "任务：",
+    "release": "发布：",
+    "noDiscovery": "已导入，无 Discovery",
+    "prNotMerged": "发布前不合并",
+    "flagKey": "功能开关键",
+    "flagHint": "启用功能开关时，发布会等待该开关在生产环境开启。",
+    "tabs": {
+      "spec": "规格",
+      "implementation": "实现",
+      "validation": "验证",
+      "history": "历史"
+    },
+    "readOnlyCodegen": "代码生成期间规格为只读。",
+    "rolledBack": "该方案的发布已回滚：方案不会重新打开，工作通过任务继续。",
+    "generating": "智能体正在生成 tech 和 qa…",
+    "generationFailed": "tech/qa 生成已停止：",
+    "regenerate": "重新生成",
+    "regenerating": "已开始重新生成",
+    "generatedLater": "审批后生成",
+    "readyForCodegen": "所有关卡已就绪。",
+    "readyForCodegenHint": "智能体可以在服务中准备变更。",
+    "startCodegen": "开始生成代码"
   },
   "editor": {
     "toolbar": "格式",
@@ -127,7 +181,13 @@
     },
     "draftByRules": "按规则起草",
     "draftPrompt": "请按照该领域的规则为 {id} 起草“{area}”规范。",
-    "state": { "idle": "", "dirty": "有未保存的更改", "saving": "保存中…", "saved": "已保存", "error": "未保存" },
+    "state": {
+      "idle": "",
+      "dirty": "有未保存的更改",
+      "saving": "保存中…",
+      "saved": "已保存",
+      "error": "未保存"
+    },
     "lockedBy": "{name} 正在编辑。",
     "lockedText": "文档以只读方式打开。{name} 关闭文档或闲置 15 分钟后即可编辑。",
     "unsupported": "文档包含编辑器不支持的内容（{list}）。这些内容保持原样，并显示为不可编辑的块。",
@@ -141,7 +201,11 @@
     "staleTitle": "文档已更改",
     "staleText": "有人保存了更新的版本。请重新加载；您未保存的文本将被放弃。",
     "retry": "重试",
-    "discard": "放弃更改"
+    "discard": "放弃更改",
+    "generated": "此关卡由智能体编写。在聊天中评论，智能体会重新生成。",
+    "askAgentButton": "请智能体处理",
+    "askAgent": "请结合我的意见重新生成 {area} 关卡：",
+    "unnumbered": "{count, plural, other {# 条需求没有 ID（**R1.**）。}}"
   },
   "history": {
     "title": "历史：{area}",
@@ -155,7 +219,8 @@
       "approved": "审批通过",
       "reset": "修改导致审批重置",
       "deleted": "删除"
-    }
+    },
+    "gateTitle": "历史：{area}"
   },
   "diff": {
     "sinceApproval": "自 {when} 审批以来的变更",
@@ -229,7 +294,10 @@
     "title": "个人资料",
     "language": "语言",
     "theme": "主题",
-    "themes": { "light": "浅色", "dark": "深色" },
+    "themes": {
+      "light": "浅色",
+      "dark": "深色"
+    },
     "myDomains": "我的领域",
     "noDomains": "暂无领域",
     "agent": "代理",
@@ -309,7 +377,8 @@
       "rolesOf": "{name} 的角色",
       "globalHint": "用户、字典、设置",
       "save": "保存角色",
-      "saved": "角色已保存"
+      "saved": "角色已保存",
+      "expertsHint": "专家在“领域与系统”中按领域指派。"
     },
     "domains": {
       "title": "领域和系统",
@@ -328,7 +397,14 @@
       "keyHint": "2–10 个字符：大写拉丁字母和数字，以字母开头。",
       "approvalRequired": "需要审批",
       "domainName": "领域 {key} 的名称",
-      "systemName": "系统 {key} 的名称"
+      "systemName": "系统 {key} 的名称",
+      "experts": "专家",
+      "expertsCount": "产品 {product} · 技术 {technical}",
+      "expertsOf": "{key} 的专家",
+      "expertsHint": "产品专家审批 product 和 design，技术专家审批 arch、tech 和 qa。任何专家都可编辑。",
+      "fromBackstage": "来自 Backstage",
+      "deletedInCatalog": "已在目录中删除",
+      "managed": "字典来自 Backstage：领域和系统在目录中创建。"
     },
     "rules": {
       "title": "规则",
@@ -338,8 +414,15 @@
       "withdraw": "撤回",
       "applied": "变更已应用",
       "withdrawn": "变更已撤回",
-      "files": { "template": "模板", "fix-template": "修复模板" },
-      "status": { "open": "待处理", "merged": "已应用", "withdrawn": "已撤回" },
+      "files": {
+        "template": "模板",
+        "fix-template": "修复模板"
+      },
+      "status": {
+        "open": "待处理",
+        "merged": "已应用",
+        "withdrawn": "已撤回"
+      },
       "comment": "修改内容和原因",
       "commentHint": "给审批同事的简短说明",
       "appliesAfter": "变更需由“{area}”的另一位管理员批准后生效",
@@ -357,6 +440,96 @@
       "days": "{count, plural, other {天}}",
       "retentionHint": "对所有用户生效。更早的文件每天删除一次。",
       "saved": "设置已保存"
+    },
+    "services": {
+      "title": "服务",
+      "key": "服务",
+      "system": "系统",
+      "repo": "仓库",
+      "owners": "负责人",
+      "ownerRef": "负责人（spec.owner）",
+      "ownerHint": "git 提供商的 user:anna.k 或 group:platform",
+      "add": "添加服务",
+      "edit": "编辑",
+      "managed": "服务来自各仓库的 catalog-info.yaml。"
+    },
+    "cycle": {
+      "title": "周期设置",
+      "catalog": "Backstage 目录",
+      "catalogEnabled": "从 catalog-info.yaml 读取领域、系统和服务",
+      "catalogHint": "键取自 hammurapi/key 注解或大写的 metadata.name。推送目录文件会触发同步。",
+      "catalogRepo": "目录仓库（Domain、System）",
+      "catalogGlob": "路径（glob）",
+      "serviceFile": "服务仓库中的路径",
+      "serviceRepos": "服务仓库（每行一个）",
+      "syncNow": "立即同步",
+      "synced": "已同步：领域 {domains}、系统 {systems}、服务 {services}、错误 {errors}",
+      "lastSync": "上次同步 {at}",
+      "neverSynced": "尚未同步",
+      "notImported": "未导入",
+      "flags": "功能开关",
+      "flagsEnabled": "在发布中使用功能开关",
+      "flagsHint": "开关服务将事件发送到通用 webhook；只有生产环境事件会改变发布步骤。",
+      "activeSecrets": "有效密钥：{n}",
+      "rotate": "签发新密钥",
+      "secretOnce": "请立即复制，仅显示一次：",
+      "stage": "预发环境",
+      "stageEnabled": "验证时将 PR 分支部署到预发环境",
+      "stageHint": "e2e 测试用例在最后一个服务的预发部署流水线中运行。",
+      "runner": "智能体任务",
+      "executor": "执行器：{executor}",
+      "localWarning": "local 执行器没有网络隔离：仅用于开发和演示，不适用于生产。"
+    },
+    "deploy": {
+      "title": "部署",
+      "env": {
+        "stage": "预发环境",
+        "production": "生产环境"
+      },
+      "notConfigured": {
+        "stage": "未配置：预发部署需手动标记。",
+        "production": "未配置：以包含合并提交的标签或手动标记计为发布。"
+      },
+      "type": "类型",
+      "types": {
+        "github-actions": "GitHub Actions",
+        "gitlab-ci": "GitLab CI",
+        "webhook": "Webhook"
+      },
+      "workflow": "工作流",
+      "auth": "授权",
+      "authTypes": {
+        "bot": "机器人令牌",
+        "secret": "密钥"
+      },
+      "timeout": "结果超时（分钟）",
+      "params": "参数",
+      "paramsHint": "每行 名称=值；变量 {service}、{repo}、{ref}、{environment}、{feature}、{release}、{callback_url}、{run_id}。",
+      "resultHook": "结果 Webhook",
+      "copy": "复制",
+      "test": "检查启动",
+      "testRun": "试运行",
+      "testOk": "流水线已启动 {url}",
+      "testFailed": "失败：{error}",
+      "override": "部署覆盖",
+      "overrideOf": "{key} 的部署",
+      "overrideHint": "留空则使用环境设置。",
+      "fromAnnotation": "由 catalog-info.yaml 中的 hammurapi/deploy-workflow 注解设置。"
+    },
+    "metrics": {
+      "title": "指标数据源",
+      "hint": "只读账号。ClickHouse 仅允许 SELECT（readonly=1 并设限）；Prometheus 仅允许 query 和 query_range。",
+      "name": "名称",
+      "add": "添加数据源",
+      "test": "测试",
+      "testOf": "在 {name} 中测试查询",
+      "run": "运行",
+      "value": "值：{value}",
+      "username": "用户",
+      "password": "密码",
+      "secretRef": "或 Kubernetes 密钥（env:名称）",
+      "maxSeconds": "最长执行时间（秒）",
+      "readOnly": "密码加密保存；数据库中只保存引用。"
     }
   },
   "errors": {
@@ -439,5 +612,431 @@
     "invalid_cursor": "无效页面。",
     "invalid_limit": "无效的每页数量。",
     "invalid_status": "未知状态。"
+  },
+  "stages": {
+    "title": "阶段",
+    "general": "总览",
+    "research": "研究",
+    "development": "开发",
+    "delivery": "交付"
+  },
+  "general": {
+    "focus": "待办焦点",
+    "overview": "概览"
+  },
+  "focus": {
+    "research": "研究",
+    "development": "开发",
+    "release": "交付",
+    "nothing": "无待处理事项",
+    "action": {
+      "verify_discovery": "验证 Discovery",
+      "approve_gate": "审批",
+      "sign_validation": "签署验证",
+      "start_merge": "开始合并",
+      "mark_deploy": "标记发布",
+      "retry_or_rollback": "重试或回滚",
+      "mark_flag": "功能开关",
+      "confirm_release": "确认发布",
+      "resolve_blocked": "已停止"
+    }
+  },
+  "issueType": {
+    "idea": "想法",
+    "problem": "问题"
+  },
+  "issueStatus": {
+    "new": "新建",
+    "discovery": "Discovery",
+    "verification": "待验证",
+    "accepted": "已接受",
+    "resolved": "已解决",
+    "rejected": "已拒绝",
+    "merged": "已合并"
+  },
+  "issueSource": {
+    "manual": "手动",
+    "hammurapi_analysis": "Hammurapi 分析",
+    "jira": "Jira",
+    "feedback": "用户反馈",
+    "prod_errors": "生产错误"
+  },
+  "phase": {
+    "spec": "规格",
+    "codegen": "代码生成",
+    "validation": "验证",
+    "in_release": "发布中",
+    "released": "已发布",
+    "rolled_back": "已回滚",
+    "deleted": "已删除"
+  },
+  "path": {
+    "spec": "规格",
+    "codegen": "代码生成",
+    "validation": "验证",
+    "in_release": "发布"
+  },
+  "releaseStatus": {
+    "merging": "合并变更",
+    "deploying": "部署中",
+    "enabling_flags": "开启功能开关",
+    "evaluating": "评估指标",
+    "awaiting_confirmation": "待确认",
+    "succeeded": "成功",
+    "rolling_back": "回滚中",
+    "rolled_back": "已回滚"
+  },
+  "releaseStep": {
+    "merging": "合并变更",
+    "deploying": "部署",
+    "enabling_flags": "开启功能开关",
+    "evaluating": "评估指标",
+    "awaiting_confirmation": "确认"
+  },
+  "rollbackStep": {
+    "revert": "准备回滚 PR",
+    "revert_wait": "准备回滚 PR",
+    "merge_wait": "合并回滚 PR",
+    "deploy_wait": "重新部署",
+    "flags_wait": "等待关闭功能开关",
+    "close_wait": "关闭规格 PR"
+  },
+  "expert": {
+    "product": "产品专家",
+    "technical": "技术专家"
+  },
+  "autonomy": {
+    "title": "智能体在 {key} 中的自主级别",
+    "noMerge": "任何级别下 PR 都只在发布时合并。",
+    "plan": {
+      "name": "计划",
+      "text": "智能体准备变更计划；代码和 PR 由人完成。",
+      "prepares": "变更计划"
+    },
+    "pr": {
+      "name": "PR",
+      "text": "智能体创建 PR；必须经过人工评审。",
+      "prepares": "带测试的 PR，并指派评审人"
+    },
+    "autonomous": {
+      "name": "自主",
+      "text": "智能体创建 PR；无需人工评审——CI 通过和智能体核对即可。",
+      "prepares": "带测试的 PR，无需评审"
+    }
+  },
+  "newIssue": {
+    "title": "新建任务",
+    "type": "类型",
+    "typeHint": {
+      "idea": "新能力。智能体会研究其价值以及衡量方式。",
+      "problem": "缺陷。智能体会查找原因以及包含该缺陷的方案。"
+    },
+    "domain": "领域",
+    "name": "标题",
+    "description": "描述",
+    "preview": "任务将获得键 {key}；Discovery 会立即开始。",
+    "create": "创建任务",
+    "creating": "正在创建…"
+  },
+  "issues": {
+    "type": "类型",
+    "empty": "没有符合筛选条件的任务",
+    "emptyHint": "新工作从任务开始。",
+    "filter": {
+      "open": "进行中",
+      "accepted": "已接受",
+      "resolved": "已解决",
+      "closed": "已关闭",
+      "all": "全部"
+    }
+  },
+  "issue": {
+    "notFound": "未找到任务 {key}",
+    "features": "方案：",
+    "releases": "发布：",
+    "movedFrom": "原键 {keys}",
+    "mergedFrom": "已合并：",
+    "mergedInto": "已合并到",
+    "rolledBack": "回滚后退回：",
+    "rejected": "已拒绝：",
+    "reopen": "重新打开",
+    "description": "描述",
+    "revision": "第 {n} 版",
+    "revisions": "Discovery 版本",
+    "rediscover": "重新运行 Discovery",
+    "discoveryBlocked": "Discovery 已停止：",
+    "agentWorking": "智能体正在研究任务…",
+    "retrying": "上次尝试失败，正在重试。",
+    "value": "价值",
+    "measure": "如何衡量",
+    "required": "必填",
+    "notFilled": "未填写",
+    "source": "数据源",
+    "query": "查询",
+    "target": "目标",
+    "window": "评估窗口",
+    "checked": "查询已于 {at} 成功执行",
+    "similar": "相似项",
+    "problemFeature": "缺陷所在",
+    "document": "Discovery 文档",
+    "missing": "缺少：{fields}",
+    "field": {
+      "value": "价值",
+      "measure.source": "指标数据源",
+      "measure.query": "查询",
+      "measure.target": "目标",
+      "measure.window": "评估窗口"
+    },
+    "accept": "接受",
+    "acceptDisabled": "Discovery 需要价值和衡量方式",
+    "reject": "拒绝",
+    "merge": "合并",
+    "move": "迁移",
+    "history": "历史"
+  },
+  "accept": {
+    "title": "接受 {key}",
+    "fix": "修复已有方案",
+    "noFeature": "无对应方案",
+    "parent": "包含缺陷的方案",
+    "preview": "将创建 {key} 并关联 {issue}。",
+    "text": "Discovery 将附加到方案，成功指标会写入产品规格草稿。"
+  },
+  "reject": {
+    "title": "拒绝 {key}",
+    "reason": "原因",
+    "hint": "作者会看到原因。"
+  },
+  "merge": {
+    "title": "合并 {key}",
+    "into": "主任务",
+    "hint": "重复项将以“已合并”关闭。若主任务已成为方案，方案会关联两者。"
+  },
+  "move": {
+    "title": "迁移 {key}",
+    "domain": "新领域",
+    "hint": "任务将获得新领域的键；{key} 仍可打开它。"
+  },
+  "development": {
+    "phase": "阶段",
+    "empty": "没有符合筛选条件的方案",
+    "emptyHint": "方案由已接受的任务创建。",
+    "imported": "无 Discovery",
+    "status": {
+      "active": "进行中",
+      "released": "已发布",
+      "rolled_back": "已回滚",
+      "all": "全部"
+    }
+  },
+  "codegen": {
+    "title": "{id} 的代码生成",
+    "service": "服务",
+    "repo": "仓库",
+    "autonomy": "自主级别",
+    "agentPrepares": "智能体将准备",
+    "noServices": "技术规格中没有目录内的服务。",
+    "notMerged": "PR 在发布前不会合并；生成期间规格为只读。",
+    "started": "已开始生成代码"
+  },
+  "impl": {
+    "blocked": "代码生成已停止：",
+    "waitingHumanPr": "等待“计划”级服务由人工提交 PR。",
+    "notMerged": "尚未合并任何内容：合并在发布中进行。",
+    "empty": "尚无代码",
+    "emptyHint": "所有关卡审批后开始生成代码。",
+    "humanPrs": "人工 PR",
+    "matrix": "需求 → 测试用例 → PR",
+    "tokens": "智能体：{n} 个 token",
+    "plan": "变更计划",
+    "planHint": "代码和 PR 由人完成",
+    "noPr": "尚无 PR",
+    "byHuman": "人工创建",
+    "requirement": "需求",
+    "services": "服务",
+    "testCases": "测试用例",
+    "noTest": "无测试用例",
+    "noPrShort": "无 PR"
+  },
+  "task": {
+    "retry": "重试",
+    "working": "进行中",
+    "status": {
+      "queued": "排队中",
+      "running": "运行中",
+      "succeeded": "完成",
+      "failed": "失败",
+      "cancelled": "已取消"
+    },
+    "type": {
+      "implement": "代码生成",
+      "address_review": "处理评审意见",
+      "update_pr": "更新 PR",
+      "revert": "回滚 PR",
+      "ci_setup": "CI 步骤"
+    }
+  },
+  "ci": {
+    "pending": "等待中",
+    "success": "通过",
+    "failure": "失败"
+  },
+  "review": {
+    "none": "无评审",
+    "required": "评审中",
+    "changes_requested": "需要修改",
+    "approved": "评审通过",
+    "not_required": "无需评审"
+  },
+  "prState": {
+    "open": "打开",
+    "merged": "已合并",
+    "closed": "已关闭"
+  },
+  "val": {
+    "notYet": "PR 就绪后开始验证",
+    "notYetHint": "在合并之前检查测试、覆盖率、偏差和评审。",
+    "waitingCi": "等待 PR 分支的 CI 结果。",
+    "waitingStage": "正在将分支部署到预发环境；最后一个服务后运行 e2e。",
+    "released": "已验证。发布：",
+    "kpi": {
+      "tests": "PR 分支中的测试用例",
+      "testsFailed": "{n} 个失败",
+      "coverage": "需求覆盖",
+      "discrepancies": "偏差",
+      "reviews": "评审通过"
+    },
+    "tests": "按测试用例的测试",
+    "noTests": "qa 规格中没有测试用例。",
+    "level": "级别",
+    "result": "结果",
+    "status": {
+      "passed": "通过",
+      "failed": "失败",
+      "skipped": "跳过",
+      "missing": "无结果"
+    },
+    "reviews": "评审",
+    "stage": "预发环境",
+    "stageManual": "未配置预发流水线：请手动标记分支已部署。",
+    "markStage": "标记已部署",
+    "signatures": "签署",
+    "side": {
+      "product": "产品侧",
+      "technical": "技术侧"
+    },
+    "sign": "签署",
+    "signed": "已签署",
+    "waitingSignature": "等待签署",
+    "releaseHint": "第二个签署后将创建发布。",
+    "releaseCreated": "已创建发布 {key}",
+    "return": "退回修改",
+    "returnTitle": "退回修改",
+    "toCode": "代码",
+    "toSpec": "规格",
+    "returnHint": {
+      "code": "智能体将更新相同的 PR；签署将被重置。",
+      "spec": "规格将重新可编辑；审批后重新生成代码。"
+    },
+    "comment": "评论"
+  },
+  "release": {
+    "notFound": "未找到发布 {key}",
+    "feature": "方案：",
+    "blocked": "已停止",
+    "blockedTitle": "发布已停止：",
+    "retry": "重试",
+    "rollback": "回滚",
+    "confirm": "确认发布",
+    "rollingBack": "回滚中：",
+    "rolledBack": "由 {name} 回滚：",
+    "succeeded": "{name} 于 {at} 确认：规格 PR 已合并。",
+    "startHint": "PR 将按架构规格中的发布顺序，以专家的令牌合并。",
+    "editPlan": "修改顺序",
+    "planHint": "服务的合并与部署顺序；规格 PR 始终最后。",
+    "up": "上移",
+    "down": "下移",
+    "startMerge": "开始合并",
+    "flagWait": "等待生产环境开启开关 {flag}。",
+    "markFlagOn": "标记开关已开启",
+    "markFlagOff": "标记开关已关闭",
+    "flagMarkHint": "Hammurapi 不会切换开关：请记录在开关服务中为 {flag} 设置的状态。",
+    "prs": "按合并顺序的 PR",
+    "current": "当前",
+    "specPr": "规格 PR",
+    "onConfirm": "确认时",
+    "reverts": "回滚 PR",
+    "metric": "成功指标",
+    "metricNext": "评估窗口将在 Hammurapi 下一版本提供；服务正常后请确认。",
+    "noMetric": "无指标（导入的方案）。",
+    "noFlag": "未设置开关键",
+    "flag": {
+      "on": "生产环境已开启",
+      "off": "生产环境已关闭"
+    },
+    "tasks": "智能体任务",
+    "skipped": "跳过",
+    "nextRelease": "下一版本",
+    "markDeploy": "标记已发布",
+    "markTitle": "{service} 已发布",
+    "version": "版本或 ref",
+    "markHint": "以最先到达的信号为准：流水线结果、标签或此标记。",
+    "confirmTitle": "确认 {key}",
+    "confirmSpec": "规格 PR 将以您的令牌合并到默认分支。",
+    "confirmStatuses": "发布变为“成功”，方案变为“已发布”，任务变为“已解决”。",
+    "confirmProblem": "未达成目标：将创建“问题”任务。"
+  },
+  "rollback": {
+    "title": "回滚 {key}",
+    "what": "将发生：",
+    "reverts": "智能体为已合并的 PR 创建回滚 PR，并以您的令牌按相反顺序合并",
+    "redeploy": "服务将重新发布",
+    "flags": "Hammurapi 将等待功能开关在开关服务中关闭",
+    "spec": "规格 PR 将不合并直接关闭",
+    "issues": "任务将回到“新建”，并重新运行 Discovery",
+    "reason": "原因"
+  },
+  "releases": {
+    "empty": "暂无发布",
+    "emptyHint": "第二个验证签署会创建发布。",
+    "filter": {
+      "active": "进行中",
+      "succeeded": "成功",
+      "rolled_back": "已回滚",
+      "all": "全部"
+    }
+  },
+  "deploy": {
+    "run": "流水线运行",
+    "status": {
+      "triggered": "等待中",
+      "started": "进行中",
+      "success": "已发布",
+      "failure": "失败",
+      "timeout": "无结果"
+    },
+    "signal": {
+      "pipeline": "流水线",
+      "tag": "标签",
+      "manual": "手动标记"
+    }
+  },
+  "unnumbered": {
+    "title": "没有 ID 的需求",
+    "text": "{count, plural, other {# 条需求没有 ID。测试用例和代码通过 ID 关联需求。}}",
+    "askAgent": "请智能体添加 ID",
+    "submitAnyway": "不加 ID 直接提交",
+    "prompt": "请将产品规格中的所有需求编号为 **R1.**，并附验收标准。"
+  },
+  "activity": {
+    "created": "已创建",
+    "accepted": "已接受",
+    "rejected": "已拒绝",
+    "reopened": "已重新打开",
+    "merged": "已合并",
+    "merged_from": "合并了其他任务",
+    "moved": "已迁移",
+    "discovery_updated": "Discovery 已更新",
+    "returned_after_rollback": "回滚后退回"
   }
 }

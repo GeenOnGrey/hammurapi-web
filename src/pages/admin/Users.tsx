@@ -3,12 +3,10 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { api, qs } from "../../api/client";
 import { keys } from "../../api/queries";
-import { AREAS, type AdminUser, type Area, type List, type Role, type RoleAreas } from "../../api/types";
+import { AREAS, type AdminUser, type Area, type List } from "../../api/types";
 import { errorText } from "../../lib/errors";
 import { Icon } from "../../components/Icon";
 import { Loading, Switch, useToast } from "../../components/ui";
-
-const ROLES: Role[] = ["editor", "approver", "admin"];
 
 export function UsersAdmin() {
   const { t } = useTranslation();
@@ -48,12 +46,13 @@ export function UsersAdmin() {
 
 function RoleChips({ u }: { u: AdminUser }) {
   const { t } = useTranslation();
-  if (!u.globalAdmin && u.roles.length === 0) return <span className="small muted">{t("roles.readerOnly")}</span>;
+  if (!u.globalAdmin && u.areaAdmin.length === 0 && u.experts.length === 0) return <span className="small muted">{t("roles.readerOnly")}</span>;
   return (
     <>
       {u.globalAdmin && <span className="rolechip global"><b>{t("roles.globalAdmin")}</b></span>}
-      {u.roles.map((r) => (
-        <span key={r.role} className="rolechip"><b>{t(`roles.${r.role}`)}</b> {r.areas.map((a) => t(`areas.${a}`)).join(", ")}</span>
+      {u.areaAdmin.length > 0 && <span className="rolechip"><b>{t("roles.admin")}</b> {u.areaAdmin.map((a) => t(`areas.${a}`)).join(", ")}</span>}
+      {u.experts.map((e) => (
+        <span key={e.domain} className="rolechip"><b>{e.domain}</b> {e.kinds.map((k) => t(`expert.${k}`)).join(", ")}</span>
       ))}
     </>
   );
@@ -64,73 +63,49 @@ function RoleEditor({ user, onDone }: { user: AdminUser; onDone: (u: AdminUser) 
   const qc = useQueryClient();
   const toast = useToast();
   const [global, setGlobal] = useState(user.globalAdmin);
-  const [grid, setGrid] = useState<Record<Role, Set<Area>>>(() => fromRoles(user.roles));
-  useEffect(() => setGrid(fromRoles(user.roles)), [user]);
-
-  const toggle = (r: Role, a: Area) => setGrid((g) => {
-    const next = { ...g, [r]: new Set(g[r]) };
-    if (next[r].has(a)) next[r].delete(a);
-    else next[r].add(a);
-    return next;
+  const [areas, setAreas] = useState<Set<Area>>(() => new Set(user.areaAdmin));
+  useEffect(() => setAreas(new Set(user.areaAdmin)), [user]);
+  const toggle = (a: Area) => setAreas((s) => {
+    const n = new Set(s);
+    if (n.has(a)) n.delete(a);
+    else n.add(a);
+    return n;
   });
-
   const save = useMutation({
     mutationFn: () => {
-      const roles: RoleAreas[] = ROLES.map((r) => ({ role: r, areas: AREAS.filter((a) => grid[r].has(a)) })).filter((r) => r.areas.length > 0);
-      return api.put(`/admin/api/v1/users/${user.id}/roles`, { globalAdmin: global, roles }).then(() => roles);
+      const areaAdmin = AREAS.filter((a) => areas.has(a));
+      return api.put(`/admin/api/v1/users/${user.id}/roles`, { globalAdmin: global, areaAdmin }).then(() => areaAdmin);
     },
-    onSuccess: (roles) => {
+    onSuccess: (areaAdmin) => {
       qc.invalidateQueries({ queryKey: ["admin", "users"] });
       qc.invalidateQueries({ queryKey: keys.me });
       toast({ kind: "ok", title: t("admin.users.saved") });
-      onDone({ ...user, globalAdmin: global, roles });
+      onDone({ ...user, globalAdmin: global, areaAdmin });
     },
     onError: (e) => toast({ kind: "error", title: errorText(t, e) }),
   });
-
   return (
     <div className="card">
       <h2 className="sec">{t("admin.users.rolesOf", { name: user.displayName })}</h2>
       <div style={{ marginBottom: 12 }}>
         <Switch on={global} onChange={setGlobal} label={<>{t("roles.globalAdmin")} <span className="small muted">{t("admin.users.globalHint")}</span></>} />
       </div>
-      <div className="areas" role="grid">
-        <div />
-        {AREAS.map((a) => <div key={a}>{t(`areasShort.${a}`)}</div>)}
-        {ROLES.map((r) => (
-          <RoleRow key={r} role={r} grid={grid} toggle={toggle} />
-        ))}
+      <div className="small t2" style={{ marginBottom: 6 }}>{t("roles.admin")}</div>
+      <div className="row" style={{ flexWrap: "wrap" }}>
+        {AREAS.map((a) => {
+          const on = areas.has(a);
+          return (
+            <button key={a} className={`chip${on ? " on" : ""}`} role="checkbox" aria-checked={on} onClick={() => toggle(a)}>
+              {on && <Icon name="check" size={12} />} {t(`areas.${a}`)}
+            </button>
+          );
+        })}
       </div>
+      <div className="hint" style={{ marginTop: 10 }}>{t("admin.users.expertsHint")}</div>
       <div className="row" style={{ justifyContent: "flex-end", marginTop: 14 }}>
-        <button className="btn ghost sm" onClick={() => { setGlobal(user.globalAdmin); setGrid(fromRoles(user.roles)); }}>{t("common.cancel")}</button>
+        <button className="btn ghost sm" onClick={() => { setGlobal(user.globalAdmin); setAreas(new Set(user.areaAdmin)); }}>{t("common.cancel")}</button>
         <button className="btn primary sm" disabled={save.isPending} onClick={() => save.mutate()}>{t("admin.users.save")}</button>
       </div>
     </div>
   );
-}
-
-function RoleRow({ role, grid, toggle }: { role: Role; grid: Record<Role, Set<Area>>; toggle: (r: Role, a: Area) => void }) {
-  const { t } = useTranslation();
-  return (
-    <>
-      <div>{t(`roles.${role}Row`)}</div>
-      {AREAS.map((a) => {
-        const on = grid[role].has(a);
-        return (
-          <div key={a}>
-            <button className={`cb${on ? " on" : ""}`} role="checkbox" aria-checked={on}
-              aria-label={`${t(`roles.${role}`)} · ${t(`areas.${a}`)}`} onClick={() => toggle(role, a)}>
-              {on && <Icon name="check" size={12} />}
-            </button>
-          </div>
-        );
-      })}
-    </>
-  );
-}
-
-function fromRoles(roles: RoleAreas[]): Record<Role, Set<Area>> {
-  const g: Record<Role, Set<Area>> = { editor: new Set(), approver: new Set(), admin: new Set() };
-  for (const r of roles) r.areas.forEach((a) => g[r.role].add(a));
-  return g;
 }

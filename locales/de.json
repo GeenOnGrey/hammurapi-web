@@ -9,10 +9,24 @@
     "remove": "Entfernen",
     "clear": "Zurücksetzen",
     "back": "Zurück",
-    "home": "Zur Startseite"
+    "home": "Zur Startseite",
+    "agent": "Agent",
+    "tokens": "{n} Tokens"
   },
-  "areas": { "product": "Produkt", "design": "Design", "arch": "Architektur", "tech": "Technische Spezifikation", "qa": "Test" },
-  "areasShort": { "product": "Produkt", "design": "Design", "arch": "Archit.", "tech": "Technik", "qa": "Test" },
+  "areas": {
+    "product": "Produkt",
+    "design": "Design",
+    "arch": "Architektur",
+    "tech": "Technische Spezifikation",
+    "qa": "Test"
+  },
+  "areasShort": {
+    "product": "Produkt",
+    "design": "Design",
+    "arch": "Archit.",
+    "tech": "Technik",
+    "qa": "Test"
+  },
   "status": {
     "draft": "Entwurf",
     "in_review": "Zur Freigabe",
@@ -28,9 +42,15 @@
     "approverRow": "Freigebender",
     "adminRow": "Bereichsadmin",
     "globalAdmin": "Globaler Administrator",
-    "readerOnly": "Nur Lesen"
+    "readerOnly": "Nur Lesen",
+    "owner": "Service-Owner"
   },
-  "tones": { "business": "Sachlich", "friendly": "Freundlich", "concise": "Knapp", "mentor": "Mentor" },
+  "tones": {
+    "business": "Sachlich",
+    "friendly": "Freundlich",
+    "concise": "Knapp",
+    "mentor": "Mentor"
+  },
   "login": {
     "slogan": "Im Anfang war die Spezifikation…",
     "signIn": "Mit {provider} anmelden",
@@ -41,15 +61,27 @@
       "failed": "Anmeldung fehlgeschlagen. Versuchen Sie es erneut oder wenden Sie sich an Ihren Administrator."
     }
   },
-  "top": { "search": "Features und IDs suchen", "import": "Import", "newFeature": "Neues Feature" },
+  "top": {
+    "search": "Features und IDs suchen",
+    "import": "Import",
+    "newFeature": "Neues Feature",
+    "newIssue": "Neue Aufgabe"
+  },
   "home": {
     "awaiting": "Warten auf Ihre Freigabe",
     "allApproved": "Alles ist freigegeben",
     "allApprovedHint": "Neue Dokumente zur Freigabe erscheinen hier.",
     "domains": "Domänen",
     "status": "Status",
-    "domain": { "mine": "Meine", "all": "Alle" },
-    "statusFilter": { "in_progress": "In Arbeit", "handed_off": "Übergeben", "all": "Alle" },
+    "domain": {
+      "mine": "Meine",
+      "all": "Alle"
+    },
+    "statusFilter": {
+      "in_progress": "In Arbeit",
+      "handed_off": "Übergeben",
+      "all": "Alle"
+    },
     "searching": "Suche: {q}",
     "emptyMine": "In Ihren Domänen sind keine Features in Arbeit",
     "emptyFiltered": "Keine Features passen zu den Filtern",
@@ -110,7 +142,29 @@
       "approved": "Freigegeben von {name} {when}. Jede Änderung setzt das Gate auf Entwurf zurück.",
       "draftAfterApproval": "Seit der letzten Freigabe geändert.",
       "draft": "Entwurf. Reichen Sie ihn zur Freigabe ein, wenn er fertig ist."
-    }
+    },
+    "issues": "Aufgaben:",
+    "release": "Release:",
+    "noDiscovery": "importiert, ohne Discovery",
+    "prNotMerged": "bis zum Release nicht gemergt",
+    "flagKey": "Feature-Flag-Schlüssel",
+    "flagHint": "Werden Feature-Flags genutzt, wartet das Release auf die Aktivierung dieses Flags in Produktion.",
+    "tabs": {
+      "spec": "Spezifikation",
+      "implementation": "Umsetzung",
+      "validation": "Validierung",
+      "history": "Verlauf"
+    },
+    "readOnlyCodegen": "Während der Code-Generierung sind Spezifikationen schreibgeschützt.",
+    "rolledBack": "Das Release wurde zurückgerollt: Das Feature wird nicht wieder geöffnet, die Arbeit geht über die Aufgabe weiter.",
+    "generating": "Der Agent erstellt tech und qa…",
+    "generationFailed": "Erstellung von tech/qa angehalten:",
+    "regenerate": "Neu erstellen",
+    "regenerating": "Neuerstellung gestartet",
+    "generatedLater": "nach der Freigabe",
+    "readyForCodegen": "Alle Gates sind bereit.",
+    "readyForCodegenHint": "Der Agent kann Änderungen in den Services vorbereiten.",
+    "startCodegen": "Code-Generierung starten"
   },
   "editor": {
     "toolbar": "Formatierung",
@@ -127,7 +181,13 @@
     },
     "draftByRules": "Entwurf nach Regeln",
     "draftPrompt": "Erstelle einen Entwurf der Spezifikation „{area}“ für {id} nach den Regeln dieses Bereichs.",
-    "state": { "idle": "", "dirty": "Ungespeicherte Änderungen", "saving": "Wird gespeichert…", "saved": "Gespeichert", "error": "Nicht gespeichert" },
+    "state": {
+      "idle": "",
+      "dirty": "Ungespeicherte Änderungen",
+      "saving": "Wird gespeichert…",
+      "saved": "Gespeichert",
+      "error": "Nicht gespeichert"
+    },
     "lockedBy": "{name} bearbeitet gerade.",
     "lockedText": "Das Dokument ist schreibgeschützt geöffnet. Es wird bearbeitbar, wenn {name} es schließt oder nach 15 Minuten Inaktivität.",
     "unsupported": "Das Dokument enthält Teile, die der Editor nicht unterstützt ({list}). Sie bleiben unverändert und werden als nicht bearbeitbare Blöcke angezeigt.",
@@ -141,7 +201,11 @@
     "staleTitle": "Das Dokument hat sich geändert",
     "staleText": "Jemand hat eine neuere Version gespeichert. Laden Sie sie neu; Ihr ungespeicherter Text wird verworfen.",
     "retry": "Wiederholen",
-    "discard": "Änderungen verwerfen"
+    "discard": "Änderungen verwerfen",
+    "generated": "Dieses Gate schreibt der Agent. Kommentieren Sie im Chat, der Agent erstellt es neu.",
+    "askAgentButton": "Agent fragen",
+    "askAgent": "Erstelle das Gate {area} unter Berücksichtigung meines Kommentars neu: ",
+    "unnumbered": "{count, plural, one {# Anforderung ohne ID (**R1.**).} other {# Anforderungen ohne ID (**R1.**).}}"
   },
   "history": {
     "title": "Verlauf: {area}",
@@ -155,7 +219,8 @@
       "approved": "freigegeben",
       "reset": "Freigabe durch Änderung zurückgesetzt",
       "deleted": "gelöscht"
-    }
+    },
+    "gateTitle": "Verlauf: {area}"
   },
   "diff": {
     "sinceApproval": "Änderungen seit der Freigabe {when}",
@@ -229,7 +294,10 @@
     "title": "Profil",
     "language": "Sprache",
     "theme": "Design",
-    "themes": { "light": "Hell", "dark": "Dunkel" },
+    "themes": {
+      "light": "Hell",
+      "dark": "Dunkel"
+    },
     "myDomains": "Meine Domänen",
     "noDomains": "Noch keine Domänen",
     "agent": "Agent",
@@ -309,7 +377,8 @@
       "rolesOf": "Rollen von {name}",
       "globalHint": "Benutzer, Verzeichnis, Einstellungen",
       "save": "Rollen speichern",
-      "saved": "Rollen gespeichert"
+      "saved": "Rollen gespeichert",
+      "expertsHint": "Experten werden unter „Domänen und Systeme“ zugewiesen."
     },
     "domains": {
       "title": "Domänen und Systeme",
@@ -328,7 +397,14 @@
       "keyHint": "2–10 Zeichen: lateinische Großbuchstaben und Ziffern, beginnend mit einem Buchstaben.",
       "approvalRequired": "Freigabe erforderlich",
       "domainName": "Name der Domäne {key}",
-      "systemName": "Name des Systems {key}"
+      "systemName": "Name des Systems {key}",
+      "experts": "Experten",
+      "expertsCount": "{product} Produkt · {technical} Technik",
+      "expertsOf": "Experten von {key}",
+      "expertsHint": "Produktexperten geben product und design frei, technische Experten arch, tech und qa. Jeder Experte darf bearbeiten.",
+      "fromBackstage": "aus Backstage",
+      "deletedInCatalog": "im Katalog gelöscht",
+      "managed": "Das Verzeichnis kommt aus Backstage: Domänen und Systeme werden im Katalog angelegt."
     },
     "rules": {
       "title": "Regeln",
@@ -338,8 +414,15 @@
       "withdraw": "Zurückziehen",
       "applied": "Die Änderung wurde angewendet",
       "withdrawn": "Die Änderung wurde zurückgezogen",
-      "files": { "template": "Vorlage", "fix-template": "Korrekturvorlage" },
-      "status": { "open": "offen", "merged": "angewendet", "withdrawn": "zurückgezogen" },
+      "files": {
+        "template": "Vorlage",
+        "fix-template": "Korrekturvorlage"
+      },
+      "status": {
+        "open": "offen",
+        "merged": "angewendet",
+        "withdrawn": "zurückgezogen"
+      },
       "comment": "Was sich ändert und warum",
       "commentHint": "Eine kurze Notiz für die Person, die freigibt",
       "appliesAfter": "Die Änderung gilt, nachdem ein anderer Administrator von „{area}“ sie freigegeben hat",
@@ -357,6 +440,96 @@
       "days": "{count, plural, one {Tag} other {Tage}}",
       "retentionHint": "Für alle Benutzer. Ältere Dateien werden einmal täglich gelöscht.",
       "saved": "Einstellungen gespeichert"
+    },
+    "services": {
+      "title": "Services",
+      "key": "Service",
+      "system": "System",
+      "repo": "Repository",
+      "owners": "Owner",
+      "ownerRef": "Owner (spec.owner)",
+      "ownerHint": "user:anna.k oder group:platform beim Git-Provider",
+      "add": "Service hinzufügen",
+      "edit": "Bearbeiten",
+      "managed": "Services stammen aus catalog-info.yaml der Repositories."
+    },
+    "cycle": {
+      "title": "Zyklus-Einstellungen",
+      "catalog": "Backstage-Katalog",
+      "catalogEnabled": "Domänen, Systeme und Services aus catalog-info.yaml übernehmen",
+      "catalogHint": "Der Schlüssel ist die Annotation hammurapi/key oder metadata.name in Großbuchstaben. Pushes auf Katalogdateien synchronisieren neu.",
+      "catalogRepo": "Katalog-Repository (Domain, System)",
+      "catalogGlob": "Pfad (Glob)",
+      "serviceFile": "Pfad in Service-Repositories",
+      "serviceRepos": "Service-Repositories (eines pro Zeile)",
+      "syncNow": "Jetzt synchronisieren",
+      "synced": "Synchronisiert: {domains} Domänen, {systems} Systeme, {services} Services, {errors} Fehler",
+      "lastSync": "Letzte Synchronisierung {at}",
+      "neverSynced": "Noch nicht synchronisiert",
+      "notImported": "Nicht importiert",
+      "flags": "Feature-Flags",
+      "flagsEnabled": "Feature-Flags in Releases verwenden",
+      "flagsHint": "Ihr Flag-Service sendet Ereignisse an den universellen Webhook; nur Produktionsereignisse ändern Release-Schritte.",
+      "activeSecrets": "Aktive Secrets: {n}",
+      "rotate": "Neues Secret erzeugen",
+      "secretOnce": "Jetzt kopieren, es wird nur einmal angezeigt:",
+      "stage": "Stage",
+      "stageEnabled": "PR-Branches während der Validierung auf die Stage ausliefern",
+      "stageHint": "E2e-Testfälle laufen in der Stage-Pipeline des letzten Services.",
+      "runner": "Agent-Aufgaben",
+      "executor": "Executor: {executor}",
+      "localWarning": "Der lokale Executor läuft ohne Netzwerkisolation: nur für Entwicklung und Demos, nicht für Produktion."
+    },
+    "deploy": {
+      "title": "Auslieferung",
+      "env": {
+        "stage": "Stage",
+        "production": "Produktion"
+      },
+      "notConfigured": {
+        "stage": "Nicht konfiguriert: Stage-Auslieferungen werden manuell markiert.",
+        "production": "Nicht konfiguriert: Die Auslieferung zählt per Tag mit dem Merge-Commit oder manueller Markierung."
+      },
+      "type": "Typ",
+      "types": {
+        "github-actions": "GitHub Actions",
+        "gitlab-ci": "GitLab CI",
+        "webhook": "Webhook"
+      },
+      "workflow": "Workflow",
+      "auth": "Autorisierung",
+      "authTypes": {
+        "bot": "Bot-Token",
+        "secret": "Secret"
+      },
+      "timeout": "Timeout für das Ergebnis, Minuten",
+      "params": "Parameter",
+      "paramsHint": "Name=Wert pro Zeile; Variablen {service}, {repo}, {ref}, {environment}, {feature}, {release}, {callback_url}, {run_id}.",
+      "resultHook": "Ergebnis-Webhook",
+      "copy": "Kopieren",
+      "test": "Start prüfen",
+      "testRun": "Probelauf",
+      "testOk": "Pipeline gestartet {url}",
+      "testFailed": "Fehlgeschlagen: {error}",
+      "override": "Auslieferungs-Override",
+      "overrideOf": "Auslieferung von {key}",
+      "overrideHint": "Leer lassen für die Umgebungseinstellungen.",
+      "fromAnnotation": "Gesetzt durch die Annotation hammurapi/deploy-workflow in catalog-info.yaml."
+    },
+    "metrics": {
+      "title": "Metrikquellen",
+      "hint": "Nur-Lese-Konten. ClickHouse nur SELECT (readonly=1 mit Limits); Prometheus nur query und query_range.",
+      "name": "Name",
+      "add": "Quelle hinzufügen",
+      "test": "Testen",
+      "testOf": "Testabfrage in {name}",
+      "run": "Ausführen",
+      "value": "Wert: {value}",
+      "username": "Benutzer",
+      "password": "Passwort",
+      "secretRef": "oder ein Kubernetes-Secret (env:NAME)",
+      "maxSeconds": "Maximale Laufzeit, Sekunden",
+      "readOnly": "Das Passwort wird verschlüsselt gespeichert; die Datenbank enthält nur eine Referenz."
     }
   },
   "errors": {
@@ -439,5 +612,431 @@
     "invalid_cursor": "Ungültige Seite.",
     "invalid_limit": "Ungültige Seitengröße.",
     "invalid_status": "Unbekannter Status."
+  },
+  "stages": {
+    "title": "Phasen",
+    "general": "Allgemein",
+    "research": "Research",
+    "development": "Entwicklung",
+    "delivery": "Auslieferung"
+  },
+  "general": {
+    "focus": "Im Fokus",
+    "overview": "Überblick"
+  },
+  "focus": {
+    "research": "Research",
+    "development": "Entwicklung",
+    "release": "Auslieferung",
+    "nothing": "nichts wartet",
+    "action": {
+      "verify_discovery": "Discovery prüfen",
+      "approve_gate": "Freigeben",
+      "sign_validation": "Validierung signieren",
+      "start_merge": "Merge starten",
+      "mark_deploy": "Auslieferung markieren",
+      "retry_or_rollback": "Wiederholen oder zurückrollen",
+      "mark_flag": "Feature-Flag",
+      "confirm_release": "Release bestätigen",
+      "resolve_blocked": "Angehalten"
+    }
+  },
+  "issueType": {
+    "idea": "Idee",
+    "problem": "Problem"
+  },
+  "issueStatus": {
+    "new": "Neu",
+    "discovery": "Discovery",
+    "verification": "In Prüfung",
+    "accepted": "Angenommen",
+    "resolved": "Gelöst",
+    "rejected": "Abgelehnt",
+    "merged": "Zusammengeführt"
+  },
+  "issueSource": {
+    "manual": "Manuell",
+    "hammurapi_analysis": "Hammurapi-Analyse",
+    "jira": "Jira",
+    "feedback": "Feedback",
+    "prod_errors": "Produktionsfehler"
+  },
+  "phase": {
+    "spec": "Spezifikation",
+    "codegen": "Code-Generierung",
+    "validation": "Validierung",
+    "in_release": "Im Release",
+    "released": "Ausgeliefert",
+    "rolled_back": "Zurückgerollt",
+    "deleted": "Gelöscht"
+  },
+  "path": {
+    "spec": "Spezifikation",
+    "codegen": "Code-Generierung",
+    "validation": "Validierung",
+    "in_release": "Release"
+  },
+  "releaseStatus": {
+    "merging": "Änderungen mergen",
+    "deploying": "Auslieferung",
+    "enabling_flags": "Flags aktivieren",
+    "evaluating": "Metrik-Bewertung",
+    "awaiting_confirmation": "Wartet auf Bestätigung",
+    "succeeded": "Erfolgreich",
+    "rolling_back": "Wird zurückgerollt",
+    "rolled_back": "Zurückgerollt"
+  },
+  "releaseStep": {
+    "merging": "Änderungen mergen",
+    "deploying": "Auslieferung",
+    "enabling_flags": "Flags aktivieren",
+    "evaluating": "Metrik bewerten",
+    "awaiting_confirmation": "Bestätigung"
+  },
+  "rollbackStep": {
+    "revert": "Revert-PRs werden vorbereitet",
+    "revert_wait": "Revert-PRs werden vorbereitet",
+    "merge_wait": "Reverts werden gemergt",
+    "deploy_wait": "erneute Auslieferung",
+    "flags_wait": "wartet auf Deaktivierung des Flags",
+    "close_wait": "Spezifikations-PR wird geschlossen"
+  },
+  "expert": {
+    "product": "Produktexperte",
+    "technical": "Technischer Experte"
+  },
+  "autonomy": {
+    "title": "Autonomie des Agenten in {key}",
+    "noMerge": "Auf jeder Stufe werden PRs nur im Release gemergt.",
+    "plan": {
+      "name": "Plan",
+      "text": "Der Agent erstellt einen Plan; Code und PR erstellt ein Mensch.",
+      "prepares": "einen Änderungsplan"
+    },
+    "pr": {
+      "name": "PR",
+      "text": "Der Agent erstellt einen PR; ein menschliches Review ist Pflicht.",
+      "prepares": "einen PR mit Tests, Reviewer zugewiesen"
+    },
+    "autonomous": {
+      "name": "Autonom",
+      "text": "Der Agent erstellt einen PR; kein menschliches Review nötig — grünes CI und die Prüfung des Agenten genügen.",
+      "prepares": "einen PR mit Tests ohne Review-Pflicht"
+    }
+  },
+  "newIssue": {
+    "title": "Neue Aufgabe",
+    "type": "Typ",
+    "typeHint": {
+      "idea": "Eine neue Möglichkeit. Der Agent untersucht Nutzen und Messbarkeit.",
+      "problem": "Ein Fehler. Der Agent sucht die Ursache und das betroffene Feature."
+    },
+    "domain": "Domäne",
+    "name": "Titel",
+    "description": "Beschreibung",
+    "preview": "Die Aufgabe erhält den Schlüssel {key}; Discovery startet sofort.",
+    "create": "Aufgabe erstellen",
+    "creating": "Wird erstellt…"
+  },
+  "issues": {
+    "type": "Typ",
+    "empty": "Keine Aufgaben für die Filter",
+    "emptyHint": "Neue Arbeit beginnt mit einer Aufgabe.",
+    "filter": {
+      "open": "Offen",
+      "accepted": "Angenommen",
+      "resolved": "Gelöst",
+      "closed": "Geschlossen",
+      "all": "Alle"
+    }
+  },
+  "issue": {
+    "notFound": "Aufgabe {key} nicht gefunden",
+    "features": "Features:",
+    "releases": "Releases:",
+    "movedFrom": "früher {keys}",
+    "mergedFrom": "Zusammengeführt:",
+    "mergedInto": "Zusammengeführt mit",
+    "rolledBack": "Zurückgekehrt nach dem Rollback von",
+    "rejected": "Abgelehnt:",
+    "reopen": "Wieder öffnen",
+    "description": "Beschreibung",
+    "revision": "Revision {n}",
+    "revisions": "Discovery-Versionen",
+    "rediscover": "Discovery erneut starten",
+    "discoveryBlocked": "Discovery angehalten:",
+    "agentWorking": "Der Agent untersucht die Aufgabe…",
+    "retrying": "Der vorige Versuch ist fehlgeschlagen; neuer Versuch.",
+    "value": "Nutzen",
+    "measure": "Wie wir messen",
+    "required": "Pflicht",
+    "notFilled": "Nicht ausgefüllt",
+    "source": "Quelle",
+    "query": "Abfrage",
+    "target": "Ziel",
+    "window": "Zeitraum",
+    "checked": "Abfrage erfolgreich ausgeführt {at}",
+    "similar": "Ähnliches",
+    "problemFeature": "Wo der Fehler liegt",
+    "document": "Discovery-Dokument",
+    "missing": "Es fehlt: {fields}",
+    "field": {
+      "value": "Nutzen",
+      "measure.source": "Metrikquelle",
+      "measure.query": "Abfrage",
+      "measure.target": "Ziel",
+      "measure.window": "Zeitraum"
+    },
+    "accept": "Annehmen",
+    "acceptDisabled": "Discovery braucht Nutzen und Messmethode",
+    "reject": "Ablehnen",
+    "merge": "Zusammenführen",
+    "move": "Verschieben",
+    "history": "Verlauf"
+  },
+  "accept": {
+    "title": "{key} annehmen",
+    "fix": "Fix eines Features",
+    "noFeature": "Kein Feature",
+    "parent": "Feature mit dem Fehler",
+    "preview": "{key} wird mit einem Link auf {issue} erstellt.",
+    "text": "Discovery wird dem Feature beigefügt; die Erfolgsmetrik kommt in den Entwurf der Produktspezifikation."
+  },
+  "reject": {
+    "title": "{key} ablehnen",
+    "reason": "Grund",
+    "hint": "Der Autor sieht den Grund."
+  },
+  "merge": {
+    "title": "{key} zusammenführen",
+    "into": "Hauptaufgabe",
+    "hint": "Das Duplikat wird als zusammengeführt geschlossen. Ist die Hauptaufgabe schon ein Feature, verweist es auf beide."
+  },
+  "move": {
+    "title": "{key} verschieben",
+    "domain": "Neue Domäne",
+    "hint": "Die Aufgabe erhält einen Schlüssel in der neuen Domäne; {key} führt weiterhin zu ihr."
+  },
+  "development": {
+    "phase": "Phase",
+    "empty": "Keine Features für die Filter",
+    "emptyHint": "Features entstehen aus angenommenen Aufgaben.",
+    "imported": "ohne Discovery",
+    "status": {
+      "active": "Aktiv",
+      "released": "Ausgeliefert",
+      "rolled_back": "Zurückgerollt",
+      "all": "Alle"
+    }
+  },
+  "codegen": {
+    "title": "Code-Generierung für {id}",
+    "service": "Service",
+    "repo": "Repository",
+    "autonomy": "Autonomie",
+    "agentPrepares": "Der Agent bereitet vor",
+    "noServices": "Die technische Spezifikation nennt keine Services aus dem Katalog.",
+    "notMerged": "PRs werden erst im Release gemergt; Spezifikationen sind währenddessen schreibgeschützt.",
+    "started": "Code-Generierung gestartet"
+  },
+  "impl": {
+    "blocked": "Code-Generierung angehalten:",
+    "waitingHumanPr": "Warten auf PRs von Menschen für Services auf Stufe „Plan“.",
+    "notMerged": "Nichts ist gemergt: Gemergt wird im Release.",
+    "empty": "Noch kein Code",
+    "emptyHint": "Die Code-Generierung startet, wenn alle Gates freigegeben sind.",
+    "humanPrs": "PRs von Menschen",
+    "matrix": "Anforderung → Testfall → PR",
+    "tokens": "Agent: {n} Tokens",
+    "plan": "Änderungsplan",
+    "planHint": "Code und PR erstellt ein Mensch",
+    "noPr": "Noch kein PR",
+    "byHuman": "von einem Menschen",
+    "requirement": "Anforderung",
+    "services": "Services",
+    "testCases": "Testfälle",
+    "noTest": "kein Testfall",
+    "noPrShort": "kein PR"
+  },
+  "task": {
+    "retry": "Wiederholen",
+    "working": "arbeitet",
+    "status": {
+      "queued": "In Warteschlange",
+      "running": "Läuft",
+      "succeeded": "Fertig",
+      "failed": "Fehlgeschlagen",
+      "cancelled": "Abgebrochen"
+    },
+    "type": {
+      "implement": "Code-Generierung",
+      "address_review": "Review-Kommentare",
+      "update_pr": "PR-Aktualisierung",
+      "revert": "Revert-PR",
+      "ci_setup": "CI-Schritt"
+    }
+  },
+  "ci": {
+    "pending": "ausstehend",
+    "success": "grün",
+    "failure": "rot"
+  },
+  "review": {
+    "none": "kein Review",
+    "required": "im Review",
+    "changes_requested": "Änderungen angefordert",
+    "approved": "Review bestanden",
+    "not_required": "kein Review nötig"
+  },
+  "prState": {
+    "open": "offen",
+    "merged": "gemergt",
+    "closed": "geschlossen"
+  },
+  "val": {
+    "notYet": "Die Validierung beginnt, wenn die PRs bereit sind",
+    "notYetHint": "Geprüft werden Tests, Abdeckung, Abweichungen und Reviews — vor jedem Merge.",
+    "waitingCi": "Warten auf CI-Ergebnisse der PR-Branches.",
+    "waitingStage": "Branches werden auf die Stage ausgeliefert; e2e läuft nach dem letzten Service.",
+    "released": "Validiert. Release:",
+    "kpi": {
+      "tests": "Testfälle in PR-Branches",
+      "testsFailed": "{n} fehlgeschlagen",
+      "coverage": "abgedeckte Anforderungen",
+      "discrepancies": "Abweichungen",
+      "reviews": "Reviews bestanden"
+    },
+    "tests": "Tests nach Testfall",
+    "noTests": "Die qa-Spezifikation hat keine Testfälle.",
+    "level": "Ebene",
+    "result": "Ergebnis",
+    "status": {
+      "passed": "bestanden",
+      "failed": "fehlgeschlagen",
+      "skipped": "übersprungen",
+      "missing": "kein Ergebnis"
+    },
+    "reviews": "Reviews",
+    "stage": "Stage",
+    "stageManual": "Keine Stage-Pipeline konfiguriert: Auslieferung manuell markieren.",
+    "markStage": "Als ausgeliefert markieren",
+    "signatures": "Signaturen",
+    "side": {
+      "product": "Produktseite",
+      "technical": "Technische Seite"
+    },
+    "sign": "Signieren",
+    "signed": "Signiert",
+    "waitingSignature": "Wartet auf Signatur",
+    "releaseHint": "Die zweite Signatur erstellt das Release.",
+    "releaseCreated": "Release {key} erstellt",
+    "return": "Zur Überarbeitung zurückgeben",
+    "returnTitle": "Zur Überarbeitung zurückgeben",
+    "toCode": "Code",
+    "toSpec": "Spezifikation",
+    "returnHint": {
+      "code": "Der Agent überarbeitet dieselben PRs; Signaturen werden zurückgesetzt.",
+      "spec": "Spezifikationen werden wieder bearbeitbar; nach der Freigabe wird der Code neu erstellt."
+    },
+    "comment": "Kommentar"
+  },
+  "release": {
+    "notFound": "Release {key} nicht gefunden",
+    "feature": "Feature:",
+    "blocked": "Angehalten",
+    "blockedTitle": "Das Release ist angehalten:",
+    "retry": "Wiederholen",
+    "rollback": "Zurückrollen",
+    "confirm": "Release bestätigen",
+    "rollingBack": "Rollback:",
+    "rolledBack": "Zurückgerollt von {name}:",
+    "succeeded": "Bestätigt von {name} {at}: Der Spezifikations-PR ist gemergt.",
+    "startHint": "PRs werden in der Rollout-Reihenfolge der Architekturspezifikation mit dem Token des Experten gemergt.",
+    "editPlan": "Reihenfolge ändern",
+    "planHint": "Reihenfolge für Merge und Auslieferung; der Spezifikations-PR ist immer zuletzt.",
+    "up": "Nach oben",
+    "down": "Nach unten",
+    "startMerge": "Merge starten",
+    "flagWait": "Warten auf die Aktivierung von {flag} in Produktion.",
+    "markFlagOn": "Flag als aktiv markieren",
+    "markFlagOff": "Flag als inaktiv markieren",
+    "flagMarkHint": "Hammurapi schaltet keine Flags: Erfassen Sie den im Flag-Service gesetzten Zustand von {flag}.",
+    "prs": "PRs in Merge-Reihenfolge",
+    "current": "jetzt",
+    "specPr": "Spezifikations-PR",
+    "onConfirm": "bei Bestätigung",
+    "reverts": "Revert-PRs",
+    "metric": "Erfolgsmetrik",
+    "metricNext": "Das Bewertungsfenster kommt im nächsten Release von Hammurapi; bestätigen Sie, wenn die Services laufen.",
+    "noMetric": "Keine Metrik (importiertes Feature).",
+    "noFlag": "kein Flag-Schlüssel",
+    "flag": {
+      "on": "in Produktion aktiv",
+      "off": "in Produktion inaktiv"
+    },
+    "tasks": "Agent-Aufgaben",
+    "skipped": "übersprungen",
+    "nextRelease": "nächstes Release",
+    "markDeploy": "Als ausgeliefert markieren",
+    "markTitle": "{service} ist ausgeliefert",
+    "version": "Version oder Ref",
+    "markHint": "Es zählt das erste Signal: Pipeline-Ergebnis, Tag oder diese Markierung.",
+    "confirmTitle": "{key} bestätigen",
+    "confirmSpec": "Der Spezifikations-PR wird mit Ihrem Token in den Hauptbranch gemergt.",
+    "confirmStatuses": "Das Release wird erfolgreich, das Feature ausgeliefert, die Aufgaben gelöst.",
+    "confirmProblem": "Das Ziel wurde nicht erreicht: Eine Problem-Aufgabe wird erstellt."
+  },
+  "rollback": {
+    "title": "{key} zurückrollen",
+    "what": "Was passiert:",
+    "reverts": "der Agent erstellt Revert-PRs für gemergte PRs; sie werden in umgekehrter Reihenfolge mit Ihrem Token gemergt",
+    "redeploy": "die Services werden erneut ausgeliefert",
+    "flags": "Hammurapi wartet, bis das Feature-Flag im Flag-Service deaktiviert ist",
+    "spec": "der Spezifikations-PR wird ohne Merge geschlossen",
+    "issues": "die Aufgaben kehren zu „Neu“ zurück, Discovery läuft erneut",
+    "reason": "Grund"
+  },
+  "releases": {
+    "empty": "Keine Releases",
+    "emptyHint": "Ein Release entsteht durch die zweite Validierungssignatur.",
+    "filter": {
+      "active": "Aktiv",
+      "succeeded": "Erfolgreich",
+      "rolled_back": "Zurückgerollt",
+      "all": "Alle"
+    }
+  },
+  "deploy": {
+    "run": "Pipeline-Lauf",
+    "status": {
+      "triggered": "wartet",
+      "started": "läuft",
+      "success": "ausgeliefert",
+      "failure": "fehlgeschlagen",
+      "timeout": "kein Ergebnis"
+    },
+    "signal": {
+      "pipeline": "Pipeline",
+      "tag": "Tag",
+      "manual": "manuelle Markierung"
+    }
+  },
+  "unnumbered": {
+    "title": "Anforderungen ohne ID",
+    "text": "{count, plural, one {# Anforderung ohne ID. Testfälle und Code verweisen per ID.} other {# Anforderungen ohne ID. Testfälle und Code verweisen per ID.}}",
+    "askAgent": "Agent um IDs bitten",
+    "submitAnyway": "Ohne IDs einreichen",
+    "prompt": "Nummeriere alle Anforderungen der Produktspezifikation als **R1.** mit Akzeptanzkriterien."
+  },
+  "activity": {
+    "created": "erstellt",
+    "accepted": "angenommen",
+    "rejected": "abgelehnt",
+    "reopened": "wieder geöffnet",
+    "merged": "zusammengeführt",
+    "merged_from": "andere Aufgabe hineingeführt",
+    "moved": "verschoben",
+    "discovery_updated": "Discovery aktualisiert",
+    "returned_after_rollback": "nach Rollback zurückgekehrt"
   }
 }

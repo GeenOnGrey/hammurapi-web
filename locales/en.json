@@ -9,10 +9,24 @@
     "remove": "Remove",
     "clear": "Clear",
     "back": "Back",
-    "home": "Home"
+    "home": "Home",
+    "agent": "agent",
+    "tokens": "{n} tokens"
   },
-  "areas": { "product": "Product", "design": "Design", "arch": "Architecture", "tech": "Tech spec", "qa": "Testing" },
-  "areasShort": { "product": "Product", "design": "Design", "arch": "Arch.", "tech": "Tech", "qa": "QA" },
+  "areas": {
+    "product": "Product",
+    "design": "Design",
+    "arch": "Architecture",
+    "tech": "Tech spec",
+    "qa": "Testing"
+  },
+  "areasShort": {
+    "product": "Product",
+    "design": "Design",
+    "arch": "Arch.",
+    "tech": "Tech",
+    "qa": "QA"
+  },
   "status": {
     "draft": "Draft",
     "in_review": "Awaiting approval",
@@ -28,9 +42,15 @@
     "approverRow": "Approver",
     "adminRow": "Area admin",
     "globalAdmin": "Global administrator",
-    "readerOnly": "Read only"
+    "readerOnly": "Read only",
+    "owner": "Service owner"
   },
-  "tones": { "business": "Business", "friendly": "Friendly", "concise": "Concise", "mentor": "Mentor" },
+  "tones": {
+    "business": "Business",
+    "friendly": "Friendly",
+    "concise": "Concise",
+    "mentor": "Mentor"
+  },
   "login": {
     "slogan": "In the beginning was the specification…",
     "signIn": "Sign in with {provider}",
@@ -41,15 +61,27 @@
       "failed": "Could not sign in. Try again or contact your administrator."
     }
   },
-  "top": { "search": "Search features and IDs", "import": "Import", "newFeature": "New feature" },
+  "top": {
+    "search": "Search features and IDs",
+    "import": "Import",
+    "newFeature": "New feature",
+    "newIssue": "New issue"
+  },
   "home": {
     "awaiting": "Awaiting your approval",
     "allApproved": "Everything is approved",
     "allApprovedHint": "New documents for approval will appear here.",
     "domains": "Domains",
     "status": "Status",
-    "domain": { "mine": "Mine", "all": "All" },
-    "statusFilter": { "in_progress": "In progress", "handed_off": "Handed off", "all": "All" },
+    "domain": {
+      "mine": "Mine",
+      "all": "All"
+    },
+    "statusFilter": {
+      "in_progress": "In progress",
+      "handed_off": "Handed off",
+      "all": "All"
+    },
     "searching": "Search: {q}",
     "emptyMine": "No features in progress in your domains",
     "emptyFiltered": "No features match the filters",
@@ -110,7 +142,29 @@
       "approved": "Approved by {name} {when}. Any edit returns the gate to draft.",
       "draftAfterApproval": "Edited since the last approval.",
       "draft": "Draft. Submit it for approval when it is ready."
-    }
+    },
+    "issues": "Issues:",
+    "release": "Release:",
+    "noDiscovery": "imported, no Discovery",
+    "prNotMerged": "not merged until the release",
+    "flagKey": "Feature flag key",
+    "flagHint": "The release waits for this flag to be switched on in production when feature flags are used.",
+    "tabs": {
+      "spec": "Specification",
+      "implementation": "Implementation",
+      "validation": "Validation",
+      "history": "History"
+    },
+    "readOnlyCodegen": "Specifications are read-only while code is generated.",
+    "rolledBack": "The release of this feature was rolled back: it is not reopened, work continues through the issue.",
+    "generating": "The agent is generating tech and qa…",
+    "generationFailed": "Generation of tech/qa stopped:",
+    "regenerate": "Regenerate",
+    "regenerating": "Regeneration started",
+    "generatedLater": "generated after approval",
+    "readyForCodegen": "All gates are ready.",
+    "readyForCodegenHint": "The agent can prepare changes in the services.",
+    "startCodegen": "Start code generation"
   },
   "editor": {
     "toolbar": "Formatting",
@@ -127,7 +181,13 @@
     },
     "draftByRules": "Draft by the rules",
     "draftPrompt": "Prepare a draft of the {area} specification for {id} according to the rules of this area.",
-    "state": { "idle": "", "dirty": "Unsaved changes", "saving": "Saving…", "saved": "Saved", "error": "Not saved" },
+    "state": {
+      "idle": "",
+      "dirty": "Unsaved changes",
+      "saving": "Saving…",
+      "saved": "Saved",
+      "error": "Not saved"
+    },
     "lockedBy": "{name} is editing.",
     "lockedText": "The document is open read-only. It becomes editable when {name} closes it or after 15 minutes of inactivity.",
     "unsupported": "This document contains fragments the editor does not support ({list}). They are kept as they are and shown as non-editable blocks.",
@@ -141,7 +201,11 @@
     "staleTitle": "The document changed",
     "staleText": "Someone saved a newer version. Reload to see it; your unsaved text will be discarded.",
     "retry": "Retry",
-    "discard": "Discard changes"
+    "discard": "Discard changes",
+    "generated": "The agent writes this gate. Comment in the chat and the agent regenerates it.",
+    "askAgentButton": "Ask the agent",
+    "askAgent": "Regenerate the {area} gate taking my comment into account: ",
+    "unnumbered": "{count, plural, one {# requirement has no ID (**R1.**).} other {# requirements have no ID (**R1.**).}}"
   },
   "history": {
     "title": "History: {area}",
@@ -155,7 +219,8 @@
       "approved": "approved",
       "reset": "approval reset by an edit",
       "deleted": "deleted"
-    }
+    },
+    "gateTitle": "History: {area}"
   },
   "diff": {
     "sinceApproval": "Changes since approval {when}",
@@ -229,7 +294,10 @@
     "title": "Profile",
     "language": "Language",
     "theme": "Theme",
-    "themes": { "light": "Light", "dark": "Dark" },
+    "themes": {
+      "light": "Light",
+      "dark": "Dark"
+    },
     "myDomains": "My domains",
     "noDomains": "No domains yet",
     "agent": "Agent",
@@ -309,7 +377,8 @@
       "rolesOf": "Roles of {name}",
       "globalHint": "users, dictionary, settings",
       "save": "Save roles",
-      "saved": "Roles saved"
+      "saved": "Roles saved",
+      "expertsHint": "Experts are assigned per domain in Domains and systems."
     },
     "domains": {
       "title": "Domains and systems",
@@ -328,7 +397,14 @@
       "keyHint": "2–10 characters: uppercase latin letters and digits, starting with a letter.",
       "approvalRequired": "Approval required",
       "domainName": "Name of domain {key}",
-      "systemName": "Name of system {key}"
+      "systemName": "Name of system {key}",
+      "experts": "Experts",
+      "expertsCount": "{product} product · {technical} technical",
+      "expertsOf": "Experts of {key}",
+      "expertsHint": "Product experts approve product and design; technical experts approve arch, tech and qa. Any expert edits specifications.",
+      "fromBackstage": "from Backstage",
+      "deletedInCatalog": "deleted in the catalog",
+      "managed": "The dictionary comes from Backstage: domains and systems are created in the catalog."
     },
     "rules": {
       "title": "Rules",
@@ -338,8 +414,15 @@
       "withdraw": "Withdraw",
       "applied": "The change was applied",
       "withdrawn": "The change was withdrawn",
-      "files": { "template": "Template", "fix-template": "Fix template" },
-      "status": { "open": "open", "merged": "applied", "withdrawn": "withdrawn" },
+      "files": {
+        "template": "Template",
+        "fix-template": "Fix template"
+      },
+      "status": {
+        "open": "open",
+        "merged": "applied",
+        "withdrawn": "withdrawn"
+      },
       "comment": "What changes and why",
       "commentHint": "A short note for the colleague who will approve it",
       "appliesAfter": "The change applies after another administrator of {area} approves it",
@@ -357,6 +440,96 @@
       "days": "{count, plural, one {day} other {days}}",
       "retentionHint": "For all users. Older files are deleted once a day.",
       "saved": "Settings saved"
+    },
+    "services": {
+      "title": "Services",
+      "key": "Service",
+      "system": "System",
+      "repo": "Repository",
+      "owners": "Owners",
+      "ownerRef": "Owner (spec.owner)",
+      "ownerHint": "user:anna.k or group:platform of the git provider",
+      "add": "Add service",
+      "edit": "Edit",
+      "managed": "Services come from catalog-info.yaml of the repositories."
+    },
+    "cycle": {
+      "title": "Cycle settings",
+      "catalog": "Backstage catalog",
+      "catalogEnabled": "Take domains, systems and services from catalog-info.yaml",
+      "catalogHint": "The key is the hammurapi/key annotation or metadata.name in upper case. Pushes to catalog files re-sync the catalog.",
+      "catalogRepo": "Catalog repository (Domain, System)",
+      "catalogGlob": "Path (glob)",
+      "serviceFile": "Path in service repositories",
+      "serviceRepos": "Service repositories (one per line)",
+      "syncNow": "Synchronize now",
+      "synced": "Synchronized: {domains} domains, {systems} systems, {services} services, {errors} errors",
+      "lastSync": "Last synchronization {at}",
+      "neverSynced": "Not synchronized yet",
+      "notImported": "Not imported",
+      "flags": "Feature flags",
+      "flagsEnabled": "Use feature flags in releases",
+      "flagsHint": "Your flag service sends events to the universal webhook; only production events change release steps.",
+      "activeSecrets": "Active secrets: {n}",
+      "rotate": "Issue a new secret",
+      "secretOnce": "Copy it now, it is shown once:",
+      "stage": "Stage",
+      "stageEnabled": "Deploy PR branches to the stage during validation",
+      "stageHint": "E2e test cases run in the stage deploy pipeline of the last service.",
+      "runner": "Agent tasks",
+      "executor": "Executor: {executor}",
+      "localWarning": "The local executor runs tasks without network isolation; it is for development and demos, not for production."
+    },
+    "deploy": {
+      "title": "Deploy",
+      "env": {
+        "stage": "Stage",
+        "production": "Production"
+      },
+      "notConfigured": {
+        "stage": "Not configured: stage deploys are marked by hand.",
+        "production": "Not configured: a release counts by a tag with the merge commit or a manual mark."
+      },
+      "type": "Type",
+      "types": {
+        "github-actions": "GitHub Actions",
+        "gitlab-ci": "GitLab CI",
+        "webhook": "Webhook"
+      },
+      "workflow": "Workflow",
+      "auth": "Authorization",
+      "authTypes": {
+        "bot": "Bot token",
+        "secret": "Secret"
+      },
+      "timeout": "Result timeout, minutes",
+      "params": "Parameters",
+      "paramsHint": "name=value per line; variables {service}, {repo}, {ref}, {environment}, {feature}, {release}, {callback_url}, {run_id}.",
+      "resultHook": "Result webhook",
+      "copy": "Copy",
+      "test": "Check the launch",
+      "testRun": "Dry run",
+      "testOk": "The pipeline started {url}",
+      "testFailed": "Failed: {error}",
+      "override": "Deploy override",
+      "overrideOf": "Deploy of {key}",
+      "overrideHint": "Leave empty to use the environment settings.",
+      "fromAnnotation": "Set by the hammurapi/deploy-workflow annotation in catalog-info.yaml."
+    },
+    "metrics": {
+      "title": "Metric sources",
+      "hint": "Read-only accounts. ClickHouse accepts only SELECT (readonly=1 with limits); Prometheus only query and query_range.",
+      "name": "Name",
+      "add": "Add source",
+      "test": "Test",
+      "testOf": "Test query in {name}",
+      "run": "Run",
+      "value": "Value: {value}",
+      "username": "User",
+      "password": "Password",
+      "secretRef": "or a Kubernetes secret (env:NAME)",
+      "maxSeconds": "Max execution, seconds",
+      "readOnly": "The password is stored encrypted; the database keeps only a reference."
     }
   },
   "errors": {
@@ -439,5 +612,431 @@
     "invalid_cursor": "Invalid page.",
     "invalid_limit": "Invalid page size.",
     "invalid_status": "Unknown status."
+  },
+  "stages": {
+    "title": "Stages",
+    "general": "General",
+    "research": "Research",
+    "development": "Development",
+    "delivery": "Release"
+  },
+  "general": {
+    "focus": "In focus",
+    "overview": "Overview"
+  },
+  "focus": {
+    "research": "Research",
+    "development": "Development",
+    "release": "Release",
+    "nothing": "nothing is waiting",
+    "action": {
+      "verify_discovery": "Verify Discovery",
+      "approve_gate": "Approve",
+      "sign_validation": "Sign validation",
+      "start_merge": "Start merge",
+      "mark_deploy": "Mark release",
+      "retry_or_rollback": "Retry or roll back",
+      "mark_flag": "Feature flag",
+      "confirm_release": "Confirm release",
+      "resolve_blocked": "Stopped"
+    }
+  },
+  "issueType": {
+    "idea": "Idea",
+    "problem": "Problem"
+  },
+  "issueStatus": {
+    "new": "New",
+    "discovery": "Discovery",
+    "verification": "In verification",
+    "accepted": "Accepted",
+    "resolved": "Resolved",
+    "rejected": "Rejected",
+    "merged": "Merged"
+  },
+  "issueSource": {
+    "manual": "Manual",
+    "hammurapi_analysis": "Hammurapi analysis",
+    "jira": "Jira",
+    "feedback": "Feedback",
+    "prod_errors": "Production errors"
+  },
+  "phase": {
+    "spec": "Specification",
+    "codegen": "Code generation",
+    "validation": "Validation",
+    "in_release": "In release",
+    "released": "Released",
+    "rolled_back": "Rolled back",
+    "deleted": "Deleted"
+  },
+  "path": {
+    "spec": "Specification",
+    "codegen": "Code generation",
+    "validation": "Validation",
+    "in_release": "Release"
+  },
+  "releaseStatus": {
+    "merging": "Merging changes",
+    "deploying": "Deploying",
+    "enabling_flags": "Enabling flags",
+    "evaluating": "Evaluating the metric",
+    "awaiting_confirmation": "Awaiting confirmation",
+    "succeeded": "Succeeded",
+    "rolling_back": "Rolling back",
+    "rolled_back": "Rolled back"
+  },
+  "releaseStep": {
+    "merging": "Merge changes",
+    "deploying": "Deploy",
+    "enabling_flags": "Enable flags",
+    "evaluating": "Evaluate metric",
+    "awaiting_confirmation": "Confirmation"
+  },
+  "rollbackStep": {
+    "revert": "preparing revert PRs",
+    "revert_wait": "preparing revert PRs",
+    "merge_wait": "merging reverts",
+    "deploy_wait": "redeploying",
+    "flags_wait": "waiting for the flag to be switched off",
+    "close_wait": "closing the specification PR"
+  },
+  "expert": {
+    "product": "Product expert",
+    "technical": "Technical expert"
+  },
+  "autonomy": {
+    "title": "Agent autonomy in {key}",
+    "noMerge": "At every level PRs are merged only by a release.",
+    "plan": {
+      "name": "Plan",
+      "text": "The agent prepares a plan; a person writes the code and opens the PR.",
+      "prepares": "a plan of changes"
+    },
+    "pr": {
+      "name": "PR",
+      "text": "The agent opens a PR; a human review is required.",
+      "prepares": "a PR with tests, reviewers assigned"
+    },
+    "autonomous": {
+      "name": "Autonomous",
+      "text": "The agent opens a PR; no human review is required — green CI and the agent's check are enough.",
+      "prepares": "a PR with tests, no review required"
+    }
+  },
+  "newIssue": {
+    "title": "New issue",
+    "type": "Type",
+    "typeHint": {
+      "idea": "A new capability. The agent researches its value and how to measure it.",
+      "problem": "An error. The agent looks for the cause and the feature that contains it."
+    },
+    "domain": "Domain",
+    "name": "Title",
+    "description": "Description",
+    "preview": "The issue gets the key {key}; Discovery starts right away.",
+    "create": "Create issue",
+    "creating": "Creating…"
+  },
+  "issues": {
+    "type": "Type",
+    "empty": "No issues match the filters",
+    "emptyHint": "New work starts with an issue.",
+    "filter": {
+      "open": "Open",
+      "accepted": "Accepted",
+      "resolved": "Resolved",
+      "closed": "Closed",
+      "all": "All"
+    }
+  },
+  "issue": {
+    "notFound": "Issue {key} not found",
+    "features": "Features:",
+    "releases": "Releases:",
+    "movedFrom": "formerly {keys}",
+    "mergedFrom": "Merged:",
+    "mergedInto": "Merged into",
+    "rolledBack": "Returned after the rollback of",
+    "rejected": "Rejected:",
+    "reopen": "Reopen",
+    "description": "Description",
+    "revision": "revision {n}",
+    "revisions": "Discovery versions",
+    "rediscover": "Run Discovery again",
+    "discoveryBlocked": "Discovery stopped:",
+    "agentWorking": "The agent is researching the issue…",
+    "retrying": "The previous attempt failed; retrying.",
+    "value": "Value",
+    "measure": "How we will measure",
+    "required": "required",
+    "notFilled": "Not filled in",
+    "source": "Source",
+    "query": "Query",
+    "target": "Target",
+    "window": "Window",
+    "checked": "The query ran successfully {at}",
+    "similar": "Similar",
+    "problemFeature": "Where the error is",
+    "document": "Discovery document",
+    "missing": "Missing: {fields}",
+    "field": {
+      "value": "value",
+      "measure.source": "metric source",
+      "measure.query": "query",
+      "measure.target": "target",
+      "measure.window": "window"
+    },
+    "accept": "Accept",
+    "acceptDisabled": "Discovery needs a value and a way to measure it",
+    "reject": "Reject",
+    "merge": "Merge",
+    "move": "Move",
+    "history": "History"
+  },
+  "accept": {
+    "title": "Accept {key}",
+    "fix": "Fix of a feature",
+    "noFeature": "No feature",
+    "parent": "The feature with the error",
+    "preview": "{key} will be created with a link to {issue}.",
+    "text": "Discovery is attached to the feature; the success metric goes into the product specification draft."
+  },
+  "reject": {
+    "title": "Reject {key}",
+    "reason": "Reason",
+    "hint": "The author sees the reason."
+  },
+  "merge": {
+    "title": "Merge {key}",
+    "into": "Main issue",
+    "hint": "The duplicate is closed as merged. If the main issue already became a feature, the feature links both."
+  },
+  "move": {
+    "title": "Move {key}",
+    "domain": "New domain",
+    "hint": "The issue gets a key in the new domain; {key} keeps opening it."
+  },
+  "development": {
+    "phase": "Phase",
+    "empty": "No features match the filters",
+    "emptyHint": "Features are created from accepted issues.",
+    "imported": "no Discovery",
+    "status": {
+      "active": "Active",
+      "released": "Released",
+      "rolled_back": "Rolled back",
+      "all": "All"
+    }
+  },
+  "codegen": {
+    "title": "Code generation for {id}",
+    "service": "Service",
+    "repo": "Repository",
+    "autonomy": "Autonomy",
+    "agentPrepares": "The agent prepares",
+    "noServices": "The tech specification names no services of the catalog.",
+    "notMerged": "PRs are not merged until the release; specifications are read-only while code is generated.",
+    "started": "Code generation started"
+  },
+  "impl": {
+    "blocked": "Code generation stopped:",
+    "waitingHumanPr": "Waiting for PRs from people for services on the Plan level.",
+    "notMerged": "Nothing is merged: merging happens in the release.",
+    "empty": "No code yet",
+    "emptyHint": "Code generation starts when all gates are approved.",
+    "humanPrs": "PRs by people",
+    "matrix": "Requirement → test case → PR",
+    "tokens": "Agent: {n} tokens",
+    "plan": "Plan of changes",
+    "planHint": "a person prepares the code and the PR",
+    "noPr": "No PR yet",
+    "byHuman": "by a person",
+    "requirement": "Requirement",
+    "services": "Services",
+    "testCases": "Test cases",
+    "noTest": "no test case",
+    "noPrShort": "no PR"
+  },
+  "task": {
+    "retry": "Retry",
+    "working": "working",
+    "status": {
+      "queued": "Queued",
+      "running": "Running",
+      "succeeded": "Done",
+      "failed": "Failed",
+      "cancelled": "Cancelled"
+    },
+    "type": {
+      "implement": "code generation",
+      "address_review": "review comments",
+      "update_pr": "PR update",
+      "revert": "revert PR",
+      "ci_setup": "CI step"
+    }
+  },
+  "ci": {
+    "pending": "pending",
+    "success": "green",
+    "failure": "red"
+  },
+  "review": {
+    "none": "no review",
+    "required": "in review",
+    "changes_requested": "changes requested",
+    "approved": "review passed",
+    "not_required": "no review required"
+  },
+  "prState": {
+    "open": "open",
+    "merged": "merged",
+    "closed": "closed"
+  },
+  "val": {
+    "notYet": "Validation starts when the PRs are ready",
+    "notYetHint": "It checks tests, coverage, discrepancies and reviews before anything is merged.",
+    "waitingCi": "Waiting for CI results of the PR branches.",
+    "waitingStage": "Deploying the branches to the stage; e2e runs after the last service.",
+    "released": "Validated. Release:",
+    "kpi": {
+      "tests": "test cases in PR branches",
+      "testsFailed": "{n} failed",
+      "coverage": "requirements covered",
+      "discrepancies": "discrepancies",
+      "reviews": "reviews passed"
+    },
+    "tests": "Tests by test case",
+    "noTests": "The qa specification has no test cases.",
+    "level": "Level",
+    "result": "Result",
+    "status": {
+      "passed": "passed",
+      "failed": "failed",
+      "skipped": "skipped",
+      "missing": "no result"
+    },
+    "reviews": "Reviews",
+    "stage": "Stage",
+    "stageManual": "No stage pipeline is configured: mark the branches deployed by hand.",
+    "markStage": "Mark deployed",
+    "signatures": "Signatures",
+    "side": {
+      "product": "Product side",
+      "technical": "Technical side"
+    },
+    "sign": "Sign",
+    "signed": "Signed",
+    "waitingSignature": "Waiting for a signature",
+    "releaseHint": "The second signature creates the release.",
+    "releaseCreated": "Release {key} created",
+    "return": "Return for rework",
+    "returnTitle": "Return for rework",
+    "toCode": "Code",
+    "toSpec": "Specification",
+    "returnHint": {
+      "code": "The agent updates the same PRs; signatures are reset.",
+      "spec": "Specifications become editable again; after approval the code is generated again."
+    },
+    "comment": "Comment"
+  },
+  "release": {
+    "notFound": "Release {key} not found",
+    "feature": "Feature:",
+    "blocked": "Stopped",
+    "blockedTitle": "The release is stopped:",
+    "retry": "Retry",
+    "rollback": "Roll back",
+    "confirm": "Confirm release",
+    "rollingBack": "Rolling back:",
+    "rolledBack": "Rolled back by {name}:",
+    "succeeded": "Confirmed by {name} {at}: the specification PR is merged.",
+    "startHint": "PRs are merged in the rollout order of the architecture specification by the expert's token.",
+    "editPlan": "Change order",
+    "planHint": "Merge and deploy order of the services; the specification PR is always last.",
+    "up": "Up",
+    "down": "Down",
+    "startMerge": "Start merge",
+    "flagWait": "Waiting for the flag {flag} to be switched on in production.",
+    "markFlagOn": "Mark flag on",
+    "markFlagOff": "Mark flag off",
+    "flagMarkHint": "Hammurapi does not switch flags: record the state set in the flag service for {flag}.",
+    "prs": "PRs in merge order",
+    "current": "now",
+    "specPr": "Specification PR",
+    "onConfirm": "on confirmation",
+    "reverts": "Revert PRs",
+    "metric": "Success metric",
+    "metricNext": "The evaluation window comes in the next release of Hammurapi; confirm when the services work.",
+    "noMetric": "No metric (imported feature).",
+    "noFlag": "no flag key",
+    "flag": {
+      "on": "on in production",
+      "off": "off in production"
+    },
+    "tasks": "Agent tasks",
+    "skipped": "skipped",
+    "nextRelease": "next release",
+    "markDeploy": "Mark released",
+    "markTitle": "{service} is released",
+    "version": "Version or ref",
+    "markHint": "The first signal counts: pipeline result, tag or this mark.",
+    "confirmTitle": "Confirm {key}",
+    "confirmSpec": "The specification PR is merged into the default branch with your token.",
+    "confirmStatuses": "The release becomes Succeeded, the feature Released, the issues Resolved.",
+    "confirmProblem": "The target was not reached: a Problem issue will be created."
+  },
+  "rollback": {
+    "title": "Roll back {key}",
+    "what": "What happens:",
+    "reverts": "the agent prepares revert PRs for merged PRs; they are merged in reverse order with your token",
+    "redeploy": "the services are released again",
+    "flags": "Hammurapi waits for the feature flag to be switched off in the flag service",
+    "spec": "the specification PR is closed without merging",
+    "issues": "the issues return to New and Discovery runs again",
+    "reason": "Reason"
+  },
+  "releases": {
+    "empty": "No releases",
+    "emptyHint": "A release is created by the second validation signature.",
+    "filter": {
+      "active": "Active",
+      "succeeded": "Succeeded",
+      "rolled_back": "Rolled back",
+      "all": "All"
+    }
+  },
+  "deploy": {
+    "run": "pipeline run",
+    "status": {
+      "triggered": "waiting",
+      "started": "running",
+      "success": "released",
+      "failure": "failed",
+      "timeout": "no result"
+    },
+    "signal": {
+      "pipeline": "pipeline",
+      "tag": "tag",
+      "manual": "manual mark"
+    }
+  },
+  "unnumbered": {
+    "title": "Requirements without an ID",
+    "text": "{count, plural, one {# requirement has no ID. Test cases and code link to requirements by ID.} other {# requirements have no ID. Test cases and code link to requirements by ID.}}",
+    "askAgent": "Ask the agent to add IDs",
+    "submitAnyway": "Submit without IDs",
+    "prompt": "Number all requirements of the product specification as **R1.** with acceptance criteria."
+  },
+  "activity": {
+    "created": "created",
+    "accepted": "accepted",
+    "rejected": "rejected",
+    "reopened": "reopened",
+    "merged": "merged",
+    "merged_from": "another issue merged into it",
+    "moved": "moved",
+    "discovery_updated": "Discovery updated",
+    "returned_after_rollback": "returned after a rollback"
   }
 }

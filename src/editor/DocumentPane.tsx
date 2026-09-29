@@ -177,6 +177,19 @@ export function DocumentPane({ feature, area }: { feature: FeatureCard; area: Ar
           <span><b>{t("editor.lockedBy", { name: lockedBy?.userName })}</b> {t("editor.lockedText", { name: lockedBy?.userName })}</span>
         </div>
       )}
+      {doc.data?.generated && (
+        <div className="banner" role="note">
+          <span className="agentmark">{t("common.agent")}</span>
+          <span className="grow">{t("editor.generated")}</span>
+          <button className="btn sm" onClick={() => chat.send(t("editor.askAgent", { area: t(`areas.${area}`) }))}>{t("editor.askAgentButton")}</button>
+        </div>
+      )}
+      {doc.data && doc.data.unnumberedRequirements.length > 0 && !doc.data.generated && (
+        <div className="banner warn" role="note">
+          <Icon name="alert" />
+          <span>{t("editor.unnumbered", { count: doc.data.unnumberedRequirements.length })}</span>
+        </div>
+      )}
       {doc.data && doc.data.warnings.length > 0 && (
         <div className="banner warn" role="note">
           <Icon name="alert" />

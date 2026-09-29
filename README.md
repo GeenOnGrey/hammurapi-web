@@ -1,16 +1,23 @@
 # hammurapi-web
 
-Web app of **Hammurapi**, a platform for writing product specifications through quality gates with
-an AI agent as a partner. It is a single-page app that talks only to the Hammurapi API
+Web app of **Hammurapi**, a platform that runs the whole product development cycle with an AI agent
+as a partner: from an idea or a problem, through a specification with quality gates, to code,
+validation, release and the value metric. It is a single-page app that talks only to the Hammurapi API
 ([`hammurapi-core`](../hammurapi-core)); deployment and documentation live in
 [`hammurapi`](../hammurapi).
 
 ## What's inside
 
-- **Screens:** sign-in through the instance's GitHub/GitLab, home page with "Awaiting your approval"
-  and filters, feature page with the gate strip and WYSIWYG editor, diff since approval, import from
-  a zip archive, administration (users and roles, domains and systems, rules, settings), profile.
-- **Chat** with the user's agent: general and specification modes, answers streamed over
+- **Stages:** the General page (what needs your attention, a board of research, development and
+  delivery), **Research** (issues, Discovery by the agent, acceptance), **Development** (features
+  with the gate strip, WYSIWYG editor, diff since approval, implementation by services and PRs,
+  validation with CI results and signatures, autonomy), **Delivery** (releases with the step lane,
+  deploy and flag marks, the value metric, confirmation and rollback).
+- **Administration:** users and roles, domains and systems (manual or from the Backstage catalog),
+  services, rules, deploy per environment, metric sources with a dry run, cycle settings (catalog,
+  feature flags webhook, stage), instance settings. Also sign-in through GitHub/GitLab, import from a
+  zip archive and the profile.
+- **Chat** with the user's agent: general mode and the context of the open issue, feature or release, answers streamed over
   server-sent events, attachments, push-to-talk voice input with transcript review.
 - **Editor:** [Milkdown](https://milkdown.dev) (ProseMirror + remark) with CommonMark + GFM and
   fixed serialization options, so a document opened and saved without edits never changes.
@@ -40,9 +47,11 @@ is the demo stack from the `hammurapi` repository: `docker compose --profile dem
 
 ```text
 locales/            translations (en is the source of truth for keys)
+src/components/     shared UI: keys, badges, lanes, progress, markdown, icons
 src/api/            typed API client (CSRF, error codes) and TanStack Query hooks
 src/app/            app shell, routing, session and chat context, profile menu
-src/pages/          home, feature, diff, import, new feature, admin/*
+src/pages/          general, issues, issue, new issue, development, feature/*, releases, release,
+                    diff, import, admin/*
 src/editor/         Milkdown wrapper and the document pane (locks, autosave)
 src/chat/           chat panel and push-to-talk recorder
 src/lib/            i18n, SSE client, formatting, markdown helpers, error texts
@@ -56,5 +65,5 @@ docker build -t hammurapi-web .
 docker run -p 8080:8080 -e API_UPSTREAM=api:8080 hammurapi-web
 ```
 
-nginx serves the SPA and proxies `/api`, `/admin/api` and `/hooks` to `API_UPSTREAM`, with
+nginx serves the SPA and proxies `/api`, `/admin/api` and `/hooks` (CI results, deploy and feature-flag webhooks) to `API_UPSTREAM`, with
 buffering disabled for the SSE stream and a 60 MB upload limit for archive imports.

@@ -56,7 +56,11 @@ export function ProfileMenu({ onClose }: { onClose: () => void }) {
     }
   };
 
-  const roleSummary = me.roles.map((r) => `${t(`roles.${r.role}`)}: ${r.areas.map((a) => t(`areas.${a}`)).join(", ")}`).join("; ");
+  const roleSummary = [
+    ...me.experts.map((e) => `${e.domain}: ${e.kinds.map((k) => t(`expert.${k}`)).join(", ")}`),
+    ...(me.areaAdmin.length ? [`${t("roles.admin")}: ${me.areaAdmin.map((a) => t(`areas.${a}`)).join(", ")}`] : []),
+    ...(me.ownedServices.length ? [`${t("roles.owner")}: ${me.ownedServices.join(", ")}`] : []),
+  ].join("; ");
 
   return (
     <div className="menu" ref={ref} role="dialog" aria-label={t("profile.title")}>

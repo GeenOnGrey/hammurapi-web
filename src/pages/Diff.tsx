@@ -45,7 +45,7 @@ export function DiffPage() {
   return (
     <main className="main">
       <div className="crumbs">
-        <Link to={`/features/${uniqueId}/${area}`} aria-label={t("common.back")}><Icon name="back" size={16} /></Link>
+        <Link to={`/features/${uniqueId}/spec/${area}`} aria-label={t("common.back")}><Icon name="back" size={16} /></Link>
         <span className="fid">{uniqueId}</span> {t(`areas.${area}`)}
       </div>
       {diff.isLoading && <Loading />}

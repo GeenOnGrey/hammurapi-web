@@ -3,12 +3,16 @@ import { useEffect, useRef } from "react";
 // One SSE stream carries every event type (tech spec, API §9).
 export type EventType =
   | "agent.token" | "agent.tool_call" | "agent.done" | "agent.error"
-  | "gate.updated" | "feature.handed_off" | "feature.deleted"
+  | "gate.updated" | "feature.deleted"
+  | "issue.updated" | "discovery.progress" | "feature.updated" | "task.progress" | "validation.updated"
+  | "release.updated" | "release.blocked" | "focus.changed"
   | "approvals.changed" | "import.progress";
 
 const TYPES: EventType[] = [
   "agent.token", "agent.tool_call", "agent.done", "agent.error",
-  "gate.updated", "feature.handed_off", "feature.deleted", "approvals.changed", "import.progress",
+  "gate.updated", "feature.deleted", "approvals.changed", "import.progress",
+  "issue.updated", "discovery.progress", "feature.updated", "task.progress", "validation.updated",
+  "release.updated", "release.blocked", "focus.changed",
 ];
 
 type Handler = (data: any) => void; // eslint-disable-line @typescript-eslint/no-explicit-any

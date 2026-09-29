@@ -39,8 +39,8 @@ export function ChatPanel() {
   const fileRef = useRef<HTMLInputElement>(null);
   const recorder = useRecorder();
 
-  // The mode follows the opened feature (CHAT-01); the user can switch back.
-  useEffect(() => setMode(chat.feature ? "spec" : "general"), [chat.feature?.uniqueId]); // eslint-disable-line react-hooks/exhaustive-deps
+  // The mode follows the issue, feature or release on the screen; the user can switch back.
+  useEffect(() => setMode(chat.subject ? "spec" : "general"), [chat.subject?.key]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const history = useInfiniteQuery({
     queryKey: keys.chat,
@@ -85,18 +85,18 @@ export function ChatPanel() {
   const send = async (msg: string, isVoice = false) => {
     const body = msg.trim();
     if (!body || sending) return;
-    if (mode === "spec" && !chat.feature) return;
+    if (mode === "spec" && !chat.subject) return;
     setSending(true);
+    const context = mode === "spec" && chat.subject ? { type: chat.subject.type, key: chat.subject.key, area: chat.area } : null;
     try {
       const res = await api.post<{ messageId: string; createdAt: string }>("/api/v1/chat/messages", {
         text: body, mode, isVoice,
-        feature: mode === "spec" ? chat.feature?.uniqueId : undefined,
-        area: mode === "spec" ? chat.area ?? undefined : undefined,
+        context: context ? { type: context.type, key: context.key, area: context.area ?? undefined } : undefined,
         attachmentIds: pending.map((p) => p.id),
       });
       setLocal((l) => [...l, {
-        id: res.messageId, role: "user", mode, feature: mode === "spec" ? chat.feature?.uniqueId ?? null : null,
-        area: chat.area, content: body, isVoice, createdAt: res.createdAt,
+        id: res.messageId, role: "user", mode, context,
+        content: body, isVoice, createdAt: res.createdAt,
         attachments: pending.map((p) => ({ id: p.id, fileName: p.fileName, mimeType: p.mimeType })),
       }]);
       setLive({ messageId: res.messageId, text: "", tools: [], done: false });
@@ -151,7 +151,7 @@ export function ChatPanel() {
   };
 
   const tagline = (m: ChatMessage) =>
-    m.mode === "spec" ? t("chat.tagSpec", { id: m.feature ?? "" }) : t("chat.tagGeneral");
+    m.mode === "spec" ? t("chat.tagSpec", { id: m.context?.key ?? "" }) : t("chat.tagGeneral");
 
   return (
     <aside className={`chat${chat.open ? " open" : ""}`} aria-label={t("chat.title")}>
@@ -180,12 +180,12 @@ export function ChatPanel() {
         {view === "chat" && (
           <>
             <div className="seg" role="group" aria-label={t("chat.mode")}>
-              <button aria-pressed={mode === "spec"} disabled={!chat.feature} onClick={() => setMode("spec")}>{t("chat.modeSpec")}</button>
+              <button aria-pressed={mode === "spec"} disabled={!chat.subject} onClick={() => setMode("spec")}>{t("chat.modeSpec")}</button>
               <button aria-pressed={mode === "general"} onClick={() => setMode("general")}>{t("chat.modeGeneral")}</button>
             </div>
             <div className="ctx">
-              {mode === "spec" && chat.feature
-                ? <><span className="fid">{chat.feature.uniqueId}</span> {chat.area ? t(`areas.${chat.area}`) : chat.feature.title}</>
+              {mode === "spec" && chat.subject
+                ? <><span className="fid">{chat.subject.key}</span> {chat.area ? t(`areas.${chat.area}`) : chat.subject.title}</>
                 : t("chat.generalHint")}
             </div>
           </>
@@ -278,7 +278,7 @@ export function ChatPanel() {
                 {sending ? (
                   <button className="iconbtn fill" aria-label={t("chat.stop")} onClick={() => api.post("/api/v1/chat/cancel").catch(() => undefined)}><Icon name="stop" /></button>
                 ) : (
-                  <button className="iconbtn fill" aria-label={t("chat.send")} disabled={!text.trim() || (mode === "spec" && !chat.feature)} onClick={() => send(text)}>
+                  <button className="iconbtn fill" aria-label={t("chat.send")} disabled={!text.trim() || (mode === "spec" && !chat.subject)} onClick={() => send(text)}>
                     <Icon name="send" />
                   </button>
                 )}

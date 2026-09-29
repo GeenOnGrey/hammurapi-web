@@ -3,14 +3,19 @@ import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { ApiError } from "../api/client";
-import { keys, useConfig, useMe, useProfile } from "../api/queries";
+import { invalidateCycle, keys, useConfig, useMe, useProfile } from "../api/queries";
 import { connectEvents, disconnectEvents, onEvent, onReconnect } from "../lib/sse";
 import { setDocumentLanguage } from "../lib/i18n";
 import { Loading } from "../components/ui";
 import { ChatProvider, SessionProvider } from "./session";
 import { Shell } from "./Shell";
 import { LoginPage } from "../pages/Login";
-import { HomePage } from "../pages/Home";
+import { FocusPage, OverviewPage } from "../pages/General";
+import { IssuesPage } from "../pages/Issues";
+import { IssuePage } from "../pages/Issue";
+import { DevelopmentPage } from "../pages/Development";
+import { ReleasesPage } from "../pages/Releases";
+import { ReleasePage } from "../pages/Release";
 import { DiffPage } from "../pages/Diff";
 import { ImportPage } from "../pages/Import";
 
@@ -64,21 +69,33 @@ function Authenticated() {
   useEffect(() => {
     connectEvents();
     const offs = [
-      onEvent("approvals.changed", () => qc.invalidateQueries({ queryKey: keys.approvals })),
+      onEvent("approvals.changed", () => {
+        qc.invalidateQueries({ queryKey: keys.approvals });
+        qc.invalidateQueries({ queryKey: keys.focus });
+      }),
       onEvent("gate.updated", (d: { uniqueId: string }) => {
         qc.invalidateQueries({ queryKey: keys.feature(d.uniqueId) });
         qc.invalidateQueries({ queryKey: ["history", d.uniqueId] });
         qc.invalidateQueries({ queryKey: ["diff", d.uniqueId] });
+        qc.invalidateQueries({ queryKey: ["document", d.uniqueId] });
+        qc.invalidateQueries({ queryKey: keys.requirements(d.uniqueId) });
         qc.invalidateQueries({ queryKey: keys.features() });
-        qc.invalidateQueries({ queryKey: keys.approvals });
+        qc.invalidateQueries({ queryKey: keys.focus });
       }),
-      onEvent("feature.handed_off", (d: { uniqueId: string }) => {
-        qc.invalidateQueries({ queryKey: keys.feature(d.uniqueId) });
-        qc.invalidateQueries({ queryKey: keys.features() });
+      onEvent("feature.deleted", () => invalidateCycle(qc)),
+      onEvent("issue.updated", () => invalidateCycle(qc)),
+      onEvent("discovery.progress", (d: { key: string }) => qc.invalidateQueries({ queryKey: keys.discovery(d.key) })),
+      onEvent("feature.updated", () => invalidateCycle(qc)),
+      onEvent("task.progress", () => qc.invalidateQueries({ queryKey: ["implementation"] })),
+      onEvent("validation.updated", () => {
+        qc.invalidateQueries({ queryKey: ["validation"] });
+        qc.invalidateQueries({ queryKey: keys.focus });
       }),
-      onEvent("feature.deleted", (d: { uniqueId: string }) => {
-        qc.invalidateQueries({ queryKey: keys.feature(d.uniqueId) });
-        qc.invalidateQueries({ queryKey: keys.features() });
+      onEvent("release.updated", () => invalidateCycle(qc)),
+      onEvent("release.blocked", () => invalidateCycle(qc)),
+      onEvent("focus.changed", () => {
+        qc.invalidateQueries({ queryKey: keys.focus });
+        qc.invalidateQueries({ queryKey: keys.overview() });
       }),
       onReconnect(() => qc.invalidateQueries()),
     ];
@@ -90,15 +107,23 @@ function Authenticated() {
 
   if (profile.isLoading) return <Loading />;
   if (!profile.data || !me.data || !config.data) return <Loading />;
+  const feature = <Suspense fallback={<Loading />}><FeaturePage /></Suspense>;
   return (
     <SessionProvider me={me.data} profile={profile.data} config={config.data}>
       <ChatProvider>
         <Routes>
           <Route element={<Shell />}>
-            <Route index element={<HomePage />} />
-            <Route path="features/:uniqueId" element={<Suspense fallback={<Loading />}><FeaturePage /></Suspense>} />
-            <Route path="features/:uniqueId/:area" element={<Suspense fallback={<Loading />}><FeaturePage /></Suspense>} />
-            <Route path="features/:uniqueId/:area/diff" element={<DiffPage />} />
+            <Route index element={<FocusPage />} />
+            <Route path="overview" element={<OverviewPage />} />
+            <Route path="research" element={<IssuesPage />} />
+            <Route path="issues/:key" element={<IssuePage />} />
+            <Route path="development" element={<DevelopmentPage />} />
+            <Route path="features/:uniqueId" element={feature} />
+            <Route path="features/:uniqueId/:tab" element={feature} />
+            <Route path="features/:uniqueId/spec/:area" element={feature} />
+            <Route path="features/:uniqueId/spec/:area/diff" element={<DiffPage />} />
+            <Route path="delivery" element={<ReleasesPage />} />
+            <Route path="releases/:key" element={<ReleasePage />} />
             <Route path="imports/:id" element={<ImportPage />} />
             <Route path="admin/*" element={<Suspense fallback={<Loading />}><AdminPage /></Suspense>} />
             <Route path="*" element={<Navigate to="/" replace />} />
