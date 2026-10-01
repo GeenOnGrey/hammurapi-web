@@ -81,7 +81,7 @@ docker run -p 8080:8080 -e API_BASE_URL=https://api.example.org hammurapi-web
 
 A tag `vX.Y.Z` runs `.github/workflows/release.yml`: lint (`npm run lint`: oxlint + `tsc`) ∥
 tests → image `ghcr.io/greenongrey/hammurapi-web` with SBOM, provenance and a cosign signature →
-Trivy scan → deploy through the reusable workflow of `hammurapi-infra` (web is deployed only after
+Trivy scan → deploy through the reusable workflow of `hammurapi` (web is deployed only after
 `hammurapi-core`). A manual run with a tag redeploys without a rebuild. Versions are pinned in
-`deploy/versions.env`; after changing `INFRA_WORKFLOW_REF` run `deploy/sync-ref.sh`. Setup:
+`deploy/versions.env`; after changing `DEPLOY_WORKFLOW_REF` run `deploy/sync-ref.sh`. Setup:
 `hammurapi-infra/docs/hammurapi.md`.
