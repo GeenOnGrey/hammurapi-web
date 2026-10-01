@@ -67,3 +67,21 @@ docker run -p 8080:8080 -e API_UPSTREAM=api:8080 hammurapi-web
 
 nginx serves the SPA and proxies `/api`, `/admin/api` and `/hooks` (CI results, deploy and feature-flag webhooks) to `API_UPSTREAM`, with
 buffering disabled for the SSE stream and a 60 MB upload limit for archive imports.
+
+Without `API_UPSTREAM` the image only serves static files, and the API lives on its own domain:
+the container writes `/config.json` from `API_BASE_URL` at start (`{ "apiBaseUrl": … }`), the
+SPA reads it before the first request and calls the API with credentials. One image fits any
+domain (PLT.INFRA-0002).
+
+```sh
+docker run -p 8080:8080 -e API_BASE_URL=https://api.example.org hammurapi-web
+```
+
+## Release
+
+A tag `vX.Y.Z` runs `.github/workflows/release.yml`: lint (`npm run lint`: oxlint + `tsc`) ∥
+tests → image `ghcr.io/greenongrey/hammurapi-web` with SBOM, provenance and a cosign signature →
+Trivy scan → deploy through the reusable workflow of `hammurapi-infra` (web is deployed only after
+`hammurapi-core`). A manual run with a tag redeploys without a rebuild. Versions are pinned in
+`deploy/versions.env`; after changing `INFRA_WORKFLOW_REF` run `deploy/sync-ref.sh`. Setup:
+`hammurapi-infra/docs/hammurapi.md`.

@@ -1,3 +1,4 @@
+import { apiUrl } from "../api/base";
 import { useEffect, useRef } from "react";
 
 // One SSE stream carries every event type (tech spec, API §9).
@@ -23,7 +24,7 @@ const reconnectHandlers = new Set<() => void>();
 
 export function connectEvents() {
   if (source) return;
-  source = new EventSource("/api/v1/events", { withCredentials: true });
+  source = new EventSource(apiUrl("/api/v1/events"), { withCredentials: true });
   let wasOpen = false;
   source.onopen = () => {
     // After a reconnect, state may have changed while we were away.

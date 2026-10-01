@@ -37,9 +37,9 @@ export function Shell() {
     e.preventDefault();
     const v = q.trim();
     if (!v) return;
-    if (/^ISS\./.test(v)) navigate(`/issues/${v}`);
-    else if (/^FTR\./.test(v)) navigate(`/features/${v}`);
-    else if (/^RLS\./.test(v)) navigate(`/releases/${v}`);
+    if (v.startsWith("ISS.")) navigate(`/issues/${v}`);
+    else if (v.startsWith("FTR.")) navigate(`/features/${v}`);
+    else if (v.startsWith("RLS.")) navigate(`/releases/${v}`);
     else navigate(`/development?q=${encodeURIComponent(v)}&domain=all&status=all`);
   };
 

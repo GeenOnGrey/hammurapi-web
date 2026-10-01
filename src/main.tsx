@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { I18nextProvider } from "react-i18next";
 import { ApiError } from "./api/client";
+import { loadRuntimeConfig } from "./api/base";
 import { i18nInstance, setDocumentLanguage } from "./lib/i18n";
 import { ToastProvider } from "./components/ui";
 import { App } from "./app/App";
@@ -21,6 +22,9 @@ const queryClient = new QueryClient({
 });
 
 setDocumentLanguage(i18nInstance.language);
+
+// Адрес API (/config.json) нужен до первого запроса.
+await loadRuntimeConfig();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

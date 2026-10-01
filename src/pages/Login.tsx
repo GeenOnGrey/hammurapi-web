@@ -1,3 +1,4 @@
+import { apiUrl } from "../api/base";
 import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import type { PublicConfig } from "../api/types";
@@ -16,7 +17,7 @@ export function LoginPage({ config }: { config: PublicConfig }) {
         <img src="/logo.png" alt={t("login.logoAlt")} />
         <h1>Hammurapi</h1>
         <p>{t("login.slogan")}</p>
-        <a className="btn" href="/api/v1/auth/login">
+        <a className="btn" href={apiUrl("/api/v1/auth/login")}>
           {config.provider === "github" ? <GitHubIcon /> : <GitLabIcon />}
           {t("login.signIn", { provider })}
         </a>

@@ -1,3 +1,4 @@
+import { apiUrl } from "../api/base";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useInfiniteQuery, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
@@ -207,7 +208,7 @@ export function ChatPanel() {
                 <div className="bub">{m.content}</div>
                 {m.attachments.length > 0 && (
                   <div className="atts">
-                    {m.attachments.map((a) => <a key={a.id} href={`/api/v1/attachments/${a.id}`}><Icon name="clip" size={12} /> {a.fileName}</a>)}
+                    {m.attachments.map((a) => <a key={a.id} href={apiUrl(`/api/v1/attachments/${a.id}`)}><Icon name="clip" size={12} /> {a.fileName}</a>)}
                   </div>
                 )}
               </div>
@@ -300,7 +301,7 @@ function FilesView() {
       <div className="files">
         {files.data?.items.length === 0 && <p className="muted small">{t("chat.noFiles")}</p>}
         {files.data?.items.map((f) => (
-          <a key={f.id} className="f" href={`/api/v1/attachments/${f.id}`}>
+          <a key={f.id} className="f" href={apiUrl(`/api/v1/attachments/${f.id}`)}>
             <div className="thumb">{(f.fileName.split(".").pop() ?? "").slice(0, 4).toUpperCase()}</div>
             <div>
               {f.fileName}

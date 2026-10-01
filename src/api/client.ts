@@ -1,5 +1,7 @@
 // Fetch wrapper: JSON, cookies, CSRF double-submit and stable error codes.
 
+import { apiUrl } from "./base";
+
 export class ApiError extends Error {
   constructor(
     public status: number,
@@ -29,7 +31,8 @@ export async function request<T>(method: string, path: string, body?: Body, init
   }
   let res: Response;
   try {
-    res = await fetch(path, { method, headers, body: payload, credentials: "same-origin", ...init });
+    // include: the API may live on api.<domain> while the SPA is on web.<domain>.
+    res = await fetch(apiUrl(path), { method, headers, body: payload, credentials: "include", ...init });
   } catch {
     throw new ApiError(0, "network", "network error");
   }
