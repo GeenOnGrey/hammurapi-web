@@ -145,7 +145,7 @@
     },
     "issues": "Tareas:",
     "release": "Release:",
-    "noDiscovery": "importada, sin Discovery",
+    "noDiscovery": "importada, sin análisis",
     "prNotMerged": "sin fusionar hasta el release",
     "flagKey": "Clave del feature flag",
     "flagHint": "Si se usan feature flags, el release espera a que este flag se active en producción.",
@@ -630,7 +630,7 @@
     "release": "Entrega",
     "nothing": "nada pendiente",
     "action": {
-      "verify_discovery": "Verificar Discovery",
+      "verify_discovery": "Verificar el análisis",
       "approve_gate": "Aprobar",
       "sign_validation": "Firmar validación",
       "start_merge": "Iniciar merge",
@@ -647,7 +647,7 @@
   },
   "issueStatus": {
     "new": "Nueva",
-    "discovery": "Discovery",
+    "discovery": "Análisis en curso",
     "verification": "En verificación",
     "accepted": "Aceptada",
     "resolved": "Resuelta",
@@ -734,7 +734,7 @@
     "domain": "Dominio",
     "name": "Título",
     "description": "Descripción",
-    "preview": "La tarea recibirá la clave {key}; Discovery empieza de inmediato.",
+    "preview": "La tarea recibirá la clave {key}; el análisis empieza de inmediato.",
     "create": "Crear tarea",
     "creating": "Creando…"
   },
@@ -762,9 +762,9 @@
     "reopen": "Reabrir",
     "description": "Descripción",
     "revision": "revisión {n}",
-    "revisions": "Versiones de Discovery",
-    "rediscover": "Ejecutar Discovery de nuevo",
-    "discoveryBlocked": "Discovery detenido:",
+    "revisions": "Versiones del análisis",
+    "rediscover": "Ejecutar el análisis de nuevo",
+    "discoveryBlocked": "Análisis detenido:",
     "agentWorking": "El agente está investigando la tarea…",
     "retrying": "El intento anterior falló; reintentando.",
     "value": "Valor",
@@ -778,7 +778,7 @@
     "checked": "La consulta se ejecutó correctamente {at}",
     "similar": "Similares",
     "problemFeature": "Dónde está el error",
-    "document": "Documento de Discovery",
+    "document": "Análisis",
     "missing": "Falta: {fields}",
     "field": {
       "value": "valor",
@@ -788,11 +788,12 @@
       "measure.window": "ventana"
     },
     "accept": "Aceptar",
-    "acceptDisabled": "Discovery necesita el valor y cómo medirlo",
+    "acceptDisabled": "El análisis necesita el valor y cómo medirlo",
     "reject": "Rechazar",
     "merge": "Fusionar",
     "move": "Mover",
-    "history": "Historial"
+    "history": "Historial",
+    "analysis": "Análisis"
   },
   "accept": {
     "title": "Aceptar {key}",
@@ -800,7 +801,7 @@
     "noFeature": "Sin funcionalidad",
     "parent": "Funcionalidad con el error",
     "preview": "Se creará {key} con un enlace a {issue}.",
-    "text": "Discovery se adjunta a la funcionalidad; la métrica de éxito pasa al borrador de la especificación de producto."
+    "text": "El análisis se adjunta a la funcionalidad; la métrica de éxito pasa al borrador de la especificación de producto."
   },
   "reject": {
     "title": "Rechazar {key}",
@@ -821,7 +822,7 @@
     "phase": "Fase",
     "empty": "No hay funcionalidades con estos filtros",
     "emptyHint": "Las funcionalidades se crean a partir de tareas aceptadas.",
-    "imported": "sin Discovery",
+    "imported": "sin análisis",
     "status": {
       "active": "Activas",
       "released": "Publicadas",
@@ -993,7 +994,7 @@
     "redeploy": "los servicios se vuelven a publicar",
     "flags": "Hammurapi espera a que el feature flag se desactive en el servicio de flags",
     "spec": "el PR de especificación se cierra sin fusionar",
-    "issues": "las tareas vuelven a Nueva y Discovery se ejecuta de nuevo",
+    "issues": "las tareas vuelven a Nueva y el análisis se ejecuta de nuevo",
     "reason": "Motivo"
   },
   "releases": {
@@ -1036,7 +1037,7 @@
     "merged": "fusionada",
     "merged_from": "se fusionó otra tarea",
     "moved": "movida",
-    "discovery_updated": "Discovery actualizado",
+    "discovery_updated": "Análisis actualizado",
     "returned_after_rollback": "volvió tras una reversión"
   }
 }

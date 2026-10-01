@@ -145,7 +145,7 @@
     },
     "issues": "Aufgaben:",
     "release": "Release:",
-    "noDiscovery": "importiert, ohne Discovery",
+    "noDiscovery": "importiert, ohne Analyse",
     "prNotMerged": "bis zum Release nicht gemergt",
     "flagKey": "Feature-Flag-Schlüssel",
     "flagHint": "Werden Feature-Flags genutzt, wartet das Release auf die Aktivierung dieses Flags in Produktion.",
@@ -616,7 +616,7 @@
   "stages": {
     "title": "Phasen",
     "general": "Allgemein",
-    "research": "Research",
+    "research": "Discovery",
     "development": "Entwicklung",
     "delivery": "Auslieferung"
   },
@@ -625,12 +625,12 @@
     "overview": "Überblick"
   },
   "focus": {
-    "research": "Research",
+    "research": "Discovery",
     "development": "Entwicklung",
     "release": "Auslieferung",
     "nothing": "nichts wartet",
     "action": {
-      "verify_discovery": "Discovery prüfen",
+      "verify_discovery": "Analyse prüfen",
       "approve_gate": "Freigeben",
       "sign_validation": "Validierung signieren",
       "start_merge": "Merge starten",
@@ -647,7 +647,7 @@
   },
   "issueStatus": {
     "new": "Neu",
-    "discovery": "Discovery",
+    "discovery": "Analyse läuft",
     "verification": "In Prüfung",
     "accepted": "Angenommen",
     "resolved": "Gelöst",
@@ -734,7 +734,7 @@
     "domain": "Domäne",
     "name": "Titel",
     "description": "Beschreibung",
-    "preview": "Die Aufgabe erhält den Schlüssel {key}; Discovery startet sofort.",
+    "preview": "Die Aufgabe erhält den Schlüssel {key}; die Analyse startet sofort.",
     "create": "Aufgabe erstellen",
     "creating": "Wird erstellt…"
   },
@@ -762,9 +762,9 @@
     "reopen": "Wieder öffnen",
     "description": "Beschreibung",
     "revision": "Revision {n}",
-    "revisions": "Discovery-Versionen",
-    "rediscover": "Discovery erneut starten",
-    "discoveryBlocked": "Discovery angehalten:",
+    "revisions": "Analyse-Versionen",
+    "rediscover": "Analyse erneut starten",
+    "discoveryBlocked": "Analyse angehalten:",
     "agentWorking": "Der Agent untersucht die Aufgabe…",
     "retrying": "Der vorige Versuch ist fehlgeschlagen; neuer Versuch.",
     "value": "Nutzen",
@@ -778,7 +778,7 @@
     "checked": "Abfrage erfolgreich ausgeführt {at}",
     "similar": "Ähnliches",
     "problemFeature": "Wo der Fehler liegt",
-    "document": "Discovery-Dokument",
+    "document": "Analyse",
     "missing": "Es fehlt: {fields}",
     "field": {
       "value": "Nutzen",
@@ -788,11 +788,12 @@
       "measure.window": "Zeitraum"
     },
     "accept": "Annehmen",
-    "acceptDisabled": "Discovery braucht Nutzen und Messmethode",
+    "acceptDisabled": "Die Analyse braucht Nutzen und Messmethode",
     "reject": "Ablehnen",
     "merge": "Zusammenführen",
     "move": "Verschieben",
-    "history": "Verlauf"
+    "history": "Verlauf",
+    "analysis": "Analyse"
   },
   "accept": {
     "title": "{key} annehmen",
@@ -800,7 +801,7 @@
     "noFeature": "Kein Feature",
     "parent": "Feature mit dem Fehler",
     "preview": "{key} wird mit einem Link auf {issue} erstellt.",
-    "text": "Discovery wird dem Feature beigefügt; die Erfolgsmetrik kommt in den Entwurf der Produktspezifikation."
+    "text": "Die Analyse wird dem Feature beigefügt; die Erfolgsmetrik kommt in den Entwurf der Produktspezifikation."
   },
   "reject": {
     "title": "{key} ablehnen",
@@ -821,7 +822,7 @@
     "phase": "Phase",
     "empty": "Keine Features für die Filter",
     "emptyHint": "Features entstehen aus angenommenen Aufgaben.",
-    "imported": "ohne Discovery",
+    "imported": "ohne Analyse",
     "status": {
       "active": "Aktiv",
       "released": "Ausgeliefert",
@@ -993,7 +994,7 @@
     "redeploy": "die Services werden erneut ausgeliefert",
     "flags": "Hammurapi wartet, bis das Feature-Flag im Flag-Service deaktiviert ist",
     "spec": "der Spezifikations-PR wird ohne Merge geschlossen",
-    "issues": "die Aufgaben kehren zu „Neu“ zurück, Discovery läuft erneut",
+    "issues": "die Aufgaben kehren zu „Neu“ zurück, die Analyse läuft erneut",
     "reason": "Grund"
   },
   "releases": {
@@ -1036,7 +1037,7 @@
     "merged": "zusammengeführt",
     "merged_from": "andere Aufgabe hineingeführt",
     "moved": "verschoben",
-    "discovery_updated": "Discovery aktualisiert",
+    "discovery_updated": "Analyse aktualisiert",
     "returned_after_rollback": "nach Rollback zurückgekehrt"
   }
 }

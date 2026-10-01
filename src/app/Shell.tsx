@@ -9,7 +9,7 @@ import { ProfileMenu } from "./ProfileMenu";
 import { useChatContext, useSession } from "./session";
 
 // Stages of the cycle are the navigation (PLT.HMR-0002 R36): General,
-// Research, Development, Delivery; the main action is "New issue".
+// Discovery, Development, Delivery (PLT.HMR-0003); the main action is "New issue".
 export const STAGES = [
   { to: "/", key: "general", match: ["/", "/overview"] },
   { to: "/research", key: "research", match: ["/research", "/issues"] },

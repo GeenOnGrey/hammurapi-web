@@ -145,7 +145,7 @@
     },
     "issues": "Задачи:",
     "release": "Релиз:",
-    "noDiscovery": "импортировано, без Discovery",
+    "noDiscovery": "импортировано, без анализа",
     "prNotMerged": "не влит до релиза",
     "flagKey": "Ключ фичафлага",
     "flagHint": "При использовании фичафлагов релиз ждёт включения этого флага в продакшене.",
@@ -618,7 +618,7 @@
     "general": "Общее",
     "research": "Исследование",
     "development": "Разработка",
-    "delivery": "Поставка"
+    "delivery": "Доставка"
   },
   "general": {
     "focus": "В фокусе",
@@ -627,10 +627,10 @@
   "focus": {
     "research": "Исследование",
     "development": "Разработка",
-    "release": "Поставка",
+    "release": "Доставка",
     "nothing": "ничего не ждёт",
     "action": {
-      "verify_discovery": "Верифицировать Discovery",
+      "verify_discovery": "Верифицировать анализ",
       "approve_gate": "Согласовать",
       "sign_validation": "Подписать валидацию",
       "start_merge": "Запустить мерж",
@@ -647,7 +647,7 @@
   },
   "issueStatus": {
     "new": "Новая",
-    "discovery": "Discovery",
+    "discovery": "Анализ идёт",
     "verification": "На верификации",
     "accepted": "Принята",
     "resolved": "Решена",
@@ -734,7 +734,7 @@
     "domain": "Домен",
     "name": "Название",
     "description": "Описание",
-    "preview": "Задача получит ключ {key}; Discovery начнётся сразу.",
+    "preview": "Задача получит ключ {key}; анализ начнётся сразу.",
     "create": "Создать задачу",
     "creating": "Создаём…"
   },
@@ -762,9 +762,9 @@
     "reopen": "Открыть снова",
     "description": "Описание",
     "revision": "версия {n}",
-    "revisions": "Версии Discovery",
-    "rediscover": "Запустить Discovery заново",
-    "discoveryBlocked": "Discovery остановлен:",
+    "revisions": "Версии анализа",
+    "rediscover": "Запустить анализ заново",
+    "discoveryBlocked": "Анализ остановлен:",
     "agentWorking": "Агент исследует задачу…",
     "retrying": "Предыдущая попытка не удалась, повторяем.",
     "value": "Ценность",
@@ -778,7 +778,7 @@
     "checked": "Запрос выполнен успешно {at}",
     "similar": "Похожее",
     "problemFeature": "Где ошибка",
-    "document": "Документ Discovery",
+    "document": "Анализ",
     "missing": "Не хватает: {fields}",
     "field": {
       "value": "ценность",
@@ -788,11 +788,12 @@
       "measure.window": "окно оценки"
     },
     "accept": "Принять",
-    "acceptDisabled": "В Discovery нужны ценность и способ измерения",
+    "acceptDisabled": "В анализе нужны ценность и способ измерения",
     "reject": "Отклонить",
     "merge": "Объединить",
     "move": "Перенести",
-    "history": "История"
+    "history": "История",
+    "analysis": "Анализ"
   },
   "accept": {
     "title": "Принять {key}",
@@ -800,7 +801,7 @@
     "noFeature": "Нет решения",
     "parent": "Решение с ошибкой",
     "preview": "Будет создано {key} со ссылкой на {issue}.",
-    "text": "Discovery прикладывается к решению, метрика успеха переносится в черновик продуктовой спецификации."
+    "text": "Анализ прикладывается к решению, метрика успеха переносится в черновик продуктовой спецификации."
   },
   "reject": {
     "title": "Отклонить {key}",
@@ -821,7 +822,7 @@
     "phase": "Фаза",
     "empty": "Нет решений по фильтрам",
     "emptyHint": "Решения создаются из принятых задач.",
-    "imported": "без Discovery",
+    "imported": "без анализа",
     "status": {
       "active": "Активные",
       "released": "Выпущенные",
@@ -993,7 +994,7 @@
     "redeploy": "сервисы будут выпущены заново",
     "flags": "Hammurapi дождётся выключения фичафлага в сервисе флагов",
     "spec": "PR спецификации закроется без мержа",
-    "issues": "задачи вернутся в «Новая», Discovery запустится заново",
+    "issues": "задачи вернутся в «Новая», анализ запустится заново",
     "reason": "Причина"
   },
   "releases": {
@@ -1036,7 +1037,7 @@
     "merged": "объединена",
     "merged_from": "объединена другая задача",
     "moved": "перенесена",
-    "discovery_updated": "Discovery обновлён",
+    "discovery_updated": "Анализ обновлён",
     "returned_after_rollback": "вернулась после отката"
   }
 }

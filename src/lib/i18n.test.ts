@@ -61,6 +61,46 @@ describe("i18n runtime", () => {
   });
 });
 
+// PLT.HMR-0003: stage names and the agent step name; the keys stay the same (R4).
+describe("stage names (PLT.HMR-0003)", () => {
+  const stageKeys = ["stages.research", "stages.development", "stages.delivery", "focus.research", "focus.development", "focus.release"];
+
+  // FIX3-03: no old stage names in RU and EN.
+  it("RU and EN use the new stage names", () => {
+    for (const lng of ["ru", "en"] as const) {
+      const msgs = flatten(resources[lng].translation as Tree);
+      for (const k of stageKeys) {
+        expect(msgs[k], `${lng}:${k}`).not.toMatch(/Поставка|Research|Release/);
+      }
+    }
+    const en = createI18n("en");
+    expect(["general", "research", "development", "delivery"].map((k) => en.t(`stages.${k}`)))
+      .toEqual(["General", "Discovery", "Development", "Delivery"]);
+    const ru = createI18n("ru");
+    expect(["general", "research", "development", "delivery"].map((k) => ru.t(`stages.${k}`)))
+      .toEqual(["Общее", "Исследование", "Разработка", "Доставка"]);
+    expect(ru.t("focus.release")).toBe("Доставка");
+  });
+
+  // R3: the agent step is Analysis / «Анализ», so it does not repeat the EN stage name.
+  it("the agent step is Analysis", () => {
+    const en = createI18n("en");
+    expect(en.t("issue.analysis")).toBe("Analysis");
+    expect(en.t("issueStatus.discovery")).toBe("Analysis in progress");
+    expect(en.t("issueStatus.verification")).toBe("Awaiting verification");
+    const ru = createI18n("ru");
+    expect(ru.t("issue.document")).toBe("Анализ");
+    expect(ru.t("issueStatus.discovery")).toBe("Анализ идёт");
+    expect(ru.t("issueStatus.verification")).toBe("На верификации");
+    // FIX3-05: Discovery remains only the EN stage name.
+    for (const lng of LANGUAGES) {
+      const msgs = flatten(resources[lng].translation as Tree);
+      const left = Object.entries(msgs).filter(([k, v]) => v.includes("Discovery") && !["stages.research", "focus.research"].includes(k));
+      expect(left, lng).toEqual([]);
+    }
+  });
+});
+
 // PROF-10: before sign-in an unsupported browser language falls back to English.
 describe("detectLanguage", () => {
   it("matches supported languages", () => {

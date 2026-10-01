@@ -145,7 +145,7 @@
     },
     "issues": "Issues:",
     "release": "Release:",
-    "noDiscovery": "imported, no Discovery",
+    "noDiscovery": "imported, no Analysis",
     "prNotMerged": "not merged until the release",
     "flagKey": "Feature flag key",
     "flagHint": "The release waits for this flag to be switched on in production when feature flags are used.",
@@ -616,21 +616,21 @@
   "stages": {
     "title": "Stages",
     "general": "General",
-    "research": "Research",
+    "research": "Discovery",
     "development": "Development",
-    "delivery": "Release"
+    "delivery": "Delivery"
   },
   "general": {
     "focus": "In focus",
     "overview": "Overview"
   },
   "focus": {
-    "research": "Research",
+    "research": "Discovery",
     "development": "Development",
-    "release": "Release",
+    "release": "Delivery",
     "nothing": "nothing is waiting",
     "action": {
-      "verify_discovery": "Verify Discovery",
+      "verify_discovery": "Verify Analysis",
       "approve_gate": "Approve",
       "sign_validation": "Sign validation",
       "start_merge": "Start merge",
@@ -647,8 +647,8 @@
   },
   "issueStatus": {
     "new": "New",
-    "discovery": "Discovery",
-    "verification": "In verification",
+    "discovery": "Analysis in progress",
+    "verification": "Awaiting verification",
     "accepted": "Accepted",
     "resolved": "Resolved",
     "rejected": "Rejected",
@@ -734,7 +734,7 @@
     "domain": "Domain",
     "name": "Title",
     "description": "Description",
-    "preview": "The issue gets the key {key}; Discovery starts right away.",
+    "preview": "The issue gets the key {key}; Analysis starts right away.",
     "create": "Create issue",
     "creating": "Creating…"
   },
@@ -762,9 +762,9 @@
     "reopen": "Reopen",
     "description": "Description",
     "revision": "revision {n}",
-    "revisions": "Discovery versions",
-    "rediscover": "Run Discovery again",
-    "discoveryBlocked": "Discovery stopped:",
+    "revisions": "Analysis versions",
+    "rediscover": "Run Analysis again",
+    "discoveryBlocked": "Analysis stopped:",
     "agentWorking": "The agent is researching the issue…",
     "retrying": "The previous attempt failed; retrying.",
     "value": "Value",
@@ -778,7 +778,7 @@
     "checked": "The query ran successfully {at}",
     "similar": "Similar",
     "problemFeature": "Where the error is",
-    "document": "Discovery document",
+    "document": "Analysis",
     "missing": "Missing: {fields}",
     "field": {
       "value": "value",
@@ -788,11 +788,12 @@
       "measure.window": "window"
     },
     "accept": "Accept",
-    "acceptDisabled": "Discovery needs a value and a way to measure it",
+    "acceptDisabled": "Analysis needs a value and a way to measure it",
     "reject": "Reject",
     "merge": "Merge",
     "move": "Move",
-    "history": "History"
+    "history": "History",
+    "analysis": "Analysis"
   },
   "accept": {
     "title": "Accept {key}",
@@ -800,7 +801,7 @@
     "noFeature": "No feature",
     "parent": "The feature with the error",
     "preview": "{key} will be created with a link to {issue}.",
-    "text": "Discovery is attached to the feature; the success metric goes into the product specification draft."
+    "text": "Analysis is attached to the feature; the success metric goes into the product specification draft."
   },
   "reject": {
     "title": "Reject {key}",
@@ -821,7 +822,7 @@
     "phase": "Phase",
     "empty": "No features match the filters",
     "emptyHint": "Features are created from accepted issues.",
-    "imported": "no Discovery",
+    "imported": "no Analysis",
     "status": {
       "active": "Active",
       "released": "Released",
@@ -993,7 +994,7 @@
     "redeploy": "the services are released again",
     "flags": "Hammurapi waits for the feature flag to be switched off in the flag service",
     "spec": "the specification PR is closed without merging",
-    "issues": "the issues return to New and Discovery runs again",
+    "issues": "the issues return to New and Analysis runs again",
     "reason": "Reason"
   },
   "releases": {
@@ -1036,7 +1037,7 @@
     "merged": "merged",
     "merged_from": "another issue merged into it",
     "moved": "moved",
-    "discovery_updated": "Discovery updated",
+    "discovery_updated": "Analysis updated",
     "returned_after_rollback": "returned after a rollback"
   }
 }

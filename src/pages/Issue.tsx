@@ -99,7 +99,7 @@ function IssueView({ is }: { is: IssueCard }) {
       </section>
 
       <div className="row" style={{ margin: "18px 0 8px" }}>
-        <h2 className="sec" style={{ margin: 0 }}>Discovery</h2>
+        <h2 className="sec" style={{ margin: 0 }}>{t("issue.analysis")}</h2>
         <AgentMark />
         {d?.revision && <button className="btn ghost sm" onClick={() => setDialog("history")}>{t("issue.revision", { n: d.revision })}</button>}
         <span className="grow" />

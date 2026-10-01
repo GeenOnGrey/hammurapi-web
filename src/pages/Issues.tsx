@@ -9,7 +9,7 @@ import { Empty, Loading } from "../components/ui";
 import { IssueStatusBadge, IssueTypeBadge, KeyLink, KeyList } from "../components/cycle";
 import { NewIssueModal } from "./NewIssue";
 
-/** Research: the list of issues (design spec §3.3). */
+/** Discovery stage: the list of issues (design spec §3.3). */
 export function IssuesPage() {
   const { t, i18n } = useTranslation();
   const chat = useChatContext();

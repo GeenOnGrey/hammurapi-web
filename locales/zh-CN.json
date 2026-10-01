@@ -145,7 +145,7 @@
     },
     "issues": "任务：",
     "release": "发布：",
-    "noDiscovery": "已导入，无 Discovery",
+    "noDiscovery": "已导入，无分析",
     "prNotMerged": "发布前不合并",
     "flagKey": "功能开关键",
     "flagHint": "启用功能开关时，发布会等待该开关在生产环境开启。",
@@ -630,7 +630,7 @@
     "release": "交付",
     "nothing": "无待处理事项",
     "action": {
-      "verify_discovery": "验证 Discovery",
+      "verify_discovery": "验证分析",
       "approve_gate": "审批",
       "sign_validation": "签署验证",
       "start_merge": "开始合并",
@@ -647,7 +647,7 @@
   },
   "issueStatus": {
     "new": "新建",
-    "discovery": "Discovery",
+    "discovery": "分析中",
     "verification": "待验证",
     "accepted": "已接受",
     "resolved": "已解决",
@@ -734,7 +734,7 @@
     "domain": "领域",
     "name": "标题",
     "description": "描述",
-    "preview": "任务将获得键 {key}；Discovery 会立即开始。",
+    "preview": "任务将获得键 {key}；分析会立即开始。",
     "create": "创建任务",
     "creating": "正在创建…"
   },
@@ -762,9 +762,9 @@
     "reopen": "重新打开",
     "description": "描述",
     "revision": "第 {n} 版",
-    "revisions": "Discovery 版本",
-    "rediscover": "重新运行 Discovery",
-    "discoveryBlocked": "Discovery 已停止：",
+    "revisions": "分析版本",
+    "rediscover": "重新运行分析",
+    "discoveryBlocked": "分析已停止：",
     "agentWorking": "智能体正在研究任务…",
     "retrying": "上次尝试失败，正在重试。",
     "value": "价值",
@@ -778,7 +778,7 @@
     "checked": "查询已于 {at} 成功执行",
     "similar": "相似项",
     "problemFeature": "缺陷所在",
-    "document": "Discovery 文档",
+    "document": "分析",
     "missing": "缺少：{fields}",
     "field": {
       "value": "价值",
@@ -788,11 +788,12 @@
       "measure.window": "评估窗口"
     },
     "accept": "接受",
-    "acceptDisabled": "Discovery 需要价值和衡量方式",
+    "acceptDisabled": "分析需要价值和衡量方式",
     "reject": "拒绝",
     "merge": "合并",
     "move": "迁移",
-    "history": "历史"
+    "history": "历史",
+    "analysis": "分析"
   },
   "accept": {
     "title": "接受 {key}",
@@ -800,7 +801,7 @@
     "noFeature": "无对应方案",
     "parent": "包含缺陷的方案",
     "preview": "将创建 {key} 并关联 {issue}。",
-    "text": "Discovery 将附加到方案，成功指标会写入产品规格草稿。"
+    "text": "分析将附加到方案，成功指标会写入产品规格草稿。"
   },
   "reject": {
     "title": "拒绝 {key}",
@@ -821,7 +822,7 @@
     "phase": "阶段",
     "empty": "没有符合筛选条件的方案",
     "emptyHint": "方案由已接受的任务创建。",
-    "imported": "无 Discovery",
+    "imported": "无分析",
     "status": {
       "active": "进行中",
       "released": "已发布",
@@ -993,7 +994,7 @@
     "redeploy": "服务将重新发布",
     "flags": "Hammurapi 将等待功能开关在开关服务中关闭",
     "spec": "规格 PR 将不合并直接关闭",
-    "issues": "任务将回到“新建”，并重新运行 Discovery",
+    "issues": "任务将回到“新建”，并重新运行分析",
     "reason": "原因"
   },
   "releases": {
@@ -1036,7 +1037,7 @@
     "merged": "已合并",
     "merged_from": "合并了其他任务",
     "moved": "已迁移",
-    "discovery_updated": "Discovery 已更新",
+    "discovery_updated": "分析已更新",
     "returned_after_rollback": "回滚后退回"
   }
 }
