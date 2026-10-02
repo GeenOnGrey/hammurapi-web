@@ -11,6 +11,7 @@ import { ServicesAdmin } from "./Services";
 import { CycleAdmin } from "./Cycle";
 import { DeployAdmin } from "./Deploy";
 import { MetricSourcesAdmin } from "./MetricSources";
+import { adminPath } from "./paths";
 
 /** Section access (product spec §17): users and settings — global admin;
  * domains — any admin; rules — area admins (global admin reads). */
@@ -25,18 +26,18 @@ export function AdminPage() {
     <div className="admin" style={{ overflow: "hidden" }}>
       <nav className="side" aria-label={t("admin.title")}>
         <div className="lab">{t("admin.title")}</div>
-        {global && <NavLink to="users"><Icon name="users" />{t("admin.users.title")}</NavLink>}
-        <NavLink to="domains"><Icon name="grid" />{t("admin.domains.title")}</NavLink>
-        <NavLink to="services"><Icon name="server" />{t("admin.services.title")}</NavLink>
-        <NavLink to="rules"><Icon name="book" />{t("admin.rules.title")}</NavLink>
-        {global && <NavLink to="cycle"><Icon name="refresh" />{t("admin.cycle.title")}</NavLink>}
-        {global && <NavLink to="deploy"><Icon name="rocket" />{t("admin.deploy.title")}</NavLink>}
-        {global && <NavLink to="metrics"><Icon name="target" />{t("admin.metrics.title")}</NavLink>}
-        {global && <NavLink to="settings"><Icon name="wrench" />{t("admin.settings.title")}</NavLink>}
+        {global && <NavLink to={adminPath("users")}><Icon name="users" />{t("admin.users.title")}</NavLink>}
+        <NavLink to={adminPath("domains")}><Icon name="grid" />{t("admin.domains.title")}</NavLink>
+        <NavLink to={adminPath("services")}><Icon name="server" />{t("admin.services.title")}</NavLink>
+        <NavLink to={adminPath("rules")}><Icon name="book" />{t("admin.rules.title")}</NavLink>
+        {global && <NavLink to={adminPath("cycle")}><Icon name="refresh" />{t("admin.cycle.title")}</NavLink>}
+        {global && <NavLink to={adminPath("deploy")}><Icon name="rocket" />{t("admin.deploy.title")}</NavLink>}
+        {global && <NavLink to={adminPath("metrics")}><Icon name="target" />{t("admin.metrics.title")}</NavLink>}
+        {global && <NavLink to={adminPath("settings")}><Icon name="wrench" />{t("admin.settings.title")}</NavLink>}
       </nav>
       <main className="main">
         <Routes>
-          <Route index element={<Navigate to={global ? "users" : "domains"} replace />} />
+          <Route index element={<Navigate to={adminPath(global ? "users" : "domains")} replace />} />
           {global && <Route path="users" element={<UsersAdmin />} />}
           <Route path="domains" element={<DomainsAdmin />} />
           <Route path="services" element={<ServicesAdmin />} />
@@ -45,7 +46,9 @@ export function AdminPage() {
           {global && <Route path="deploy" element={<DeployAdmin />} />}
           {global && <Route path="metrics" element={<MetricSourcesAdmin />} />}
           {global && <Route path="settings" element={<SettingsAdmin />} />}
-          <Route path="*" element={<Navigate to="." replace />} />
+          {/* Unknown or unavailable section — the first available one (not ".": in a
+              splat route it resolves to the current URL itself). */}
+          <Route path="*" element={<Navigate to={adminPath(global ? "users" : "domains")} replace />} />
         </Routes>
       </main>
     </div>
