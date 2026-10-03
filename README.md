@@ -8,6 +8,10 @@ validation, release and the value metric. It is a single-page app that talks onl
 
 ## What's inside
 
+- **Specification:** the navigator of the specification merged to the default branch — a tree of
+  domains, systems and features, documents in the editor's read-only view with contents and links to
+  sections, files of the areas (HTML in a sandboxed iframe), full-text search, issues and merged PRs
+  of each feature (FTR.HMR.CMN-0005).
 - **Stages:** the General page (what needs your attention, a board of research, development and
   delivery), **Research** (issues, Discovery by the agent, acceptance), **Development** (features
   with the gate strip, WYSIWYG editor, diff since approval, implementation by services and PRs,
@@ -74,7 +78,7 @@ buffering disabled for the SSE stream and a 60 MB upload limit for archive impor
 Without `API_UPSTREAM` the image only serves static files, and the API lives on its own domain:
 the container writes `/config.json` from `API_BASE_URL` at start (`{ "apiBaseUrl": … }`), the
 SPA reads it before the first request and calls the API with credentials. One image fits any
-domain (HMR.INFRA-0002).
+domain (FTR.HMR.INFRA-0002).
 
 ```sh
 docker run -p 8080:8080 -e API_BASE_URL=https://api.example.org hammurapi-web

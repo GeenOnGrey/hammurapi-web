@@ -70,6 +70,18 @@ export function FocusPage() {
           ))}
         </section>
       )}
+      {focus.data?.spec && focus.data.spec.length > 0 && (
+        <section className="focusgroup" aria-label={t("focus.spec")}>
+          <div className="gh">
+            <Icon name="book" size={16} />
+            {t("focus.spec")}
+            <span className="count">{focus.data.spec.length}</span>
+          </div>
+          {focus.data.spec.map((it) => (
+            <SpecFocusRow key={`${it.key}-${it.action}`} it={it} />
+          ))}
+        </section>
+      )}
       {focus.data &&
         groups.map((g) => {
           const items = focus.data[g.key];
@@ -145,7 +157,43 @@ function FocusRow({ it }: { it: FocusItem }) {
   );
 }
 
-/** A problem of the agent: a connection, an MCP server or no model (HMR.CMN-0004 R21). */
+/** A problem of the agent: a connection, an MCP server or no model (FTR.HMR.CMN-0004 R21). */
+/** A problem of indexing the specification repository (FTR.HMR.CMN-0005 R10):
+ * missing domains lead to the domains page, the rest to the check in Settings. */
+function SpecFocusRow({ it }: { it: FocusItem }) {
+  const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+  const href =
+    it.action === "missing_catalog"
+      ? adminPath("domains")
+      : adminPath("settings");
+  const hint = it.hint ?? "";
+  return (
+    <div
+      className="irow"
+      role="link"
+      tabIndex={0}
+      onClick={() => navigate(href)}
+      onKeyDown={(e) => e.key === "Enter" && navigate(href)}
+    >
+      <span className="mono small">{it.key}</span>
+      <span
+        className={`st ${it.action === "deleted" ? "in_review" : "blocked"}`}
+      >
+        {t(`focus.action.${it.action}`)}
+      </span>
+      <span className="ellipsis mono small">{it.title}</span>
+      <span className="small t2 ellipsis" title={hint}>
+        {hint}
+      </span>
+      <span className="small muted">
+        <Icon name="clock" size={14} />{" "}
+        {duration(it.waitingSince, i18n.language)}
+      </span>
+    </div>
+  );
+}
+
 function AgentFocusRow({ it }: { it: FocusItem }) {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();

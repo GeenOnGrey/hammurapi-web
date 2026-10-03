@@ -4,14 +4,16 @@ export const AREAS = ["product", "design", "arch", "tech", "qa"] as const;
 export type Area = (typeof AREAS)[number];
 export type ExpertKind = "product" | "technical";
 export type GateStatus = "draft" | "in_review" | "approved";
-export type FeaturePhase = "spec" | "codegen" | "validation" | "in_release" | "released" | "rolled_back" | "deleted";
+export type FeaturePhase = "spec" | "codegen" | "validation" | "in_release" | "released" | "rolled_back" | "deleted"
+  /** Found in the default branch and indexed as implemented (FTR.HMR.CMN-0005 R4). */
+  | "indexed";
 export type Autonomy = "plan" | "pr" | "autonomous";
 export type IssueType = "idea" | "problem";
 export type IssueStatus = "new" | "discovery" | "verification" | "accepted" | "resolved" | "rejected" | "merged";
 export type ReleaseStatus = "merging" | "deploying" | "enabling_flags" | "evaluating" | "awaiting_confirmation" | "succeeded" | "rolling_back" | "rolled_back";
 /** Who approves an area: product and design — product experts, the rest — technical. */
 export const approverKind = (a: Area): ExpertKind => (a === "product" || a === "design" ? "product" : "technical");
-/** Generated gates are written by the agent (HMR.CMN-0002 R12–R14). */
+/** Generated gates are written by the agent (FTR.HMR.CMN-0002 R12–R14). */
 export const isGenerated = (a: Area) => a === "tech" || a === "qa";
 export type Tone = "business" | "friendly" | "concise" | "mentor";
 export type ChatMode = "general" | "spec";
@@ -246,7 +248,7 @@ export interface ChatMessage {
   content: string;
   isVoice: boolean;
   attachments: AttachmentRef[];
-  /** HMR.CMN-0004: the model of an answer, the error class of a failed message, the repeated message. */
+  /** FTR.HMR.CMN-0004: the model of an answer, the error class of a failed message, the repeated message. */
   model?: string | null;
   errorClass?: string | null;
   retryOf?: string | null;
@@ -339,7 +341,7 @@ export interface ImportJob {
   results: ImportResult[];
 }
 
-// ─── HMR.CMN-0002: the closed cycle ──────────────────────────────────
+// ─── FTR.HMR.CMN-0002: the closed cycle ──────────────────────────────────
 
 export interface Activity {
   id: string;
@@ -567,10 +569,11 @@ export interface ReleaseCard extends ReleaseDTO {
 export type FocusAction =
   | "verify_discovery" | "approve_gate" | "sign_validation" | "start_merge" | "mark_deploy"
   | "retry_or_rollback" | "mark_flag" | "confirm_release" | "resolve_blocked"
-  | "agent_not_configured" | "connection_problem" | "mcp_problem";
+  | "agent_not_configured" | "connection_problem" | "mcp_problem"
+  | "missing_catalog" | "bad_id" | "missing_parent" | "deleted";
 
 export interface FocusItem {
-  kind: ContextType | "agent" | "connection" | "mcp_server";
+  kind: ContextType | "agent" | "connection" | "mcp_server" | "spec";
   key: string;
   title: string;
   action: FocusAction;
@@ -582,8 +585,10 @@ export interface Focus {
   research: FocusItem[];
   development: FocusItem[];
   release: FocusItem[];
-  /** Global administrators: the agent needs attention (HMR.CMN-0004 R21). */
+  /** Global administrators: the agent needs attention (FTR.HMR.CMN-0004 R21). */
   agent?: FocusItem[];
+  /** Global administrators: problems of indexing the specification repository (FTR.HMR.CMN-0005 R10). */
+  spec?: FocusItem[];
 }
 
 export interface OverviewCard {
@@ -665,7 +670,7 @@ export interface CycleSettings {
   runnerExecutor: string;
 }
 
-// ─── HMR.CMN-0004: the agent (Pi) and its configuration ───────────
+// ─── FTR.HMR.CMN-0004: the agent (Pi) and its configuration ───────────
 
 export type AgentScenario = "chat" | "issue_analysis" | "gate_generation" | "conformance_check" | "codegen" | "review_update" | "rollback_revert";
 export const AGENT_SCENARIOS: AgentScenario[] = ["chat", "issue_analysis", "gate_generation", "conformance_check", "codegen", "review_update", "rollback_revert"];
@@ -796,4 +801,126 @@ export interface ChatSessionInfo {
   connectionName: string;
   thinking: string;
   configured: boolean;
+}
+
+// ─── Specification navigator and repository check (FTR.HMR.CMN-0005) ───
+
+export type SpecArea = "product" | "design" | "arch" | "tech" | "qa";
+export const SPEC_AREAS: SpecArea[] = ["product", "design", "arch", "tech", "qa"];
+
+export interface SpecTreeFeature {
+  key: string;
+  title: string;
+  phase: FeaturePhase;
+  source: "hammurapi" | "repository";
+  areas: SpecArea[];
+  fixes: SpecTreeFeature[];
+}
+
+export interface SpecTree {
+  commit: string;
+  domains: { key: string; name: string; systems: { key: string; name: string; count: number; features: SpecTreeFeature[] }[] }[];
+}
+
+export interface SpecHeading {
+  level: number;
+  text: string;
+  slug: string;
+}
+
+export interface SpecPR {
+  kind: "service" | "spec";
+  service?: string;
+  repo: string;
+  number: number;
+  url: string;
+  mergedAt: string | null;
+}
+
+export interface SpecDocument {
+  featureKey: string;
+  area: SpecArea;
+  areas: SpecArea[];
+  path: string;
+  title: string;
+  markdown: string;
+  toc: SpecHeading[];
+  blobSha: string;
+  commit: string;
+  historyUrl: string;
+  feature: {
+    phase: FeaturePhase;
+    source: "hammurapi" | "repository";
+    title: string;
+    release: string | null;
+    releasedAt: string | null;
+    indexedAt: string | null;
+    parent: string | null;
+    issues: { key: string; title: string; url: string }[];
+    pullRequests: SpecPR[];
+  };
+}
+
+export interface SpecFile {
+  path: string;
+  name: string;
+  size: number;
+  mimeType: string;
+  previewable: boolean;
+}
+
+export interface SpecSearchItem {
+  featureKey: string;
+  featureTitle: string;
+  area: SpecArea;
+  path: string;
+  section: string;
+  snippet: string;
+  rank: number;
+}
+
+export interface SpecSearchResult {
+  total: number;
+  items: SpecSearchItem[];
+  nextCursor: string | null;
+}
+
+export type SpecScanInterval = "15m" | "30m" | "1h" | "3h" | "6h" | "12h" | "24h";
+export const SPEC_SCAN_INTERVALS: SpecScanInterval[] = ["15m", "30m", "1h", "3h", "6h", "12h", "24h"];
+
+export interface SpecScanSettings {
+  interval: SpecScanInterval;
+  branch: string;
+}
+
+export interface SpecScanRun {
+  id: string;
+  trigger: "schedule" | "manual" | "catalog" | "push";
+  status: "queued" | "running" | "succeeded" | "failed";
+  commit: string | null;
+  startedAt: string | null;
+  durationMs: number | null;
+  found: number | null;
+  indexed: number | null;
+  issues: number | null;
+  error: string | null;
+  createdAt: string;
+}
+
+export type SpecIssueKind = "old_format" | "bad_format" | "key_path_mismatch" | "missing_domain" | "missing_system" | "missing_parent" | "deleted";
+
+export interface SpecIndexIssue {
+  id: string;
+  path: string;
+  featureKey: string | null;
+  kind: SpecIssueKind;
+  details: Record<string, unknown>;
+  firstSeenAt: string;
+  lastSeenAt: string;
+  resolvedAt: string | null;
+}
+
+export interface MissingCatalog {
+  catalogSource: "manual" | "backstage";
+  items: { domain: string; domainExists: boolean; system: string; features: string[]; catalogInfoExample?: string }[];
 }

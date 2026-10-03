@@ -61,8 +61,8 @@ describe("i18n runtime", () => {
   });
 });
 
-// HMR.CMN-0003: stage names and the agent step name; the keys stay the same (R4).
-describe("stage names (HMR.CMN-0003)", () => {
+// FTR.HMR.CMN-0003: stage names and the agent step name; the keys stay the same (R4).
+describe("stage names (FTR.HMR.CMN-0003)", () => {
   const stageKeys = ["stages.research", "stages.development", "stages.delivery", "focus.research", "focus.development", "focus.release"];
 
   // FIX3-03: no old stage names in RU and EN.

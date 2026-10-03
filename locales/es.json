@@ -164,7 +164,9 @@
     "generatedLater": "tras la aprobación",
     "readyForCodegen": "Todas las puertas están listas.",
     "readyForCodegenHint": "El agente puede preparar los cambios en los servicios.",
-    "startCodegen": "Iniciar generación de código"
+    "startCodegen": "Iniciar generación de código",
+    "indexedHint": "Indexada desde el repositorio como implementada: sin gates; los cambios se hacen con una corrección.",
+    "openInNavigator": "Abrir en Especificación"
   },
   "editor": {
     "toolbar": "Formato",
@@ -748,14 +750,19 @@
     "skill_change_open": "Este skill ya tiene un cambio abierto.",
     "skill_invalid": "El skill no es válido.",
     "skill_name_conflict": "Ya existe un skill con este nombre.",
-    "skill_not_found": "Skill no encontrado."
+    "skill_not_found": "Skill no encontrado.",
+    "spec_document_not_found": "El documento no está en la especificación.",
+    "spec_file_not_found": "El archivo no está en la especificación.",
+    "spec_file_too_large": "El archivo es demasiado grande para abrirlo; descárgalo.",
+    "invalid_interval": "Elige uno de los periodos ofrecidos."
   },
   "stages": {
     "title": "Etapas",
     "general": "General",
     "research": "Investigación",
     "development": "Desarrollo",
-    "delivery": "Entrega"
+    "delivery": "Entrega",
+    "spec": "Especificación"
   },
   "general": {
     "focus": "En foco",
@@ -778,10 +785,15 @@
       "resolve_blocked": "Detenido",
       "agent_not_configured": "Configurar el agente",
       "connection_problem": "Problema de conexión",
-      "mcp_problem": "Problema del servidor MCP"
+      "mcp_problem": "Problema del servidor MCP",
+      "missing_catalog": "Falta dominio o sistema",
+      "bad_id": "ID incorrecto",
+      "missing_parent": "Falta la funcionalidad padre",
+      "deleted": "Eliminada del repositorio"
     },
     "agent": "Agente",
-    "agentHint": "El agente no tiene modelo asignado"
+    "agentHint": "El agente no tiene modelo asignado",
+    "spec": "Especificación"
   },
   "issueType": {
     "idea": "Idea",
@@ -810,7 +822,8 @@
     "in_release": "En release",
     "released": "Publicado",
     "rolled_back": "Revertido",
-    "deleted": "Eliminado"
+    "deleted": "Eliminado",
+    "indexed": "Indexada"
   },
   "path": {
     "spec": "Especificación",
@@ -1212,5 +1225,94 @@
     },
     "retry": "Reintentar",
     "theConnection": "LLM"
+  },
+  "spec": {
+    "tree": "Árbol de la especificación",
+    "search": "Buscar en la especificación",
+    "searchPlaceholder": "Buscar por ID, título o texto",
+    "choose": "Elige un documento",
+    "chooseHint": "Abre un dominio, un sistema y una funcionalidad en el árbol o usa la búsqueda.",
+    "empty": "La especificación está vacía",
+    "emptyHint": "Los documentos aparecen tras revisar el repositorio (Administración → Ajustes).",
+    "indexed": "Indexada · desde el repositorio",
+    "released": "Publicada en {release}",
+    "fixOf": "Corrección de",
+    "feature": "Funcionalidad",
+    "history": "Historial en git",
+    "issues": "Tareas",
+    "implementation": "Implementación",
+    "specPR": "Especificación",
+    "readOnlyIndexed": "Esta especificación se indexó desde el repositorio. Los cambios se hacen con una corrección.",
+    "copyLink": "Enlace a la sección",
+    "linkCopied": "Enlace copiado",
+    "files": "Archivos del área",
+    "open": "Abrir",
+    "download": "Descargar",
+    "toc": "Índice",
+    "domain": "Dominio",
+    "area": "Área",
+    "allDomains": "Todos los dominios",
+    "allAreas": "Todas las áreas",
+    "found": "{count, plural, one {# documento encontrado} other {# documentos encontrados}}",
+    "nothingFound": "No se encontró nada",
+    "more": "Mostrar más"
+  },
+  "specScan": {
+    "title": "Revisión del repositorio",
+    "hint": "Hammurapi revisa la rama principal del repositorio de especificaciones e indexa como implementadas las especificaciones añadidas fuera de Hammurapi.",
+    "interval": "Periodo",
+    "branch": "Rama",
+    "checkNow": "Revisar ahora",
+    "queued": "La revisión está en cola",
+    "every": {
+      "15m": "Cada 15 minutos",
+      "30m": "Cada 30 minutos",
+      "1h": "Cada hora",
+      "3h": "Cada 3 horas",
+      "6h": "Cada 6 horas",
+      "12h": "Cada 12 horas",
+      "24h": "Una vez al día"
+    },
+    "status": {
+      "queued": "En cola…",
+      "running": "Revisando…",
+      "succeeded": "Listo",
+      "failed": "Error"
+    },
+    "lastRun": "Última revisión",
+    "ms": "{ms} ms",
+    "found": "Encontradas",
+    "indexed": "Indexadas",
+    "issues": "Con problemas",
+    "failed": "La última revisión falló: {error}",
+    "problems": "Problemas de indexación",
+    "noProblems": "Sin problemas.",
+    "path": "Ruta",
+    "reason": "Motivo",
+    "since": "Desde",
+    "kind": {
+      "old_format": "Formato de ID antiguo: renombra la carpeta a {suggested}",
+      "bad_format": "El ID no tiene el formato FTR.DOMAIN.SYSTEM-NNNN",
+      "key_path_mismatch": "El ID {id} no coincide con la ruta {path}",
+      "missing_domain": "Faltan el dominio {domain} y el sistema {system}",
+      "missing_system": "Falta el sistema {system} en el dominio {domain}",
+      "missing_parent": "No se encuentra la funcionalidad padre {parent}",
+      "deleted": "Eliminada del repositorio"
+    },
+    "add": "añadir",
+    "deletedTitle": "Eliminadas del repositorio",
+    "deletedHint": "Las funcionalidades siguen en Hammurapi, pero no se muestran en Especificación.",
+    "missingTitle": "Especificaciones a la espera de dominios y sistemas",
+    "missingHint": "Estas especificaciones están en el repositorio, pero su dominio o sistema no está en el catálogo. Añádelos y una revisión adicional indexará las especificaciones.",
+    "missingBackstage": "El catálogo se gestiona en Backstage: añade allí el dominio y el sistema y sincroniza el catálogo.",
+    "missing": "Falta",
+    "waiting": "Especificaciones",
+    "addDomain": "Añadir dominio {key}",
+    "addSystem": "Añadir sistema {key}",
+    "copy": "Copiar",
+    "copied": "Copiado",
+    "syncCatalog": "Sincronizar el catálogo",
+    "catalogSynced": "Catálogo sincronizado",
+    "extraCheck": "En cuanto aparece un dominio o un sistema, una revisión adicional indexa las especificaciones que lo esperaban."
   }
 }

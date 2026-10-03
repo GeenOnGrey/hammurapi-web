@@ -6,7 +6,7 @@ export type EventType =
   | "agent.token" | "agent.tool_call" | "agent.done" | "agent.error"
   | "gate.updated" | "feature.deleted"
   | "issue.updated" | "discovery.progress" | "feature.updated" | "task.progress" | "validation.updated"
-  | "release.updated" | "release.blocked" | "focus.changed"
+  | "release.updated" | "release.blocked" | "focus.changed" | "spec.index_updated"
   | "approvals.changed" | "import.progress"
   | "chat.error" | "chat.model" | "agent.connection_status";
 
@@ -14,7 +14,7 @@ const TYPES: EventType[] = [
   "agent.token", "agent.tool_call", "agent.done", "agent.error",
   "gate.updated", "feature.deleted", "approvals.changed", "import.progress",
   "issue.updated", "discovery.progress", "feature.updated", "task.progress", "validation.updated",
-  "release.updated", "release.blocked", "focus.changed",
+  "release.updated", "release.blocked", "focus.changed", "spec.index_updated",
   "chat.error", "chat.model", "agent.connection_status",
 ];
 

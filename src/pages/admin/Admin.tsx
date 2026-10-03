@@ -22,7 +22,7 @@ import { adminPath } from "./paths";
 
 /** Section access (product spec §17): users and settings — global admin;
  * domains — any admin; rules — area admins (global admin reads); the agent
- * (HMR.CMN-0004) — global admin. */
+ * (FTR.HMR.CMN-0004) — global admin. */
 export function AdminPage() {
   const { t } = useTranslation();
   const { me, isAnyAdmin } = useSession();

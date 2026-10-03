@@ -5,6 +5,7 @@ import { api } from "../../api/client";
 import { keys } from "../../api/queries";
 import { errorText } from "../../lib/errors";
 import { Loading, useToast } from "../../components/ui";
+import { SpecScanSection } from "./SpecScan";
 
 interface Settings {
   attachmentRetentionDays: number;
@@ -44,6 +45,7 @@ export function SettingsAdmin() {
         </div>
         <button className="btn primary sm" disabled={!valid || save.isPending} onClick={() => save.mutate()}>{t("common.save")}</button>
       </div>
+      <SpecScanSection />
     </>
   );
 }

@@ -2,7 +2,7 @@
 # Выполняется образом nginx до подстановки шаблонов (/docker-entrypoint.d).
 #   - пишет /config.json из API_BASE_URL: один образ web подходит для любых доменов;
 #   - выбирает конфигурацию: с API_UPSTREAM — nginx проксирует /api (docker compose),
-#     без него — только статика (API на отдельном домене, HMR.INFRA-0002).
+#     без него — только статика (API на отдельном домене, FTR.HMR.INFRA-0002).
 set -eu
 
 html=/usr/share/nginx/html

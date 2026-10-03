@@ -15,7 +15,7 @@ import {
   type PublicConfig,
 } from "../api/types";
 
-// Roles (HMR.CMN-0002 §5): product and technical experts of domains, owners of
+// Roles (FTR.HMR.CMN-0002 §5): product and technical experts of domains, owners of
 // services, area administrators and the global administrator. Everybody reads
 // everything and creates issues.
 export interface Session {

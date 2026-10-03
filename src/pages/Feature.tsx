@@ -171,6 +171,11 @@ function FeatureView({ f, tab, area }: { f: FeatureCard; tab: Tab; area?: Area }
         <>
           {f.phase === "codegen" && <div className="banner info"><Icon name="lock" /><span className="grow">{t("feature.readOnlyCodegen")}</span></div>}
           {f.phase === "rolled_back" && <div className="banner warn"><Icon name="undo" /><span className="grow">{t("feature.rolledBack")}</span></div>}
+          {f.phase === "indexed" && (
+            <div className="banner info"><Icon name="refresh" /><span className="grow">{t("feature.indexedHint")}</span>
+              <Link className="btn sm" to={`/spec/${f.uniqueId}/product`}>{t("feature.openInNavigator")}</Link>
+            </div>
+          )}
           {generating && <div className="banner info"><span className="ring" /><span className="grow">{t("feature.generating")}</span></div>}
           {f.workflow?.kind === "gate_generation" && f.workflow.state === "blocked" && (
             <BlockedBanner title={t("feature.generationFailed")} reason={f.workflow.lastError}>

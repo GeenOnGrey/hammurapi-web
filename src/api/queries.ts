@@ -39,7 +39,7 @@ export const keys = {
   catalog: ["admin", "catalog"] as const,
   deploy: (env: string) => ["admin", "deploy", env] as const,
   metricSources: ["admin", "metricSources"] as const,
-  // HMR.CMN-0004: the Agent section and the chat model.
+  // FTR.HMR.CMN-0004: the Agent section and the chat model.
   agentConnections: ["admin", "agent", "connections"] as const,
   agentModels: ["admin", "agent", "models"] as const,
   agentResolved: ["admin", "agent", "resolved"] as const,
@@ -47,6 +47,14 @@ export const keys = {
   agentMCP: ["admin", "agent", "mcp"] as const,
   agentUsage: (period: string) => ["admin", "agent", "usage", period] as const,
   chatSession: ["chat", "session"] as const,
+  specTree: ["spec", "tree"] as const,
+  specDoc: (key: string, area: string) => ["spec", "doc", key, area] as const,
+  specFiles: (key: string, area: string) => ["spec", "files", key, area] as const,
+  specSearch: (q: string, domain: string, area: string) => ["spec", "search", q, domain, area] as const,
+  specScanSettings: ["admin", "spec-scan", "settings"] as const,
+  specScanRuns: ["admin", "spec-scan", "runs"] as const,
+  specScanIssues: ["admin", "spec-scan", "issues"] as const,
+  missingCatalog: ["admin", "spec-scan", "missing-catalog"] as const,
 };
 
 export const useConfig = () =>

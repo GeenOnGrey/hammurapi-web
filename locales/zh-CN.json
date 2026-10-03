@@ -164,7 +164,9 @@
     "generatedLater": "审批后生成",
     "readyForCodegen": "所有关卡已就绪。",
     "readyForCodegenHint": "智能体可以在服务中准备变更。",
-    "startCodegen": "开始生成代码"
+    "startCodegen": "开始生成代码",
+    "indexedHint": "从仓库索引为已实现：没有关卡；修改请通过修复功能进行。",
+    "openInNavigator": "在规范中打开"
   },
   "editor": {
     "toolbar": "格式",
@@ -748,14 +750,19 @@
     "skill_change_open": "该技能已有未完成的修改。",
     "skill_invalid": "技能无效。",
     "skill_name_conflict": "已存在同名技能。",
-    "skill_not_found": "未找到技能。"
+    "skill_not_found": "未找到技能。",
+    "spec_document_not_found": "规范中没有此文档。",
+    "spec_file_not_found": "规范中没有此文件。",
+    "spec_file_too_large": "文件太大，无法打开；请下载。",
+    "invalid_interval": "请选择提供的周期之一。"
   },
   "stages": {
     "title": "阶段",
     "general": "总览",
     "research": "研究",
     "development": "开发",
-    "delivery": "交付"
+    "delivery": "交付",
+    "spec": "规范"
   },
   "general": {
     "focus": "待办焦点",
@@ -778,10 +785,15 @@
       "resolve_blocked": "已停止",
       "agent_not_configured": "配置智能体",
       "connection_problem": "连接问题",
-      "mcp_problem": "MCP 服务器问题"
+      "mcp_problem": "MCP 服务器问题",
+      "missing_catalog": "缺少领域或系统",
+      "bad_id": "ID 错误",
+      "missing_parent": "找不到父功能",
+      "deleted": "已从仓库删除"
     },
     "agent": "智能体",
-    "agentHint": "尚未为智能体选择模型"
+    "agentHint": "尚未为智能体选择模型",
+    "spec": "规范"
   },
   "issueType": {
     "idea": "想法",
@@ -810,7 +822,8 @@
     "in_release": "发布中",
     "released": "已发布",
     "rolled_back": "已回滚",
-    "deleted": "已删除"
+    "deleted": "已删除",
+    "indexed": "已索引"
   },
   "path": {
     "spec": "规格",
@@ -1212,5 +1225,94 @@
     },
     "retry": "重试",
     "theConnection": "LLM"
+  },
+  "spec": {
+    "tree": "规范树",
+    "search": "搜索规范",
+    "searchPlaceholder": "按 ID、标题或正文搜索",
+    "choose": "选择文档",
+    "chooseHint": "在树中展开领域、系统和功能，或使用上方的搜索。",
+    "empty": "规范为空",
+    "emptyHint": "检查仓库后文档会出现（管理 → 设置）。",
+    "indexed": "已索引 · 来自仓库",
+    "released": "已在 {release} 中发布",
+    "fixOf": "修复对象",
+    "feature": "功能",
+    "history": "git 历史",
+    "issues": "任务",
+    "implementation": "实现",
+    "specPR": "规范",
+    "readOnlyIndexed": "此规范从仓库索引而来。修改请通过修复功能进行。",
+    "copyLink": "章节链接",
+    "linkCopied": "链接已复制",
+    "files": "领域文件",
+    "open": "打开",
+    "download": "下载",
+    "toc": "目录",
+    "domain": "领域",
+    "area": "领域文档",
+    "allDomains": "所有领域",
+    "allAreas": "所有文档类型",
+    "found": "{count, plural, other {找到 # 个文档}}",
+    "nothingFound": "未找到结果",
+    "more": "显示更多"
+  },
+  "specScan": {
+    "title": "仓库检查",
+    "hint": "Hammurapi 检查规范仓库的默认分支，并将绕过 Hammurapi 添加的规范索引为已实现。",
+    "interval": "周期",
+    "branch": "分支",
+    "checkNow": "立即检查",
+    "queued": "检查已排队",
+    "every": {
+      "15m": "每 15 分钟",
+      "30m": "每 30 分钟",
+      "1h": "每小时",
+      "3h": "每 3 小时",
+      "6h": "每 6 小时",
+      "12h": "每 12 小时",
+      "24h": "每天"
+    },
+    "status": {
+      "queued": "排队中…",
+      "running": "正在检查…",
+      "succeeded": "完成",
+      "failed": "失败"
+    },
+    "lastRun": "上次检查",
+    "ms": "{ms} 毫秒",
+    "found": "发现",
+    "indexed": "已索引",
+    "issues": "有问题",
+    "failed": "上次检查失败：{error}",
+    "problems": "索引问题",
+    "noProblems": "没有问题。",
+    "path": "路径",
+    "reason": "原因",
+    "since": "出现时间",
+    "kind": {
+      "old_format": "旧的 ID 格式：请将文件夹重命名为 {suggested}",
+      "bad_format": "ID 不符合 FTR.DOMAIN.SYSTEM-NNNN 格式",
+      "key_path_mismatch": "ID {id} 与路径 {path} 不一致",
+      "missing_domain": "缺少领域 {domain} 和系统 {system}",
+      "missing_system": "领域 {domain} 中缺少系统 {system}",
+      "missing_parent": "找不到父功能 {parent}",
+      "deleted": "已从仓库删除"
+    },
+    "add": "添加",
+    "deletedTitle": "已从仓库删除",
+    "deletedHint": "这些功能仍保留在 Hammurapi 中，但不会显示在规范中。",
+    "missingTitle": "规范在等待领域和系统",
+    "missingHint": "这些规范已在仓库中，但其领域或系统不在目录中。添加后，额外的检查会索引这些规范。",
+    "missingBackstage": "目录在 Backstage 中维护：请在其中添加领域和系统，然后同步目录。",
+    "missing": "缺少",
+    "waiting": "规范",
+    "addDomain": "添加领域 {key}",
+    "addSystem": "添加系统 {key}",
+    "copy": "复制",
+    "copied": "已复制",
+    "syncCatalog": "同步目录",
+    "catalogSynced": "目录已同步",
+    "extraCheck": "领域或系统一出现，额外的检查就会索引等待它的规范。"
   }
 }

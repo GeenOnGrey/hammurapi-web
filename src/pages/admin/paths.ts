@@ -5,7 +5,7 @@ export const ADMIN_SECTIONS = ["users", "domains", "services", "rules", "cycle",
   "agent/connections", "agent/models", "agent/skills", "agent/mcp", "agent/usage"] as const;
 export type AdminSection = (typeof ADMIN_SECTIONS)[number];
 
-/** Subsections of the Agent section (HMR.CMN-0004 design §2). */
+/** Subsections of the Agent section (FTR.HMR.CMN-0004 design §2). */
 export const AGENT_SECTIONS = ["agent/connections", "agent/models", "agent/skills", "agent/mcp", "agent/usage"] as const;
 
 export const adminPath = (s: AdminSection) => `/admin/${s}`;

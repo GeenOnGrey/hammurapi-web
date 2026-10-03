@@ -1779,7 +1779,7 @@ table.t tr.clickable {
   }
 }
 
-/* ---- Development cycle (HMR.CMN-0002) ---- */
+/* ---- Development cycle (FTR.HMR.CMN-0002) ---- */
 .main.wide {
   max-width: none;
 }
@@ -2376,7 +2376,7 @@ table.cov tr.gap td {
   }
 }
 
-/* ── Agent (HMR.CMN-0004) ─────────────────────────── */
+/* ── Agent (FTR.HMR.CMN-0004) ─────────────────────────── */
 .side a.sub {
   padding-left: 22px;
 }
@@ -2473,3 +2473,55 @@ select.inp.inherit {
   border-color: transparent;
   color: var(--text);
 }
+
+/* ── Specification navigator (FTR.HMR.CMN-0005) ─────────────────── */
+.specpage { display: flex; flex-direction: column; gap: 12px; }
+.specsearch { display: flex; align-items: center; gap: 8px; border: 1px solid var(--border); border-radius: var(--r-m); background: var(--surface); padding: 6px 12px; }
+.specsearch input { flex: 1; border: 0; background: none; font: inherit; color: var(--text); outline: none; padding: 4px 0; }
+.specnav { display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 20px; min-height: 0; }
+.spectree { border-right: 1px solid var(--border); padding-right: 12px; overflow: auto; max-height: calc(100vh - 170px); position: sticky; top: 0; }
+.specbody > .show-m { display: none; margin-bottom: 8px; }
+.tree, .tree ul { list-style: none; margin: 0; padding: 0; }
+.tree ul { padding-left: 14px; }
+.tree .node { display: flex; align-items: center; gap: 6px; width: 100%; text-align: left; background: none; border: 0; padding: 5px 6px; border-radius: var(--r-s); color: var(--text); font: inherit; font-size: 14px; cursor: pointer; text-decoration: none; min-width: 0; }
+.tree .node:hover { background: var(--surface-2); }
+.tree .node.on { background: var(--violet-soft); color: var(--violet-text); font-weight: 500; }
+.tree .node .count { margin-left: auto; font-size: 12px; color: var(--muted); }
+.tree .node.feat .ellipsis { min-width: 0; }
+.tree .chev { display: inline-block; width: 12px; color: var(--muted); transition: transform .15s; }
+.tree .chev.open { transform: rotate(90deg); }
+.specdoc { display: grid; grid-template-columns: minmax(0, 1fr) 190px; gap: 24px; align-items: start; }
+.specdoc-main { min-width: 0; }
+.speclinks { gap: 10px; margin-top: 8px; align-items: baseline; flex-wrap: wrap; }
+.speclinks .chip { text-decoration: none; }
+.specmd { position: relative; }
+.specmd h2, .specmd h3 { scroll-margin-top: 16px; }
+.anchorbtn { position: absolute; left: -30px; margin-top: 4px; }
+.spectoc { position: sticky; top: 0; display: flex; flex-direction: column; gap: 2px; font-size: 13px; max-height: calc(100vh - 170px); overflow: auto; }
+.spectoc .lab { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+.spectoc .tocselect { display: none; }
+.spectoc a { color: var(--text-2); text-decoration: none; padding: 3px 8px; border-left: 2px solid var(--border); }
+.spectoc a.lvl3 { padding-left: 20px; }
+.spectoc a.on { color: var(--violet-text); border-color: var(--violet); }
+.searchres { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+.searchres .hit { display: flex; flex-direction: column; gap: 4px; text-align: left; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-m); padding: 10px 14px; cursor: pointer; color: var(--text); font: inherit; }
+.searchres .hit:hover { border-color: var(--border-strong); }
+.searchres .snippet { font-size: 14px; color: var(--text-2); }
+.searchres mark, .specsnippet mark { background: var(--amber-soft); color: var(--text); border-radius: 3px; padding: 0 2px; }
+.specimg { max-width: 100%; max-height: 70vh; display: block; margin: 0 auto; background: repeating-conic-gradient(var(--surface-2) 0% 25%, transparent 0% 50%) 50% / 16px 16px; }
+.spechtml { width: 100%; height: 70vh; border: 1px solid var(--border); border-radius: var(--r-m); background: #fff; }
+.issuecard { border-left: 3px solid var(--red); }
+.issuecard.warnc { border-left-color: var(--amber); }
+@media (max-width: 900px) {
+  .specnav { grid-template-columns: 1fr; }
+  .specnav .spectree { display: none; border-right: 0; padding-right: 0; position: static; max-height: none; }
+  .specnav.tree-open .spectree { display: block; }
+  .specnav.tree-open .specbody { display: none; }
+  .specbody > .show-m { display: inline-flex; }
+  .specdoc { grid-template-columns: 1fr; }
+  .spectoc { position: static; max-height: none; order: -1; }
+  .spectoc a, .spectoc .lab { display: none; }
+  .spectoc .tocselect { display: block; }
+  .anchorbtn { display: none; }
+}
+.codeblock { font-family: var(--mono); font-size: 12px; background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--r-s); padding: 8px 10px; overflow-x: auto; margin: 6px 0; white-space: pre; }

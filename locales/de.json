@@ -164,7 +164,9 @@
     "generatedLater": "nach der Freigabe",
     "readyForCodegen": "Alle Gates sind bereit.",
     "readyForCodegenHint": "Der Agent kann Änderungen in den Services vorbereiten.",
-    "startCodegen": "Code-Generierung starten"
+    "startCodegen": "Code-Generierung starten",
+    "indexedHint": "Aus dem Repository als umgesetzt indiziert: ohne Gates; Änderungen über ein Fix-Feature.",
+    "openInNavigator": "In der Spezifikation öffnen"
   },
   "editor": {
     "toolbar": "Formatierung",
@@ -748,14 +750,19 @@
     "skill_change_open": "Für diesen Skill gibt es bereits eine offene Änderung.",
     "skill_invalid": "Der Skill ist ungültig.",
     "skill_name_conflict": "Ein Skill mit diesem Namen existiert bereits.",
-    "skill_not_found": "Skill nicht gefunden."
+    "skill_not_found": "Skill nicht gefunden.",
+    "spec_document_not_found": "Das Dokument ist nicht in der Spezifikation.",
+    "spec_file_not_found": "Die Datei ist nicht in der Spezifikation.",
+    "spec_file_too_large": "Die Datei ist zu groß zum Öffnen; laden Sie sie herunter.",
+    "invalid_interval": "Wählen Sie eines der angebotenen Intervalle."
   },
   "stages": {
     "title": "Phasen",
     "general": "Allgemein",
     "research": "Discovery",
     "development": "Entwicklung",
-    "delivery": "Auslieferung"
+    "delivery": "Auslieferung",
+    "spec": "Spezifikation"
   },
   "general": {
     "focus": "Im Fokus",
@@ -778,10 +785,15 @@
       "resolve_blocked": "Angehalten",
       "agent_not_configured": "Agent einrichten",
       "connection_problem": "Verbindungsproblem",
-      "mcp_problem": "Problem mit MCP-Server"
+      "mcp_problem": "Problem mit MCP-Server",
+      "missing_catalog": "Domäne oder System fehlt",
+      "bad_id": "Falsche ID",
+      "missing_parent": "Übergeordnetes Feature fehlt",
+      "deleted": "Aus dem Repository gelöscht"
     },
     "agent": "Agent",
-    "agentHint": "Für den Agenten ist kein Modell festgelegt"
+    "agentHint": "Für den Agenten ist kein Modell festgelegt",
+    "spec": "Spezifikation"
   },
   "issueType": {
     "idea": "Idee",
@@ -810,7 +822,8 @@
     "in_release": "Im Release",
     "released": "Ausgeliefert",
     "rolled_back": "Zurückgerollt",
-    "deleted": "Gelöscht"
+    "deleted": "Gelöscht",
+    "indexed": "Indiziert"
   },
   "path": {
     "spec": "Spezifikation",
@@ -1212,5 +1225,94 @@
     },
     "retry": "Wiederholen",
     "theConnection": "LLM"
+  },
+  "spec": {
+    "tree": "Spezifikationsbaum",
+    "search": "Spezifikation durchsuchen",
+    "searchPlaceholder": "Nach ID, Titel oder Text suchen",
+    "choose": "Dokument wählen",
+    "chooseHint": "Öffnen Sie Domäne, System und Feature im Baum oder nutzen Sie die Suche.",
+    "empty": "Die Spezifikation ist leer",
+    "emptyHint": "Dokumente erscheinen nach der Prüfung des Repositorys (Administration → Einstellungen).",
+    "indexed": "Indiziert · aus dem Repository",
+    "released": "Veröffentlicht in {release}",
+    "fixOf": "Fix für",
+    "feature": "Feature",
+    "history": "Verlauf in git",
+    "issues": "Aufgaben",
+    "implementation": "Umsetzung",
+    "specPR": "Spezifikation",
+    "readOnlyIndexed": "Diese Spezifikation wurde aus dem Repository indiziert. Änderungen erfolgen über ein Fix-Feature.",
+    "copyLink": "Link zum Abschnitt",
+    "linkCopied": "Link kopiert",
+    "files": "Dateien des Bereichs",
+    "open": "Öffnen",
+    "download": "Herunterladen",
+    "toc": "Inhalt",
+    "domain": "Domäne",
+    "area": "Bereich",
+    "allDomains": "Alle Domänen",
+    "allAreas": "Alle Bereiche",
+    "found": "{count, plural, one {# Dokument gefunden} other {# Dokumente gefunden}}",
+    "nothingFound": "Nichts gefunden",
+    "more": "Mehr anzeigen"
+  },
+  "specScan": {
+    "title": "Repository-Prüfung",
+    "hint": "Hammurapi prüft den Standard-Branch des Spezifikations-Repositorys und indiziert außerhalb von Hammurapi hinzugefügte Spezifikationen als umgesetzt.",
+    "interval": "Intervall",
+    "branch": "Branch",
+    "checkNow": "Jetzt prüfen",
+    "queued": "Die Prüfung ist eingeplant",
+    "every": {
+      "15m": "Alle 15 Minuten",
+      "30m": "Alle 30 Minuten",
+      "1h": "Stündlich",
+      "3h": "Alle 3 Stunden",
+      "6h": "Alle 6 Stunden",
+      "12h": "Alle 12 Stunden",
+      "24h": "Täglich"
+    },
+    "status": {
+      "queued": "Eingeplant…",
+      "running": "Prüfung läuft…",
+      "succeeded": "Fertig",
+      "failed": "Fehler"
+    },
+    "lastRun": "Letzte Prüfung",
+    "ms": "{ms} ms",
+    "found": "Gefunden",
+    "indexed": "Indiziert",
+    "issues": "Mit Problemen",
+    "failed": "Die letzte Prüfung ist fehlgeschlagen: {error}",
+    "problems": "Indizierungsprobleme",
+    "noProblems": "Keine Probleme.",
+    "path": "Pfad",
+    "reason": "Grund",
+    "since": "Seit",
+    "kind": {
+      "old_format": "Altes ID-Format: Ordner in {suggested} umbenennen",
+      "bad_format": "Die ID hat nicht das Format FTR.DOMAIN.SYSTEM-NNNN",
+      "key_path_mismatch": "Die ID {id} passt nicht zum Pfad {path}",
+      "missing_domain": "Domäne {domain} und System {system} fehlen",
+      "missing_system": "System {system} fehlt in Domäne {domain}",
+      "missing_parent": "Das übergeordnete Feature {parent} fehlt",
+      "deleted": "Aus dem Repository gelöscht"
+    },
+    "add": "hinzufügen",
+    "deletedTitle": "Aus dem Repository gelöscht",
+    "deletedHint": "Die Features bleiben in Hammurapi, erscheinen aber nicht in der Spezifikation.",
+    "missingTitle": "Spezifikationen warten auf Domänen und Systeme",
+    "missingHint": "Diese Spezifikationen liegen im Repository, ihre Domäne oder ihr System fehlt aber im Katalog. Fügen Sie sie hinzu, dann indiziert eine Zusatzprüfung die Spezifikationen.",
+    "missingBackstage": "Der Katalog wird in Backstage gepflegt: Domäne und System dort hinzufügen und den Katalog synchronisieren.",
+    "missing": "Fehlt",
+    "waiting": "Spezifikationen",
+    "addDomain": "Domäne {key} hinzufügen",
+    "addSystem": "System {key} hinzufügen",
+    "copy": "Kopieren",
+    "copied": "Kopiert",
+    "syncCatalog": "Katalog synchronisieren",
+    "catalogSynced": "Der Katalog ist synchronisiert",
+    "extraCheck": "Sobald eine Domäne oder ein System erscheint, indiziert eine Zusatzprüfung die wartenden Spezifikationen."
   }
 }

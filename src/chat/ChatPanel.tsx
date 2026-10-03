@@ -29,7 +29,7 @@ interface Live {
   text: string;
   tools: { id: string; title: string; status: string }[];
   error?: string;
-  /** HMR.CMN-0004: the LLM error class and its connection (chat.error). */
+  /** FTR.HMR.CMN-0004: the LLM error class and its connection (chat.error). */
   errorClass?: string;
   connectionName?: string;
   done: boolean;

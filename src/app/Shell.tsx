@@ -14,10 +14,12 @@ import { NewIssueModal } from "../pages/NewIssue";
 import { ProfileMenu } from "./ProfileMenu";
 import { useChatContext, useSession } from "./session";
 
-// Stages of the cycle are the navigation (HMR.CMN-0002 R36): General,
-// Discovery, Development, Delivery (HMR.CMN-0003); the main action is "New issue".
+// Stages of the cycle are the navigation (FTR.HMR.CMN-0002 R36): General,
+// Discovery, Development, Delivery (FTR.HMR.CMN-0003); the main action is "New issue".
 export const STAGES = [
   { to: "/", key: "general", match: ["/", "/overview"] },
+  // FTR.HMR.CMN-0005 R11: the specification comes first among the stages of the cycle.
+  { to: "/spec", key: "spec", match: ["/spec"] },
   { to: "/research", key: "research", match: ["/research", "/issues"] },
   {
     to: "/development",

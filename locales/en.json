@@ -164,7 +164,9 @@
     "generatedLater": "generated after approval",
     "readyForCodegen": "All gates are ready.",
     "readyForCodegenHint": "The agent can prepare changes in the services.",
-    "startCodegen": "Start code generation"
+    "startCodegen": "Start code generation",
+    "indexedHint": "Indexed from the repository as implemented: it has no gates; change it with a fix feature.",
+    "openInNavigator": "Open in Specification"
   },
   "editor": {
     "toolbar": "Formatting",
@@ -748,14 +750,19 @@
     "skill_change_open": "This skill already has an open change.",
     "skill_invalid": "The skill is not valid.",
     "skill_name_conflict": "A skill with this name already exists.",
-    "skill_not_found": "Skill not found."
+    "skill_not_found": "Skill not found.",
+    "spec_document_not_found": "The document is not in the specification.",
+    "spec_file_not_found": "The file is not in the specification.",
+    "spec_file_too_large": "The file is too large to open; download it.",
+    "invalid_interval": "Choose one of the offered periods."
   },
   "stages": {
     "title": "Stages",
     "general": "General",
     "research": "Discovery",
     "development": "Development",
-    "delivery": "Delivery"
+    "delivery": "Delivery",
+    "spec": "Specification"
   },
   "general": {
     "focus": "In focus",
@@ -778,10 +785,15 @@
       "resolve_blocked": "Stopped",
       "agent_not_configured": "Set up the agent",
       "connection_problem": "Connection problem",
-      "mcp_problem": "MCP server problem"
+      "mcp_problem": "MCP server problem",
+      "missing_catalog": "No domain or system",
+      "bad_id": "Wrong ID",
+      "missing_parent": "Parent not found",
+      "deleted": "Deleted from the repository"
     },
     "agent": "Agent",
-    "agentHint": "No model is set for the agent"
+    "agentHint": "No model is set for the agent",
+    "spec": "Specification"
   },
   "issueType": {
     "idea": "Idea",
@@ -810,7 +822,8 @@
     "in_release": "In release",
     "released": "Released",
     "rolled_back": "Rolled back",
-    "deleted": "Deleted"
+    "deleted": "Deleted",
+    "indexed": "Indexed"
   },
   "path": {
     "spec": "Specification",
@@ -1212,5 +1225,94 @@
     },
     "retry": "Retry",
     "theConnection": "LLM"
+  },
+  "spec": {
+    "tree": "Specification tree",
+    "search": "Search the specification",
+    "searchPlaceholder": "Search by ID, title or text",
+    "choose": "Choose a document",
+    "chooseHint": "Open a domain, a system and a feature in the tree, or search above.",
+    "empty": "The specification is empty",
+    "emptyHint": "Documents appear after the repository is checked (Admin → Settings).",
+    "indexed": "Indexed · from the repository",
+    "released": "Released in {release}",
+    "fixOf": "Fix of",
+    "feature": "Feature",
+    "history": "History in git",
+    "issues": "Issues",
+    "implementation": "Implementation",
+    "specPR": "Specification",
+    "readOnlyIndexed": "This specification was indexed from the repository. Changes are made with a fix feature.",
+    "copyLink": "Link to the section",
+    "linkCopied": "Link copied",
+    "files": "Files of the area",
+    "open": "Open",
+    "download": "Download",
+    "toc": "Contents",
+    "domain": "Domain",
+    "area": "Area",
+    "allDomains": "All domains",
+    "allAreas": "All areas",
+    "found": "{count, plural, one {# document found} other {# documents found}}",
+    "nothingFound": "Nothing found",
+    "more": "Show more"
+  },
+  "specScan": {
+    "title": "Repository check",
+    "hint": "Hammurapi checks the default branch of the specification repository and indexes specifications added outside Hammurapi as implemented.",
+    "interval": "Period",
+    "branch": "Branch",
+    "checkNow": "Check now",
+    "queued": "The check is queued",
+    "every": {
+      "15m": "Every 15 minutes",
+      "30m": "Every 30 minutes",
+      "1h": "Every hour",
+      "3h": "Every 3 hours",
+      "6h": "Every 6 hours",
+      "12h": "Every 12 hours",
+      "24h": "Every 24 hours"
+    },
+    "status": {
+      "queued": "Queued…",
+      "running": "Checking…",
+      "succeeded": "Done",
+      "failed": "Failed"
+    },
+    "lastRun": "Last check",
+    "ms": "{ms} ms",
+    "found": "Found",
+    "indexed": "Indexed",
+    "issues": "With problems",
+    "failed": "The last check failed: {error}",
+    "problems": "Indexing problems",
+    "noProblems": "No problems.",
+    "path": "Path",
+    "reason": "Reason",
+    "since": "Since",
+    "kind": {
+      "old_format": "Old ID format: rename the folder to {suggested}",
+      "bad_format": "The ID is not FTR.DOMAIN.SYSTEM-NNNN",
+      "key_path_mismatch": "The ID {id} does not match the path {path}",
+      "missing_domain": "No domain {domain} and system {system}",
+      "missing_system": "No system {system} in domain {domain}",
+      "missing_parent": "The parent {parent} is not found",
+      "deleted": "Deleted from the repository"
+    },
+    "add": "add",
+    "deletedTitle": "Deleted from the repository",
+    "deletedHint": "The features stay in Hammurapi but are not shown in Specification.",
+    "missingTitle": "Specifications wait for domains and systems",
+    "missingHint": "These specifications are in the repository but their domain or system is not in the catalog. Add them, and the specifications are indexed by an extra check.",
+    "missingBackstage": "The catalog is managed in Backstage: add the domain and the system there, then synchronize the catalog.",
+    "missing": "Missing",
+    "waiting": "Specifications",
+    "addDomain": "Add domain {key}",
+    "addSystem": "Add system {key}",
+    "copy": "Copy",
+    "copied": "Copied",
+    "syncCatalog": "Synchronize the catalog",
+    "catalogSynced": "The catalog is synchronized",
+    "extraCheck": "Right after a domain or a system appears, an extra check indexes the specifications that waited for it."
   }
 }

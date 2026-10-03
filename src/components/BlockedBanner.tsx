@@ -4,7 +4,7 @@ import { blockedReason, parseLLMReason, transientLLMError } from "../lib/llm";
 import { Icon } from "./Icon";
 
 /** A stopped run: an LLM error is shown in the user's language, red for errors
- * of the connection and amber for temporary ones (HMR.CMN-0004 design §3.7). */
+ * of the connection and amber for temporary ones (FTR.HMR.CMN-0004 design §3.7). */
 export function BlockedBanner({
   title,
   reason,

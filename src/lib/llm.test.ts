@@ -3,7 +3,7 @@ import { createI18n } from "./i18n";
 import { blockedReason, llmErrorText, parseLLMReason, transientLLMError } from "./llm";
 import { thinkingLevels } from "../pages/admin/Agent";
 
-describe("LLM errors (HMR.CMN-0004 design §4)", () => {
+describe("LLM errors (FTR.HMR.CMN-0004 design §4)", () => {
   it("parses the reason of a stopped run", () => {
     expect(parseLLMReason("[llm:insufficient_balance|DeepSeek] 402: balance")).toEqual({ errorClass: "insufficient_balance", connection: "DeepSeek" });
     expect(parseLLMReason("[llm:rate_limit|] 429")).toEqual({ errorClass: "rate_limit", connection: "" });

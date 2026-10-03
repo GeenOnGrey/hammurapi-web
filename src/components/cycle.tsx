@@ -46,7 +46,7 @@ export function IssueStatusBadge({ status }: { status: string }) {
 
 export function PhaseBadge({ phase }: { phase: FeaturePhase | string }) {
   const { t } = useTranslation();
-  const cls = { spec: "draft", codegen: "disc", validation: "in_review", in_release: "handed", released: "approved", rolled_back: "no", deleted: "no" }[phase] ?? "draft";
+  const cls = { spec: "draft", codegen: "disc", validation: "in_review", in_release: "handed", released: "approved", rolled_back: "no", deleted: "no", indexed: "none" }[phase] ?? "draft";
   return <span className={`st ${cls}`}>{t(`phase.${phase}`)}</span>;
 }
 

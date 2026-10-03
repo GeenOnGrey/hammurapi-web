@@ -3,7 +3,13 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { api } from "../../api/client";
 import { keys } from "../../api/queries";
-import type { AdminUser, DomainDTO, ExpertKind, List } from "../../api/types";
+import type {
+  AdminUser,
+  DomainDTO,
+  ExpertKind,
+  List,
+  MissingCatalog,
+} from "../../api/types";
 import { errorText } from "../../lib/errors";
 import { Icon } from "../../components/Icon";
 import { Loading, Modal, Switch, useToast } from "../../components/ui";
@@ -15,6 +21,10 @@ export function DomainsAdmin() {
   const qc = useQueryClient();
   const toast = useToast();
   const [dialog, setDialog] = useState<"domain" | "system" | null>(null);
+  // Prefilled keys from the block of waiting specifications (FTR.HMR.CMN-0005 R6).
+  const [prefill, setPrefill] = useState<{ domain?: string; system?: string }>(
+    {},
+  );
   const [experts, setExperts] = useState<DomainDTO | null>(null);
   const list = useQuery({
     queryKey: keys.adminDomains,
@@ -60,6 +70,12 @@ export function DomainsAdmin() {
         {t("admin.domains.title")}
       </h1>
       {list.isLoading && <Loading />}
+      <MissingCatalogBlock
+        onAdd={(kind, d, sys) => {
+          setPrefill({ domain: d, system: sys });
+          setDialog(kind);
+        }}
+      />
       <div style={{ overflowX: "auto", marginTop: 12 }}>
         <table className="t">
           <thead>
@@ -183,12 +199,24 @@ export function DomainsAdmin() {
         />
       )}
       {dialog === "domain" && (
-        <DomainModal onClose={() => setDialog(null)} onDone={refresh} />
+        <DomainModal
+          initialKey={prefill.domain}
+          onClose={() => {
+            setDialog(null);
+            setPrefill({});
+          }}
+          onDone={refresh}
+        />
       )}
       {dialog === "system" && list.data && (
         <SystemModal
           domains={list.data}
-          onClose={() => setDialog(null)}
+          initialDomain={prefill.domain}
+          initialKey={prefill.system}
+          onClose={() => {
+            setDialog(null);
+            setPrefill({});
+          }}
           onDone={refresh}
         />
       )}
@@ -197,14 +225,16 @@ export function DomainsAdmin() {
 }
 
 function DomainModal({
+  initialKey,
   onClose,
   onDone,
 }: {
+  initialKey?: string;
   onClose: () => void;
   onDone: () => void;
 }) {
   const { t } = useTranslation();
-  const [key, setKey] = useState("");
+  const [key, setKey] = useState(initialKey ?? "");
   const [name, setName] = useState("");
   const [approval, setApproval] = useState(true);
   const create = useMutation({
@@ -277,16 +307,24 @@ function DomainModal({
 
 function SystemModal({
   domains,
+  initialDomain,
+  initialKey,
   onClose,
   onDone,
 }: {
   domains: DomainDTO[];
+  initialDomain?: string;
+  initialKey?: string;
   onClose: () => void;
   onDone: () => void;
 }) {
   const { t } = useTranslation();
-  const [domain, setDomain] = useState(domains[0]?.key ?? "");
-  const [key, setKey] = useState("");
+  const [domain, setDomain] = useState(
+    initialDomain && domains.some((d) => d.key === initialDomain)
+      ? initialDomain
+      : (domains[0]?.key ?? ""),
+  );
+  const [key, setKey] = useState(initialKey ?? "");
   const [name, setName] = useState("");
   const create = useMutation({
     mutationFn: () =>
@@ -359,7 +397,7 @@ function SystemModal({
   );
 }
 
-/** Experts of a domain by kind (HMR.CMN-0002 §5); editable with Backstage too. */
+/** Experts of a domain by kind (FTR.HMR.CMN-0002 §5); editable with Backstage too. */
 function ExpertsModal({
   d,
   onClose,
@@ -455,5 +493,121 @@ function ExpertsModal({
       <div className="hint">{t("admin.domains.expertsHint")}</div>
       {save.error && <div className="err-text">{errorText(t, save.error)}</div>}
     </Modal>
+  );
+}
+
+/** Specifications of the repository waiting for a domain or a system (FTR.HMR.CMN-0005
+ * R6): "Add" with the key filled in, or — when Backstage is the master of the
+ * catalog — an example of catalog-info.yaml and the synchronization. */
+function MissingCatalogBlock({
+  onAdd,
+}: {
+  onAdd: (kind: "domain" | "system", domain: string, system: string) => void;
+}) {
+  const { t } = useTranslation();
+  const qc = useQueryClient();
+  const toast = useToast();
+  const missing = useQuery({
+    queryKey: keys.missingCatalog,
+    queryFn: () =>
+      api.get<MissingCatalog>("/admin/api/v1/spec-scan/missing-catalog"),
+  });
+  const sync = useMutation({
+    mutationFn: () => api.post("/admin/api/v1/catalog/sync"),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: keys.adminDomains });
+      qc.invalidateQueries({ queryKey: keys.missingCatalog });
+      toast({ kind: "ok", title: t("specScan.catalogSynced") });
+    },
+    onError: (e) => toast({ kind: "error", title: errorText(t, e) }),
+  });
+  const items = missing.data?.items ?? [];
+  if (items.length === 0) return null;
+  const backstage = missing.data?.catalogSource === "backstage";
+  return (
+    <div
+      className="card issuecard"
+      style={{ marginTop: 12, padding: "12px 16px" }}
+    >
+      <b>{t("specScan.missingTitle")}</b>
+      <p className="small t2" style={{ margin: "4px 0 8px" }}>
+        {backstage ? t("specScan.missingBackstage") : t("specScan.missingHint")}
+      </p>
+      {!backstage ? (
+        <table className="t">
+          <thead>
+            <tr>
+              <th>{t("specScan.missing")}</th>
+              <th>{t("specScan.waiting")}</th>
+              <th />
+            </tr>
+          </thead>
+          <tbody>
+            {items.map((it) => (
+              <tr key={`${it.domain}/${it.system}`}>
+                <td className="mono">
+                  {it.domainExists
+                    ? `${it.domain}/${it.system}`
+                    : `${it.domain}, ${it.domain}/${it.system}`}
+                </td>
+                <td className="mono small">{it.features.join(", ")}</td>
+                <td style={{ textAlign: "right" }}>
+                  {it.domainExists ? (
+                    <button
+                      className="btn sm"
+                      onClick={() => onAdd("system", it.domain, it.system)}
+                    >
+                      {t("specScan.addSystem", { key: it.system })}
+                    </button>
+                  ) : (
+                    <button
+                      className="btn sm"
+                      onClick={() => onAdd("domain", it.domain, it.system)}
+                    >
+                      {t("specScan.addDomain", { key: it.domain })}
+                    </button>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        items.map((it) => (
+          <div key={`${it.domain}/${it.system}`} style={{ marginBottom: 10 }}>
+            <div className="small">
+              <span className="mono">
+                {it.domain}/{it.system}
+              </span>{" "}
+              — {it.features.join(", ")}
+            </div>
+            <pre className="codeblock">{it.catalogInfoExample}</pre>
+            <button
+              className="btn ghost sm"
+              onClick={() => {
+                void navigator.clipboard?.writeText(
+                  it.catalogInfoExample ?? "",
+                );
+                toast({ kind: "ok", title: t("specScan.copied") });
+              }}
+            >
+              <Icon name="copy" size={13} />
+              {t("specScan.copy")}
+            </button>
+          </div>
+        ))
+      )}
+      {backstage && (
+        <button
+          className="btn sm"
+          disabled={sync.isPending}
+          onClick={() => sync.mutate()}
+        >
+          <Icon name="refresh" size={14} />
+          {t("specScan.syncCatalog")}
+        </button>
+      )}
+      <div className="hint">{t("specScan.extraCheck")}</div>
+    </div>
   );
 }
