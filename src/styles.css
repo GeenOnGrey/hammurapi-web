@@ -248,6 +248,38 @@ svg.i {
   background: linear-gradient(135deg, #6d4aff, #22c58b);
   color: #fff;
 }
+.avatar.agent.business {
+  background: linear-gradient(135deg, #3b4a8f, #6d4aff);
+}
+.avatar.agent.friendly {
+  background: linear-gradient(135deg, #f08a3c, #22c58b);
+}
+.avatar.agent.concise {
+  background: linear-gradient(135deg, #1b1830, #5b5872);
+}
+.avatar.agent.mentor {
+  background: linear-gradient(135deg, #6d4aff, #c04ad8);
+}
+button.avatar-btn {
+  background: none;
+  border: 0;
+  padding: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+button.avatar-btn:hover .avatar,
+button.avatar-btn[aria-expanded="true"] .avatar {
+  box-shadow: 0 0 0 2px var(--violet-soft);
+}
+.chat-h {
+  position: relative;
+}
+.menu.agent-pop {
+  left: 14px;
+  right: auto;
+  top: 56px;
+  width: 300px;
+}
 .body {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 360px;

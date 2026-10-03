@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
-import type { Area, GateStatus } from "../api/types";
+import type { Area, GateStatus, Tone } from "../api/types";
 import { initials } from "../lib/format";
 import { Icon } from "./Icon";
 
@@ -83,10 +83,18 @@ export const useToast = () => useContext(ToastCtx);
 
 // ─── Small pieces ──────────────────────────────────────────────────
 
-export function Avatar({ name, url, small, agent }: { name: string; url?: string | null; small?: boolean; agent?: boolean }) {
+/** Icon of the agent's avatar per tone (FTR.HMR.CMN-0001 design §3). */
+const TONE_ICONS = { business: "briefcase", friendly: "smile", concise: "bolt", mentor: "book" } as const;
+
+export function Avatar({ name, url, small, agent, tone }: {
+  name: string; url?: string | null; small?: boolean; agent?: boolean; tone?: Tone;
+}) {
+  const cls = `avatar${small ? " s" : ""}${agent ? " agent" : ""}${agent && tone ? ` ${tone}` : ""}`;
   return (
-    <span className={`avatar${small ? " s" : ""}${agent ? " agent" : ""}`} aria-hidden="true">
-      {url ? <img src={url} alt="" /> : agent ? name.slice(0, 1).toUpperCase() : initials(name)}
+    <span className={cls} aria-hidden="true">
+      {url ? <img src={url} alt="" />
+        : agent && tone ? <Icon name={TONE_ICONS[tone]} size={small ? 14 : 18} />
+        : agent ? name.slice(0, 1).toUpperCase() : initials(name)}
     </span>
   );
 }

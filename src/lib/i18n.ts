@@ -15,6 +15,11 @@ export const LANGUAGE_NAMES: Record<Language, string> = {
   en: "English", ru: "Русский", de: "Deutsch", es: "Español", "zh-CN": "中文",
 };
 
+/** Short labels of the language switch; the full name is the tooltip (FTR.HMR.CMN-0001 design §4). */
+export const LANGUAGE_SHORT: Record<Language, string> = {
+  en: "EN", ru: "RU", de: "DE", es: "ES", "zh-CN": "中文",
+};
+
 export const resources = {
   en: { translation: en }, ru: { translation: ru }, de: { translation: de }, es: { translation: es }, "zh-CN": { translation: zhCN },
 };

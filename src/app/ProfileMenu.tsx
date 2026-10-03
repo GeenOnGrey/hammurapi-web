@@ -3,36 +3,24 @@ import { Link } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { api } from "../api/client";
-import { keys, useDomains } from "../api/queries";
-import type { Profile, Tone } from "../api/types";
-import { LANGUAGES, LANGUAGE_NAMES, setDocumentLanguage } from "../lib/i18n";
+import { useDomains } from "../api/queries";
 import { errorText } from "../lib/errors";
+import { LANGUAGES, LANGUAGE_NAMES, LANGUAGE_SHORT, setDocumentLanguage } from "../lib/i18n";
 import { Icon } from "../components/Icon";
-import { Avatar, Modal, useOutside, useToast } from "../components/ui";
+import { Avatar, Modal, useOutside } from "../components/ui";
 import { useSession } from "./session";
-
-const TONES: Tone[] = ["business", "friendly", "concise", "mentor"];
+import { useProfilePatch } from "./useProfilePatch";
 
 export function ProfileMenu({ onClose }: { onClose: () => void }) {
   const { t, i18n } = useTranslation();
   const { me, profile, isAnyAdmin } = useSession();
   const domains = useDomains();
   const qc = useQueryClient();
-  const toast = useToast();
-  const [agentName, setAgentName] = useState(profile.agentName);
   const [feedback, setFeedback] = useState(false);
   const close = useCallback(() => !feedback && onClose(), [feedback, onClose]);
   const ref = useOutside<HTMLDivElement>(true, close);
 
-  const patch = useMutation({
-    mutationFn: (p: Partial<Profile>) => api.patch<Profile>("/api/v1/profile", p),
-    onSuccess: (p) => {
-      qc.setQueryData(keys.profile, p);
-      qc.invalidateQueries({ queryKey: keys.me });
-      qc.invalidateQueries({ queryKey: keys.features() });
-    },
-    onError: (e) => toast({ kind: "error", title: errorText(t, e) }),
-  });
+  const patch = useProfilePatch();
 
   const setLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
@@ -77,13 +65,16 @@ export function ProfileMenu({ onClose }: { onClose: () => void }) {
         </div>
       </div>
       <div className="sec">
-        <div className="lab">{t("profile.language")}</div>
-        <div className="chips">
-          {LANGUAGES.map((l) => (
-            <button key={l} className={`chip${profile.language === l ? " on" : ""}`} lang={l} onClick={() => setLanguage(l)}>
-              {LANGUAGE_NAMES[l]}
-            </button>
-          ))}
+        <div className="line">
+          <span>{t("profile.language")}</span>
+          <span className="mini-seg">
+            {LANGUAGES.map((l) => (
+              <button key={l} className={profile.language === l ? "on" : ""} lang={l} title={LANGUAGE_NAMES[l]} aria-label={LANGUAGE_NAMES[l]}
+                aria-pressed={profile.language === l} onClick={() => setLanguage(l)}>
+                {LANGUAGE_SHORT[l]}
+              </button>
+            ))}
+          </span>
         </div>
         <div className="line" style={{ marginTop: 12 }}>
           <span>{t("profile.theme")}</span>
@@ -106,23 +97,6 @@ export function ProfileMenu({ onClose }: { onClose: () => void }) {
           ))}
           {domains.data?.length === 0 && <span className="small muted">{t("profile.noDomains")}</span>}
         </div>
-      </div>
-      <div className="sec">
-        <div className="lab">{t("profile.agent")}</div>
-        <div className="field" style={{ marginBottom: 10 }}>
-          <input className="inp" value={agentName} maxLength={40} aria-label={t("profile.agentName")}
-            onChange={(e) => setAgentName(e.target.value)}
-            onBlur={() => agentName.trim() && agentName !== profile.agentName && patch.mutate({ agentName: agentName.trim() })}
-            onKeyDown={(e) => e.key === "Enter" && (e.target as HTMLInputElement).blur()} />
-        </div>
-        <div className="chips">
-          {TONES.map((tone) => (
-            <button key={tone} className={`chip${profile.agentTone === tone ? " on" : ""}`} onClick={() => patch.mutate({ agentTone: tone })}>
-              {t(`tones.${tone}`)}
-            </button>
-          ))}
-        </div>
-        <div className="hint">{t("profile.toneHint")}</div>
       </div>
       {isAnyAdmin && (
         <div className="sec">

@@ -23,7 +23,8 @@ export function UsersAdmin() {
         <Icon name="search" />
         <input placeholder={t("admin.users.search")} value={q} onChange={(e) => setQ(e.target.value)} />
       </label>
-      <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) minmax(0, 440px)", gap: 24, alignItems: "start" }}>
+      {/* The editor column appears with a selected user; until then the table takes the full width. */}
+      <div style={{ display: "grid", gridTemplateColumns: selected ? "minmax(0, 1fr) minmax(0, 440px)" : "minmax(0, 1fr)", gap: 24, alignItems: "start" }}>
         <div style={{ overflowX: "auto" }}>
           {users.isLoading && <Loading />}
           <table className="t">

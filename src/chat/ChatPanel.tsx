@@ -22,6 +22,7 @@ import { bytes, relativeTime } from "../lib/format";
 import { useEvent } from "../lib/sse";
 import { Icon } from "../components/Icon";
 import { Avatar, useToast } from "../components/ui";
+import { AgentSettings } from "./AgentSettings";
 import { useRecorder } from "./useRecorder";
 
 interface Live {
@@ -43,6 +44,7 @@ export function ChatPanel() {
   const toast = useToast();
   const [mode, setMode] = useState<ChatMode>("general");
   const [view, setView] = useState<"chat" | "files">("chat");
+  const [agentMenu, setAgentMenu] = useState(false);
   const [text, setText] = useState("");
   const [pending, setPending] = useState<Attachment[]>([]);
   const [uploading, setUploading] = useState(false);
@@ -342,7 +344,17 @@ export function ChatPanel() {
             </>
           ) : (
             <>
-              <Avatar agent name={profile.agentName} />
+              <button
+                className="avatar-btn"
+                // The popover closes on an outside mousedown; keep this click a toggle.
+                onMouseDown={(e) => agentMenu && e.stopPropagation()}
+                onClick={() => setAgentMenu((v) => !v)}
+                aria-label={t("chat.agentSettings")}
+                aria-expanded={agentMenu}
+                title={t("chat.agentSettings")}
+              >
+                <Avatar agent tone={profile.agentTone} name={profile.agentName} />
+              </button>
               <div>
                 <b>{profile.agentName}</b>
                 <div className="small muted">
@@ -376,6 +388,9 @@ export function ChatPanel() {
             <Icon name="x" />
           </button>
         </div>
+        {agentMenu && view === "chat" && (
+          <AgentSettings onClose={() => setAgentMenu(false)} />
+        )}
         {view === "chat" && (
           <>
             <div className="seg" role="group" aria-label={t("chat.mode")}>

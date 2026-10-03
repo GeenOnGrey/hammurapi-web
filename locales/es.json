@@ -252,6 +252,7 @@
   },
   "chat": {
     "title": "Chat con el agente",
+    "agentSettings": "Ajustes del agente",
     "tone": "tono: {tone}",
     "myFiles": "Mis archivos",
     "backToChat": "Volver al chat",
@@ -302,7 +303,7 @@
     },
     "myDomains": "Mis dominios",
     "noDomains": "Aún no hay dominios",
-    "agent": "Agente",
+    "tone": "Tono",
     "agentName": "Nombre del agente",
     "toneHint": "El tono solo cambia la forma de hablar del agente, no el contenido de los borradores.",
     "admin": "Administración",

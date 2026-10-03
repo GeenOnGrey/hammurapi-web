@@ -252,6 +252,7 @@
   },
   "chat": {
     "title": "与代理聊天",
+    "agentSettings": "代理设置",
     "tone": "语气：{tone}",
     "myFiles": "我的文件",
     "backToChat": "返回聊天",
@@ -302,7 +303,7 @@
     },
     "myDomains": "我的领域",
     "noDomains": "暂无领域",
-    "agent": "代理",
+    "tone": "语气",
     "agentName": "代理名称",
     "toneHint": "语气只影响代理的交流方式，不影响草稿内容。",
     "admin": "管理",

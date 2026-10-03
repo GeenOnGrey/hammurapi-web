@@ -252,6 +252,7 @@
   },
   "chat": {
     "title": "Chat mit dem Agenten",
+    "agentSettings": "Agent-Einstellungen",
     "tone": "Ton: {tone}",
     "myFiles": "Meine Dateien",
     "backToChat": "Zurück zum Chat",
@@ -302,7 +303,7 @@
     },
     "myDomains": "Meine Domänen",
     "noDomains": "Noch keine Domänen",
-    "agent": "Agent",
+    "tone": "Ton",
     "agentName": "Name des Agenten",
     "toneHint": "Der Ton ändert nur die Art der Kommunikation, nicht den Inhalt der Entwürfe.",
     "admin": "Administration",

@@ -252,6 +252,7 @@
   },
   "chat": {
     "title": "Chat with the agent",
+    "agentSettings": "Agent settings",
     "tone": "tone: {tone}",
     "myFiles": "My files",
     "backToChat": "Back to chat",
@@ -302,7 +303,7 @@
     },
     "myDomains": "My domains",
     "noDomains": "No domains yet",
-    "agent": "Agent",
+    "tone": "Tone",
     "agentName": "Agent name",
     "toneHint": "The tone changes only how the agent talks, not the content of drafts.",
     "admin": "Administration",
