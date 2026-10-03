@@ -530,6 +530,118 @@
       "secretRef": "oder ein Kubernetes-Secret (env:NAME)",
       "maxSeconds": "Maximale Laufzeit, Sekunden",
       "readOnly": "Das Passwort wird verschlüsselt gespeichert; die Datenbank enthält nur eine Referenz."
+    },
+    "agent": {
+      "title": "Agent",
+      "status": "Status",
+      "check": "Prüfen",
+      "checkOf": "Prüfung: {name}",
+      "enabled": "Aktiviert",
+      "scenarios": "Szenarien",
+      "allScenarios": "Alle Szenarien",
+      "connections": {
+        "title": "LLM-Verbindungen",
+        "hint": "Anbieter der Modelle des Agenten. Von einem Schlüssel sind nur die letzten Zeichen sichtbar.",
+        "name": "Name",
+        "models": "Modelle",
+        "key": "API-Schlüssel",
+        "baseUrl": "API-Adresse",
+        "add": "Neue Verbindung",
+        "empty": "Noch keine Verbindungen. Fügen Sie eine hinzu, damit der Agent arbeiten kann.",
+        "moreTypes": "Weitere Anbietertypen folgen später.",
+        "replaceKey": "Schlüssel ersetzen",
+        "replaceKeyOf": "Neuer Schlüssel für {name}",
+        "newKey": "Neuer API-Schlüssel",
+        "keyHint": "Der Schlüssel wird verschlüsselt gespeichert; der Status wird bei der nächsten Anfrage erneut geprüft.",
+        "confirmDelete": "Verbindung {name} löschen?",
+        "answered": "Antwort in {ms} ms",
+        "stopped": "Angehaltene Szenarien:",
+        "fix": {
+          "insufficient_balance": "Laden Sie das Guthaben in der Konsole des Anbieters auf; der Agent arbeitet ab der nächsten Anfrage weiter.",
+          "auth": "Der Anbieter hat den Schlüssel abgelehnt. Ersetzen Sie den Schlüssel der Verbindung."
+        }
+      },
+      "models": {
+        "title": "Modelle nach Szenario",
+        "hint": "Szenarien ohne eigenes Modell verwenden das Standardmodell.",
+        "default": "Standard",
+        "scenario": "Szenario",
+        "model": "Modell",
+        "thinking": "Reasoning",
+        "thinkingOff": "aus",
+        "inherit": "Standard: {model}",
+        "notSet": "nicht festgelegt",
+        "choose": "Modell wählen",
+        "noConnections": "Keine aktive Verbindung: Fügen Sie eine unter „LLM-Verbindungen“ hinzu.",
+        "saved": "Modelle gespeichert",
+        "allStages": "Alle Phasen"
+      },
+      "skills": {
+        "title": "Skills",
+        "hint": "Anleitungen, die der Agent bei Bedarf lädt. Skripte von Skills laufen nur in Aufgaben der Codegenerierung. Jede Änderung geht als Pull Request in das Regel-Repository.",
+        "skill": "Skill",
+        "add": "Neuer Skill",
+        "empty": "Noch keine Skills.",
+        "status": {
+          "active": "Aktiv",
+          "pending_add": "Wartet auf Freigabe",
+          "pending_change": "Änderung wartet auf Freigabe",
+          "pending_delete": "Wird gelöscht"
+        },
+        "approve": "Freigeben",
+        "withdraw": "Zurückziehen",
+        "approved": "Änderung freigegeben",
+        "withdrawn": "Änderung zurückgezogen",
+        "proposed": "Pull Request geöffnet",
+        "propose": "Pull Request öffnen",
+        "confirmDelete": "Löschen des Skills {name} vorschlagen?",
+        "zip": "Zip hochladen",
+        "text": "Aus Text erstellen",
+        "dropZip": "Zip-Archiv mit SKILL.md wählen (bis 5 MB)",
+        "scenariosHint": "Ohne gewählte Szenarien ist der Skill in allen Szenarien verfügbar.",
+        "prHint": "Der Skill wird aktiv, nachdem der Pull Request freigegeben und zusammengeführt wurde."
+      },
+      "mcp": {
+        "title": "MCP-Server",
+        "hint": "Externe Werkzeuge des Agenten. Der integrierte Server hammurapi ist immer verbunden.",
+        "server": "Server",
+        "exposure": "Sichtbarkeit",
+        "direct": "Immer sichtbar",
+        "deferred": "Per Suche",
+        "exposureHint": "Werkzeuge „per Suche“ findet der Agent bei Bedarf; sie belegen keinen Kontext.",
+        "add": "Neuer MCP-Server",
+        "headers": "Header",
+        "headerName": "Header",
+        "headerValue": "Wert",
+        "addHeader": "Header hinzufügen",
+        "scenariosHint": "Ohne gewählte Szenarien ist der Server in allen Szenarien verfügbar.",
+        "tools": "Werkzeuge: {count}",
+        "readOnly": "lesend",
+        "mutates": "ändert Daten",
+        "noTools": "Der Server meldet keine Werkzeuge.",
+        "confirmDelete": "MCP-Server {name} löschen?"
+      },
+      "usage": {
+        "title": "Nutzung",
+        "period": "Zeitraum",
+        "day": "Tag",
+        "week": "Woche",
+        "month": "Monat",
+        "cost": "Kosten",
+        "tokens": "Tokens",
+        "cache": "Aus dem Cache",
+        "runs": "Sitzungen und Aufgaben",
+        "connection": "Verbindung",
+        "in": "Eingabe",
+        "out": "Ausgabe",
+        "empty": "Keine Nutzung in diesem Zeitraum."
+      },
+      "audit": {
+        "title": "Änderungen",
+        "empty": "Noch keine Änderungen.",
+        "system": "System",
+        "selfApproved": "selbst freigegeben"
+      }
     }
   },
   "errors": {
@@ -611,7 +723,32 @@
     "invalid_json": "Ungültige Anfrage.",
     "invalid_cursor": "Ungültige Seite.",
     "invalid_limit": "Ungültige Seitengröße.",
-    "invalid_status": "Unbekannter Status."
+    "invalid_status": "Unbekannter Status.",
+    "agent_not_configured": "Der Agent ist nicht eingerichtet: Legen Sie unter Administration → Agent ein Standardmodell fest.",
+    "agent_unavailable": "Der Agent ist gerade nicht verfügbar. Versuchen Sie es später erneut.",
+    "connection_disabled": "Die Verbindung ist deaktiviert.",
+    "connection_in_use": "Die Verbindung wird von Szenarien verwendet: Wählen Sie zuerst andere Modelle.",
+    "connection_name_taken": "Eine Verbindung mit diesem Namen existiert bereits.",
+    "connection_not_found": "Verbindung nicht gefunden.",
+    "default_required": "Wählen Sie das Standardmodell.",
+    "invalid_connection": "Unbekannte Verbindung.",
+    "invalid_model": "Die Verbindung hat kein solches Modell.",
+    "invalid_models": "Wählen Sie mindestens ein Modell der Verbindung.",
+    "invalid_scenario": "Unbekanntes Szenario.",
+    "invalid_type": "Unbekannter Verbindungstyp.",
+    "invalid_period": "Ungültiger Zeitraum.",
+    "invalid_group": "Ungültige Gruppierung.",
+    "thinking_not_supported": "Das Modell unterstützt diese Reasoning-Stufe nicht.",
+    "mcp_builtin": "Der integrierte Server hammurapi kann nicht geändert werden.",
+    "mcp_invalid": "Prüfen Sie Adresse und Header des MCP-Servers: {reason}",
+    "mcp_name_taken": "Ein MCP-Server mit diesem Namen existiert bereits.",
+    "mcp_not_found": "MCP-Server nicht gefunden.",
+    "message_not_found": "Nachricht nicht gefunden.",
+    "not_failed": "Nur eine fehlgeschlagene Nachricht kann wiederholt werden.",
+    "skill_change_open": "Für diesen Skill gibt es bereits eine offene Änderung.",
+    "skill_invalid": "Der Skill ist ungültig.",
+    "skill_name_conflict": "Ein Skill mit diesem Namen existiert bereits.",
+    "skill_not_found": "Skill nicht gefunden."
   },
   "stages": {
     "title": "Phasen",
@@ -638,8 +775,13 @@
       "retry_or_rollback": "Wiederholen oder zurückrollen",
       "mark_flag": "Feature-Flag",
       "confirm_release": "Release bestätigen",
-      "resolve_blocked": "Angehalten"
-    }
+      "resolve_blocked": "Angehalten",
+      "agent_not_configured": "Agent einrichten",
+      "connection_problem": "Verbindungsproblem",
+      "mcp_problem": "Problem mit MCP-Server"
+    },
+    "agent": "Agent",
+    "agentHint": "Für den Agenten ist kein Modell festgelegt"
   },
   "issueType": {
     "idea": "Idee",
@@ -1039,5 +1181,36 @@
     "moved": "verschoben",
     "discovery_updated": "Analyse aktualisiert",
     "returned_after_rollback": "nach Rollback zurückgekehrt"
+  },
+  "llm": {
+    "errors": {
+      "insufficient_balance": "Das Guthaben der Verbindung „{connection}“ ist aufgebraucht. Informieren Sie Ihre Administration.",
+      "auth": "Die Verbindung „{connection}“ ist nicht autorisiert. Informieren Sie Ihre Administration.",
+      "rate_limit": "Der Anbieter ist überlastet, versuchen Sie es später erneut.",
+      "unavailable": "Der Anbieter ist überlastet, versuchen Sie es später erneut.",
+      "bad_request": "Das Modell hat die Anfrage nicht angenommen.",
+      "context_overflow": "Der Kontext ist zu groß.",
+      "agent_crashed": "Der Agent wurde unerwartet beendet, versuchen Sie es erneut."
+    },
+    "status": {
+      "unknown": "Nicht geprüft",
+      "ok": "Funktioniert",
+      "insufficient_balance": "Kein Guthaben",
+      "auth": "Autorisierungsfehler",
+      "unavailable": "Nicht erreichbar",
+      "disabled": "Deaktiviert",
+      "error": "Fehler"
+    },
+    "scenario": {
+      "chat": "Chat",
+      "issue_analysis": "Analyse der Aufgabe",
+      "gate_generation": "Gate-Generierung",
+      "conformance_check": "Konformitätsprüfung",
+      "codegen": "Codegenerierung",
+      "review_update": "Review-Änderungen",
+      "rollback_revert": "Release-Rückabwicklung"
+    },
+    "retry": "Wiederholen",
+    "theConnection": "LLM"
   }
 }

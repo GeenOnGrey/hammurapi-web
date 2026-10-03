@@ -15,6 +15,7 @@ import { AgentMark, KeyList, Lane, PhaseBadge, type LaneItem } from "../componen
 import { ImplementationTab } from "./feature/Implementation";
 import { ValidationTab } from "./feature/Validation";
 import { ActivityTab } from "./feature/Activity";
+import { BlockedBanner } from "../components/BlockedBanner";
 
 const TABS = ["spec", "implementation", "validation", "history"] as const;
 type Tab = (typeof TABS)[number];
@@ -172,9 +173,9 @@ function FeatureView({ f, tab, area }: { f: FeatureCard; tab: Tab; area?: Area }
           {f.phase === "rolled_back" && <div className="banner warn"><Icon name="undo" /><span className="grow">{t("feature.rolledBack")}</span></div>}
           {generating && <div className="banner info"><span className="ring" /><span className="grow">{t("feature.generating")}</span></div>}
           {f.workflow?.kind === "gate_generation" && f.workflow.state === "blocked" && (
-            <div className="banner warn"><Icon name="alert" /><span className="grow">{t("feature.generationFailed")} {f.workflow.lastError}</span>
+            <BlockedBanner title={t("feature.generationFailed")} reason={f.workflow.lastError}>
               {f.permissions.regenerate && <button className="btn sm" onClick={() => act.mutate({ path: "/gates/tech/regenerate" })}>{t("feature.regenerate")}</button>}
-            </div>
+            </BlockedBanner>
           )}
 
           <GateStrip f={f} current={area} onDialog={setDialog} onAdd={addGate} busy={act.isPending} />

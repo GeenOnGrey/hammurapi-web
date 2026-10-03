@@ -12,6 +12,7 @@ import { Icon } from "../components/Icon";
 import { Empty, Loading, Modal, useToast } from "../components/ui";
 import { AgentMark, IssueStatusBadge, IssueTypeBadge, KeyList, KeyLink } from "../components/cycle";
 import { Markdown } from "../components/Markdown";
+import { BlockedBanner } from "../components/BlockedBanner";
 
 export function IssuePage() {
   const { t } = useTranslation();
@@ -108,7 +109,7 @@ function IssueView({ is }: { is: IssueCard }) {
         )}
       </div>
       {running && !d?.content && <DiscoveryRunning d={d} />}
-      {blocked && <div className="banner warn"><Icon name="alert" /><span className="grow">{t("issue.discoveryBlocked")} {d?.workflow?.lastError}</span></div>}
+      {blocked && <BlockedBanner title={t("issue.discoveryBlocked")} reason={d?.workflow?.lastError} />}
       {d?.content && <DiscoveryDoc d={d} />}
 
       {is.permissions.verify && (

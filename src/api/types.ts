@@ -246,6 +246,10 @@ export interface ChatMessage {
   content: string;
   isVoice: boolean;
   attachments: AttachmentRef[];
+  /** PLT.HMR-0004: the model of an answer, the error class of a failed message, the repeated message. */
+  model?: string | null;
+  errorClass?: string | null;
+  retryOf?: string | null;
   createdAt: string;
 }
 
@@ -562,10 +566,11 @@ export interface ReleaseCard extends ReleaseDTO {
 
 export type FocusAction =
   | "verify_discovery" | "approve_gate" | "sign_validation" | "start_merge" | "mark_deploy"
-  | "retry_or_rollback" | "mark_flag" | "confirm_release" | "resolve_blocked";
+  | "retry_or_rollback" | "mark_flag" | "confirm_release" | "resolve_blocked"
+  | "agent_not_configured" | "connection_problem" | "mcp_problem";
 
 export interface FocusItem {
-  kind: ContextType;
+  kind: ContextType | "agent" | "connection" | "mcp_server";
   key: string;
   title: string;
   action: FocusAction;
@@ -577,6 +582,8 @@ export interface Focus {
   research: FocusItem[];
   development: FocusItem[];
   release: FocusItem[];
+  /** Global administrators: the agent needs attention (PLT.HMR-0004 R21). */
+  agent?: FocusItem[];
 }
 
 export interface OverviewCard {
@@ -656,4 +663,137 @@ export interface CycleSettings {
   featureFlags: { enabled: boolean; activeSecrets: number };
   stage: { enabled: boolean };
   runnerExecutor: string;
+}
+
+// ─── PLT.HMR-0004: the agent (Pi) and its configuration ───────────
+
+export type AgentScenario = "chat" | "issue_analysis" | "gate_generation" | "conformance_check" | "codegen" | "review_update" | "rollback_revert";
+export const AGENT_SCENARIOS: AgentScenario[] = ["chat", "issue_analysis", "gate_generation", "conformance_check", "codegen", "review_update", "rollback_revert"];
+/** Stage rows of the scenario table (design §3). */
+export const SCENARIO_STAGE: Record<AgentScenario, "all" | "discovery" | "development" | "delivery"> = {
+  chat: "all", issue_analysis: "discovery", gate_generation: "development", conformance_check: "development",
+  codegen: "development", review_update: "development", rollback_revert: "delivery",
+};
+
+export type LLMErrorClass = "insufficient_balance" | "auth" | "rate_limit" | "unavailable" | "bad_request" | "context_overflow" | "agent_crashed";
+export type ConnectionStatus = "unknown" | "ok" | "insufficient_balance" | "auth" | "unavailable" | "disabled";
+
+export interface AgentModelDef {
+  id: string;
+  name?: string;
+  contextWindow: number;
+  maxTokens: number;
+  reasoning: boolean;
+  input: string[];
+  thinkingLevelMap?: Record<string, string | null>;
+  cost: { input: number; output: number; cacheRead: number; cacheWrite: number };
+}
+
+export interface LLMConnection {
+  id: string;
+  name: string;
+  type: "deepseek";
+  baseUrl: string;
+  models: AgentModelDef[];
+  keyLast4: string;
+  enabled: boolean;
+  status: ConnectionStatus;
+  statusReason: string | null;
+  statusAt: string | null;
+  createdAt: string;
+}
+
+export interface LLMCheckResult {
+  model: string;
+  ok: boolean;
+  latencyMs?: number;
+  errorClass?: LLMErrorClass;
+  httpStatus?: number;
+  message?: string;
+}
+
+export interface ModelChoice {
+  connectionId: string;
+  model: string;
+  thinking: string;
+}
+
+export interface ScenarioModels {
+  default: ModelChoice | null;
+  scenarios: Record<AgentScenario, ModelChoice | null>;
+}
+
+export interface ResolvedModel {
+  scenario: AgentScenario;
+  stage: string;
+  inherited: boolean;
+  connectionId: string;
+  connectionName: string;
+  model: string;
+  thinking: string;
+  status: ConnectionStatus;
+}
+
+export interface SkillChange {
+  id: string;
+  skill: string;
+  kind: "add" | "change" | "delete";
+  prUrl: string;
+  prNumber: number;
+  authorId: string;
+  author: string;
+  state: "open" | "merged" | "closed";
+  createdAt: string;
+}
+
+export interface AgentSkill {
+  name: string;
+  description: string;
+  scenarios: AgentScenario[];
+  status: "active" | "pending_add" | "pending_change" | "pending_delete";
+  change?: SkillChange;
+}
+
+export interface MCPServerInfo {
+  id: string | null;
+  name: string;
+  url: string;
+  headers: { name: string; last4: string }[];
+  exposure: "direct" | "deferred";
+  scenarios: AgentScenario[];
+  enabled: boolean;
+  builtin: boolean;
+  status: string;
+  statusReason: string | null;
+  toolsCount: number | null;
+  statusAt: string | null;
+}
+
+export interface MCPCheckResult {
+  ok: boolean;
+  tools: { name: string; description?: string; readOnly: boolean; destructive: boolean }[];
+  error?: string;
+}
+
+export interface UsageTotals {
+  costUsd: number;
+  tokensIn: number;
+  tokensOut: number;
+  cacheRead: number;
+  cacheWrite: number;
+  runs: number;
+}
+
+export interface UsageReport {
+  from: string;
+  to: string;
+  totals: UsageTotals;
+  rows: { key: Record<string, string>; costUsd: number; tokensIn: number; tokensOut: number; cacheRead: number; runs: number }[];
+}
+
+export interface ChatSessionInfo {
+  model: string;
+  connectionName: string;
+  thinking: string;
+  configured: boolean;
 }

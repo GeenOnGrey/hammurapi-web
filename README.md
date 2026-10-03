@@ -17,8 +17,11 @@ validation, release and the value metric. It is a single-page app that talks onl
   services, rules, deploy per environment, metric sources with a dry run, cycle settings (catalog,
   feature flags webhook, stage), instance settings. Also sign-in through GitHub/GitLab, import from a
   zip archive and the profile.
+- **Agent** (global administrators): LLM connections with a check, models by scenario with a default,
+  skills proposed through pull requests, MCP servers with their tools, usage and the change log.
 - **Chat** with the user's agent: general mode and the context of the open issue, feature or release, answers streamed over
-  server-sent events, attachments, push-to-talk voice input with transcript review.
+  server-sent events, attachments, push-to-talk voice input with transcript review; the model under the
+  agent's name and LLM errors as a card with "Retry".
 - **Editor:** [Milkdown](https://milkdown.dev) (ProseMirror + remark) with CommonMark + GFM and
   fixed serialization options, so a document opened and saved without edits never changes.
   Autosave with optimistic concurrency (`baseSha`), edit locks, retry/discard on failed saves.

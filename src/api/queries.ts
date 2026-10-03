@@ -39,6 +39,14 @@ export const keys = {
   catalog: ["admin", "catalog"] as const,
   deploy: (env: string) => ["admin", "deploy", env] as const,
   metricSources: ["admin", "metricSources"] as const,
+  // PLT.HMR-0004: the Agent section and the chat model.
+  agentConnections: ["admin", "agent", "connections"] as const,
+  agentModels: ["admin", "agent", "models"] as const,
+  agentResolved: ["admin", "agent", "resolved"] as const,
+  agentSkills: ["admin", "agent", "skills"] as const,
+  agentMCP: ["admin", "agent", "mcp"] as const,
+  agentUsage: (period: string) => ["admin", "agent", "usage", period] as const,
+  chatSession: ["chat", "session"] as const,
 };
 
 export const useConfig = () =>

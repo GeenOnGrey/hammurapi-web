@@ -7,13 +7,15 @@ export type EventType =
   | "gate.updated" | "feature.deleted"
   | "issue.updated" | "discovery.progress" | "feature.updated" | "task.progress" | "validation.updated"
   | "release.updated" | "release.blocked" | "focus.changed"
-  | "approvals.changed" | "import.progress";
+  | "approvals.changed" | "import.progress"
+  | "chat.error" | "chat.model" | "agent.connection_status";
 
 const TYPES: EventType[] = [
   "agent.token", "agent.tool_call", "agent.done", "agent.error",
   "gate.updated", "feature.deleted", "approvals.changed", "import.progress",
   "issue.updated", "discovery.progress", "feature.updated", "task.progress", "validation.updated",
   "release.updated", "release.blocked", "focus.changed",
+  "chat.error", "chat.model", "agent.connection_status",
 ];
 
 type Handler = (data: any) => void; // eslint-disable-line @typescript-eslint/no-explicit-any

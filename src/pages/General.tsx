@@ -7,6 +7,7 @@ import { useChatContext } from "../app/session";
 import { duration } from "../lib/format";
 import { Icon } from "../components/Icon";
 import { Loading } from "../components/ui";
+import { adminPath } from "./admin/paths";
 import { IssueStatusBadge, IssueTypeBadge, KeyLink, KeyList, keyHref, PhaseBadge, Progress, ReleaseStatusBadge } from "../components/cycle";
 
 function GeneralTabs() {
@@ -38,6 +39,16 @@ export function FocusPage() {
     <main className="main">
       <GeneralTabs />
       {focus.isLoading && <Loading />}
+      {focus.data?.agent && focus.data.agent.length > 0 && (
+        <section className="focusgroup" aria-label={t("focus.agent")}>
+          <div className="gh">
+            <Icon name="cpu" size={16} />
+            {t("focus.agent")}
+            <span className="count">{focus.data.agent.length}</span>
+          </div>
+          {focus.data.agent.map((it) => <AgentFocusRow key={`${it.kind}-${it.key}-${it.action}`} it={it} />)}
+        </section>
+      )}
       {focus.data && groups.map((g) => {
         const items = focus.data[g.key];
         return (
@@ -70,6 +81,23 @@ function FocusRow({ it }: { it: FocusItem }) {
       <span><KeyLink k={it.key} /></span>
       <span className={`st ${it.action === "retry_or_rollback" || it.action === "resolve_blocked" ? "blocked" : "in_review"}`}>{t(`focus.action.${it.action}`)}</span>
       <span className="ellipsis">{it.title}</span>
+      <span className="small t2 ellipsis" title={hint}>{hint}</span>
+      <span className="small muted"><Icon name="clock" size={14} /> {duration(it.waitingSince, i18n.language)}</span>
+    </div>
+  );
+}
+
+/** A problem of the agent: a connection, an MCP server or no model (PLT.HMR-0004 R21). */
+function AgentFocusRow({ it }: { it: FocusItem }) {
+  const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+  const href = it.kind === "mcp_server" ? adminPath("agent/mcp") : adminPath("agent/connections");
+  const hint = it.hint ? t(`llm.status.${it.hint}`, { defaultValue: it.hint }) : "";
+  return (
+    <div className="irow" role="link" tabIndex={0} onClick={() => navigate(href)} onKeyDown={(e) => e.key === "Enter" && navigate(href)}>
+      <span className="mono small">{it.kind === "agent" ? t("focus.agent") : it.title}</span>
+      <span className="st blocked">{t(`focus.action.${it.action}`)}</span>
+      <span className="ellipsis">{it.kind === "agent" ? t("focus.agentHint") : it.title}</span>
       <span className="small t2 ellipsis" title={hint}>{hint}</span>
       <span className="small muted"><Icon name="clock" size={14} /> {duration(it.waitingSince, i18n.language)}</span>
     </div>

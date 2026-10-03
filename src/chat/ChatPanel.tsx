@@ -4,9 +4,10 @@ import { useInfiniteQuery, useQuery, useQueryClient } from "@tanstack/react-quer
 import { useTranslation } from "react-i18next";
 import { ApiError, api } from "../api/client";
 import { keys } from "../api/queries";
-import type { Attachment, ChatMessage, ChatMode, List } from "../api/types";
+import type { Attachment, ChatMessage, ChatMode, ChatSessionInfo, List } from "../api/types";
 import { useChatContext, useSession } from "../app/session";
 import { errorText } from "../lib/errors";
+import { llmErrorText, transientLLMError } from "../lib/llm";
 import { bytes, relativeTime } from "../lib/format";
 import { useEvent } from "../lib/sse";
 import { Icon } from "../components/Icon";
@@ -18,6 +19,9 @@ interface Live {
   text: string;
   tools: { id: string; title: string; status: string }[];
   error?: string;
+  /** PLT.HMR-0004: the LLM error class and its connection (chat.error). */
+  errorClass?: string;
+  connectionName?: string;
   done: boolean;
 }
 
@@ -74,9 +78,38 @@ export function ChatPanel() {
     qc.invalidateQueries({ queryKey: keys.attachments });
   });
   useEvent("agent.error", (d: { messageId: string; code: string; message: string }) => {
-    setLive((l) => (l && l.messageId === d.messageId ? { ...l, error: t(`chat.errors.${d.code}`, { defaultValue: d.message }), done: true } : l));
+    // chat.error comes first for LLM errors and is more precise: keep its text.
+    setLive((l) => (l && l.messageId === d.messageId && !l.errorClass ? { ...l, error: t(`chat.errors.${d.code}`, { defaultValue: d.message }), done: true } : l));
     setSending(false);
   });
+  useEvent("chat.error", (d: { messageId: string; errorClass: string; connectionName?: string; text: string }) => {
+    if (!d.errorClass) return;
+    setLive((l) => (l && l.messageId === d.messageId
+      ? { ...l, errorClass: d.errorClass, connectionName: d.connectionName ?? "", error: llmErrorText(t, d.errorClass, d.connectionName ?? ""), done: true }
+      : l));
+    setSending(false);
+    qc.invalidateQueries({ queryKey: keys.chat });
+  });
+
+  // The model of the chat under the agent's name (design §3.7).
+  const session = useQuery({ queryKey: keys.chatSession, queryFn: () => api.get<ChatSessionInfo>("/api/v1/chat/session"), staleTime: 60_000 });
+  useEvent("chat.model", (d: { model: string; connectionName: string }) =>
+    qc.setQueryData<ChatSessionInfo>(keys.chatSession, (old) => ({ thinking: "", ...old, model: d.model, connectionName: d.connectionName, configured: true })));
+
+  const retried = new Set(messages.map((m) => m.retryOf).filter(Boolean));
+  const retry = async (m: ChatMessage) => {
+    if (sending) return;
+    setSending(true);
+    try {
+      const res = await api.post<{ messageId: string; createdAt: string }>(`/api/v1/chat/messages/${m.id}/retry`);
+      setLocal((l) => [...l, { ...m, id: res.messageId, createdAt: res.createdAt, errorClass: null, retryOf: m.id }]);
+      setLive({ messageId: res.messageId, text: "", tools: [], done: false });
+      qc.invalidateQueries({ queryKey: keys.chat });
+    } catch (e) {
+      setSending(false);
+      toast({ kind: "error", title: errorText(t, e) });
+    }
+  };
 
   // Drop the live bubble once the stored agent message has arrived.
   useEffect(() => {
@@ -169,6 +202,9 @@ export function ChatPanel() {
               <div>
                 <b>{profile.agentName}</b>
                 <div className="small muted">{t("chat.tone", { tone: t(`tones.${profile.agentTone}`) })}</div>
+                {session.data?.configured && session.data.model && (
+                  <div className="small muted mono" title={session.data.connectionName}>{session.data.model}</div>
+                )}
               </div>
               <button className="iconbtn" style={{ marginLeft: "auto" }} onClick={() => setView("files")} aria-label={t("chat.myFiles")}><Icon name="files" /></button>
             </>
@@ -211,9 +247,13 @@ export function ChatPanel() {
                     {m.attachments.map((a) => <a key={a.id} href={apiUrl(`/api/v1/attachments/${a.id}`)}><Icon name="clip" size={12} /> {a.fileName}</a>)}
                   </div>
                 )}
+                {m.role === "user" && !retried.has(m.id) && (live?.messageId === m.id ? live.errorClass : m.errorClass) && (
+                  <LLMErrorCard errorClass={(live?.messageId === m.id ? live.errorClass : m.errorClass) ?? ""}
+                    connection={live?.messageId === m.id ? live.connectionName ?? "" : ""} disabled={sending} onRetry={() => retry(m)} />
+                )}
               </div>
             ))}
-            {live && (
+            {live && !live.errorClass && (
               <div className={`m a${live.error ? " err" : ""}`}>
                 <div className="bub">
                   {live.error ? live.error : live.text || <span className="typing" aria-label={t("chat.typing")}><i /><i /><i /></span>}
@@ -290,6 +330,18 @@ export function ChatPanel() {
         </>
       )}
     </aside>
+  );
+}
+
+/** An LLM error under the message it stopped, with "Retry" (design §3.7, §4):
+ * red for errors of the connection, amber for temporary ones. */
+function LLMErrorCard({ errorClass, connection, disabled, onRetry }: { errorClass: string; connection: string; disabled: boolean; onRetry: () => void }) {
+  const { t } = useTranslation();
+  return (
+    <div className={`llmerr${transientLLMError(errorClass) ? " amber" : ""}`} role="alert" style={{ marginTop: 6 }}>
+      <span>{llmErrorText(t, errorClass, connection || t("llm.theConnection"))}</span>
+      <div className="row"><button className="btn sm" disabled={disabled} onClick={onRetry}><Icon name="refresh" size={14} />{t("llm.retry")}</button></div>
+    </div>
   );
 }
 

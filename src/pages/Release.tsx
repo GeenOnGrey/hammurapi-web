@@ -12,6 +12,7 @@ import { Icon } from "../components/Icon";
 import { Empty, Loading, Modal, useToast } from "../components/ui";
 import { AgentMark, Dot, KeyLink, KeyList, Lane, ReleaseStatusBadge, type LaneItem } from "../components/cycle";
 import { PRRow } from "./feature/Implementation";
+import { BlockedBanner } from "../components/BlockedBanner";
 
 export function ReleasePage() {
   const { t } = useTranslation();
@@ -90,10 +91,9 @@ function ReleaseView({ r }: { r: ReleaseCard }) {
       <Lane items={steps(r, t)} />
 
       {r.blocked && (
-        <div className="banner warn"><Icon name="alert" />
-          <span className="grow"><b>{t("release.blockedTitle")}</b> {r.blockedReason}</span>
+        <BlockedBanner title={<b>{t("release.blockedTitle")}</b>} reason={r.blockedReason}>
           {p.retry && <button className="btn sm" disabled={act.isPending} onClick={() => act.mutate("/retry")}>{t("release.retry")}</button>}
-        </div>
+        </BlockedBanner>
       )}
       {r.status === "rolling_back" && (
         <div className="banner warn"><Icon name="undo" /><span className="grow"><b>{t("release.rollingBack")}</b> {r.rollbackReason} {r.rollback ? `· ${t(`rollbackStep.${r.rollback.step || "revert"}`, { defaultValue: r.rollback.step })}` : ""}</span>

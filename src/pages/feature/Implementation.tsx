@@ -12,6 +12,7 @@ import { Icon } from "../../components/Icon";
 import { Empty, Loading, useToast } from "../../components/ui";
 import { AgentMark, Dot } from "../../components/cycle";
 import { Markdown } from "../../components/Markdown";
+import { BlockedBanner } from "../../components/BlockedBanner";
 
 /** Implementation tab (R21): PRs by service with CI and review, and the traceability matrix. */
 export function ImplementationTab({ f }: { f: FeatureCard }) {
@@ -23,7 +24,7 @@ export function ImplementationTab({ f }: { f: FeatureCard }) {
   const nothing = d.services.length === 0 && d.matrix.length === 0;
   return (
     <>
-      {d.workflow?.state === "blocked" && <div className="banner warn"><Icon name="alert" /><span className="grow">{t("impl.blocked")} {d.workflow.lastError}</span></div>}
+      {d.workflow?.state === "blocked" && <BlockedBanner title={t("impl.blocked")} reason={d.workflow.lastError} />}
       {d.workflow?.step === "waiting_human_pr" && <div className="banner info"><Icon name="clock" /><span className="grow">{t("impl.waitingHumanPr")}</span></div>}
       {f.phase !== "released" && f.phase !== "spec" && (
         <div className="banner info"><Icon name="merge" /><span className="grow">{t("impl.notMerged")}</span></div>

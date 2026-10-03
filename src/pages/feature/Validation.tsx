@@ -11,6 +11,7 @@ import { Icon } from "../../components/Icon";
 import { Empty, Loading, Modal, useToast } from "../../components/ui";
 import { Dot, Kpi, KeyList } from "../../components/cycle";
 import { Matrix } from "./Implementation";
+import { BlockedBanner } from "../../components/BlockedBanner";
 
 /** Validation tab (R22–R25): summary, discrepancies, stage, two signatures, return. */
 export function ValidationTab({ f }: { f: FeatureCard }) {
@@ -30,7 +31,7 @@ export function ValidationTab({ f }: { f: FeatureCard }) {
     <>
       {d.state === "waiting_ci" && <div className="banner info"><span className="ring" /><span className="grow">{t("val.waitingCi")}</span></div>}
       {d.state === "waiting_stage_deploy" && <div className="banner info"><span className="ring" /><span className="grow">{t("val.waitingStage")}</span></div>}
-      {d.state === "blocked" && <div className="banner warn"><Icon name="alert" /><span className="grow">{d.lastError}</span></div>}
+      {d.state === "blocked" && <BlockedBanner title="" reason={d.lastError} />}
       {f.release && <div className="banner ok"><Icon name="rocket" /><span className="grow">{t("val.released")} <KeyList keys={[f.release]} /></span></div>}
       <Kpi items={[
         { value: `${passed}/${d.tests.length}`, label: failed ? t("val.kpi.testsFailed", { n: failed }) : t("val.kpi.tests") },

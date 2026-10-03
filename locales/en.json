@@ -530,6 +530,118 @@
       "secretRef": "or a Kubernetes secret (env:NAME)",
       "maxSeconds": "Max execution, seconds",
       "readOnly": "The password is stored encrypted; the database keeps only a reference."
+    },
+    "agent": {
+      "title": "Agent",
+      "status": "Status",
+      "check": "Check",
+      "checkOf": "Check of {name}",
+      "enabled": "Enabled",
+      "scenarios": "Scenarios",
+      "allScenarios": "All scenarios",
+      "connections": {
+        "title": "LLM connections",
+        "hint": "Providers of the agent's models. Only the last characters of a key are shown.",
+        "name": "Name",
+        "models": "Models",
+        "key": "API key",
+        "baseUrl": "API address",
+        "add": "New connection",
+        "empty": "No connections yet. Add one to let the agent work.",
+        "moreTypes": "Other provider types will come later.",
+        "replaceKey": "Replace key",
+        "replaceKeyOf": "New key for {name}",
+        "newKey": "New API key",
+        "keyHint": "The key is stored encrypted; the status is checked again with the next request.",
+        "confirmDelete": "Delete the connection {name}?",
+        "answered": "answered in {ms} ms",
+        "stopped": "Stopped scenarios:",
+        "fix": {
+          "insufficient_balance": "Top up the balance in the provider's console; the agent resumes with the next request.",
+          "auth": "The provider rejected the key. Replace the key of the connection."
+        }
+      },
+      "models": {
+        "title": "Models by scenario",
+        "hint": "Scenarios without their own model use the default model.",
+        "default": "Default",
+        "scenario": "Scenario",
+        "model": "Model",
+        "thinking": "Reasoning",
+        "thinkingOff": "off",
+        "inherit": "Default: {model}",
+        "notSet": "not set",
+        "choose": "Choose a model",
+        "noConnections": "No enabled connection: add one in “LLM connections”.",
+        "saved": "Models saved",
+        "allStages": "All stages"
+      },
+      "skills": {
+        "title": "Skills",
+        "hint": "Instructions the agent loads when needed. Scripts of skills run only in code generation tasks. Every change goes through a pull request to the rules repository.",
+        "skill": "Skill",
+        "add": "New skill",
+        "empty": "No skills yet.",
+        "status": {
+          "active": "Active",
+          "pending_add": "Awaiting approval",
+          "pending_change": "Change awaiting approval",
+          "pending_delete": "Will be deleted"
+        },
+        "approve": "Approve",
+        "withdraw": "Withdraw",
+        "approved": "Change approved",
+        "withdrawn": "Change withdrawn",
+        "proposed": "Pull request opened",
+        "propose": "Open pull request",
+        "confirmDelete": "Propose to delete the skill {name}?",
+        "zip": "Upload zip",
+        "text": "Create from text",
+        "dropZip": "Choose a zip archive with SKILL.md (up to 5 MB)",
+        "scenariosHint": "No scenario selected: the skill is available in all scenarios.",
+        "prHint": "The skill becomes active after the pull request is approved and merged."
+      },
+      "mcp": {
+        "title": "MCP servers",
+        "hint": "External tools for the agent. The built-in hammurapi server is always connected.",
+        "server": "Server",
+        "exposure": "Visibility",
+        "direct": "Always visible",
+        "deferred": "On search",
+        "exposureHint": "Tools “on search” are found by the agent when needed and do not take up the context.",
+        "add": "New MCP server",
+        "headers": "Headers",
+        "headerName": "Header",
+        "headerValue": "Value",
+        "addHeader": "Add header",
+        "scenariosHint": "No scenario selected: the server is available in all scenarios.",
+        "tools": "tools: {count}",
+        "readOnly": "read",
+        "mutates": "changes data",
+        "noTools": "The server reports no tools.",
+        "confirmDelete": "Delete the MCP server {name}?"
+      },
+      "usage": {
+        "title": "Usage",
+        "period": "Period",
+        "day": "Day",
+        "week": "Week",
+        "month": "Month",
+        "cost": "Cost",
+        "tokens": "Tokens",
+        "cache": "From cache",
+        "runs": "Sessions and tasks",
+        "connection": "Connection",
+        "in": "Input",
+        "out": "Output",
+        "empty": "No usage in this period."
+      },
+      "audit": {
+        "title": "Changes",
+        "empty": "No changes yet.",
+        "system": "system",
+        "selfApproved": "self-approved"
+      }
     }
   },
   "errors": {
@@ -611,7 +723,32 @@
     "invalid_json": "Invalid request.",
     "invalid_cursor": "Invalid page.",
     "invalid_limit": "Invalid page size.",
-    "invalid_status": "Unknown status."
+    "invalid_status": "Unknown status.",
+    "agent_not_configured": "The agent is not configured: set a default model in Admin → Agent.",
+    "agent_unavailable": "The agent is unavailable right now. Try again later.",
+    "connection_disabled": "The connection is disabled.",
+    "connection_in_use": "The connection is used by scenarios: choose other models first.",
+    "connection_name_taken": "A connection with this name already exists.",
+    "connection_not_found": "Connection not found.",
+    "default_required": "Choose the default model.",
+    "invalid_connection": "Unknown connection.",
+    "invalid_model": "The connection has no such model.",
+    "invalid_models": "Choose at least one model of the connection.",
+    "invalid_scenario": "Unknown scenario.",
+    "invalid_type": "Unknown connection type.",
+    "invalid_period": "Invalid period.",
+    "invalid_group": "Invalid grouping.",
+    "thinking_not_supported": "The model does not support this reasoning level.",
+    "mcp_builtin": "The built-in hammurapi server cannot be changed.",
+    "mcp_invalid": "Check the address and headers of the MCP server: {reason}",
+    "mcp_name_taken": "An MCP server with this name already exists.",
+    "mcp_not_found": "MCP server not found.",
+    "message_not_found": "Message not found.",
+    "not_failed": "Only a failed message can be repeated.",
+    "skill_change_open": "This skill already has an open change.",
+    "skill_invalid": "The skill is not valid.",
+    "skill_name_conflict": "A skill with this name already exists.",
+    "skill_not_found": "Skill not found."
   },
   "stages": {
     "title": "Stages",
@@ -638,8 +775,13 @@
       "retry_or_rollback": "Retry or roll back",
       "mark_flag": "Feature flag",
       "confirm_release": "Confirm release",
-      "resolve_blocked": "Stopped"
-    }
+      "resolve_blocked": "Stopped",
+      "agent_not_configured": "Set up the agent",
+      "connection_problem": "Connection problem",
+      "mcp_problem": "MCP server problem"
+    },
+    "agent": "Agent",
+    "agentHint": "No model is set for the agent"
   },
   "issueType": {
     "idea": "Idea",
@@ -1039,5 +1181,36 @@
     "moved": "moved",
     "discovery_updated": "Analysis updated",
     "returned_after_rollback": "returned after a rollback"
+  },
+  "llm": {
+    "errors": {
+      "insufficient_balance": "The balance of the connection “{connection}” ran out. Tell your administrator.",
+      "auth": "The connection “{connection}” is not authorized. Tell your administrator.",
+      "rate_limit": "The provider is overloaded, try again later.",
+      "unavailable": "The provider is overloaded, try again later.",
+      "bad_request": "The model did not accept the request.",
+      "context_overflow": "The context is too large.",
+      "agent_crashed": "The agent stopped unexpectedly, try again."
+    },
+    "status": {
+      "unknown": "Not checked",
+      "ok": "Working",
+      "insufficient_balance": "No balance",
+      "auth": "Authorization error",
+      "unavailable": "Unavailable",
+      "disabled": "Disabled",
+      "error": "Error"
+    },
+    "scenario": {
+      "chat": "Chat",
+      "issue_analysis": "Issue analysis",
+      "gate_generation": "Gate generation",
+      "conformance_check": "Conformance check",
+      "codegen": "Code generation",
+      "review_update": "Review updates",
+      "rollback_revert": "Rollback revert"
+    },
+    "retry": "Retry",
+    "theConnection": "LLM"
   }
 }

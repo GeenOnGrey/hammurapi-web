@@ -530,6 +530,118 @@
       "secretRef": "或 Kubernetes 密钥（env:名称）",
       "maxSeconds": "最长执行时间（秒）",
       "readOnly": "密码加密保存；数据库中只保存引用。"
+    },
+    "agent": {
+      "title": "智能体",
+      "status": "状态",
+      "check": "检查",
+      "checkOf": "检查：{name}",
+      "enabled": "已启用",
+      "scenarios": "场景",
+      "allScenarios": "所有场景",
+      "connections": {
+        "title": "LLM 连接",
+        "hint": "智能体模型的提供商。密钥只显示最后几个字符。",
+        "name": "名称",
+        "models": "模型",
+        "key": "API 密钥",
+        "baseUrl": "API 地址",
+        "add": "新建连接",
+        "empty": "还没有连接。添加一个连接后智能体即可工作。",
+        "moreTypes": "其他提供商类型将在以后提供。",
+        "replaceKey": "更换密钥",
+        "replaceKeyOf": "{name} 的新密钥",
+        "newKey": "新 API 密钥",
+        "keyHint": "密钥加密保存；下一次请求时会重新检查状态。",
+        "confirmDelete": "删除连接 {name}？",
+        "answered": "{ms} 毫秒内响应",
+        "stopped": "已停止的场景：",
+        "fix": {
+          "insufficient_balance": "请在提供商控制台充值；智能体将从下一次请求起恢复工作。",
+          "auth": "提供商拒绝了该密钥。请更换连接的密钥。"
+        }
+      },
+      "models": {
+        "title": "按场景的模型",
+        "hint": "没有单独模型的场景使用默认模型。",
+        "default": "默认",
+        "scenario": "场景",
+        "model": "模型",
+        "thinking": "推理",
+        "thinkingOff": "关闭",
+        "inherit": "默认：{model}",
+        "notSet": "未设置",
+        "choose": "选择模型",
+        "noConnections": "没有已启用的连接：请在“LLM 连接”中添加。",
+        "saved": "模型已保存",
+        "allStages": "所有阶段"
+      },
+      "skills": {
+        "title": "技能",
+        "hint": "智能体按需加载的说明。技能脚本只在代码生成任务中运行。每次修改都会以拉取请求提交到规则仓库。",
+        "skill": "技能",
+        "add": "新建技能",
+        "empty": "还没有技能。",
+        "status": {
+          "active": "已启用",
+          "pending_add": "等待批准",
+          "pending_change": "修改等待批准",
+          "pending_delete": "将被删除"
+        },
+        "approve": "批准",
+        "withdraw": "撤回",
+        "approved": "修改已批准",
+        "withdrawn": "修改已撤回",
+        "proposed": "已打开拉取请求",
+        "propose": "打开拉取请求",
+        "confirmDelete": "提议删除技能 {name}？",
+        "zip": "上传 zip",
+        "text": "从文本创建",
+        "dropZip": "选择包含 SKILL.md 的 zip 压缩包（不超过 5 MB）",
+        "scenariosHint": "未选择场景时，技能在所有场景中可用。",
+        "prHint": "拉取请求被批准并合并后，技能才会生效。"
+      },
+      "mcp": {
+        "title": "MCP 服务器",
+        "hint": "智能体的外部工具。内置服务器 hammurapi 始终连接。",
+        "server": "服务器",
+        "exposure": "可见性",
+        "direct": "始终可见",
+        "deferred": "按搜索",
+        "exposureHint": "“按搜索”的工具由智能体按需查找，不占用上下文。",
+        "add": "新建 MCP 服务器",
+        "headers": "请求头",
+        "headerName": "请求头",
+        "headerValue": "值",
+        "addHeader": "添加请求头",
+        "scenariosHint": "未选择场景时，服务器在所有场景中可用。",
+        "tools": "工具：{count}",
+        "readOnly": "只读",
+        "mutates": "修改数据",
+        "noTools": "服务器未报告任何工具。",
+        "confirmDelete": "删除 MCP 服务器 {name}？"
+      },
+      "usage": {
+        "title": "用量",
+        "period": "周期",
+        "day": "日",
+        "week": "周",
+        "month": "月",
+        "cost": "费用",
+        "tokens": "令牌",
+        "cache": "缓存命中",
+        "runs": "会话和任务",
+        "connection": "连接",
+        "in": "输入",
+        "out": "输出",
+        "empty": "该周期内没有用量。"
+      },
+      "audit": {
+        "title": "变更",
+        "empty": "还没有变更。",
+        "system": "系统",
+        "selfApproved": "作者自行批准"
+      }
     }
   },
   "errors": {
@@ -611,7 +723,32 @@
     "invalid_json": "无效请求。",
     "invalid_cursor": "无效页面。",
     "invalid_limit": "无效的每页数量。",
-    "invalid_status": "未知状态。"
+    "invalid_status": "未知状态。",
+    "agent_not_configured": "智能体尚未配置：请在 管理 → 智能体 中选择默认模型。",
+    "agent_unavailable": "智能体暂时不可用。请稍后再试。",
+    "connection_disabled": "连接已停用。",
+    "connection_in_use": "该连接正被场景使用：请先为它们选择其他模型。",
+    "connection_name_taken": "已存在同名连接。",
+    "connection_not_found": "未找到连接。",
+    "default_required": "请选择默认模型。",
+    "invalid_connection": "未知连接。",
+    "invalid_model": "该连接没有此模型。",
+    "invalid_models": "请至少选择连接的一个模型。",
+    "invalid_scenario": "未知场景。",
+    "invalid_type": "未知连接类型。",
+    "invalid_period": "周期无效。",
+    "invalid_group": "分组无效。",
+    "thinking_not_supported": "该模型不支持此推理级别。",
+    "mcp_builtin": "内置服务器 hammurapi 不能修改。",
+    "mcp_invalid": "请检查 MCP 服务器的地址和请求头：{reason}",
+    "mcp_name_taken": "已存在同名 MCP 服务器。",
+    "mcp_not_found": "未找到 MCP 服务器。",
+    "message_not_found": "未找到消息。",
+    "not_failed": "只能重试失败的消息。",
+    "skill_change_open": "该技能已有未完成的修改。",
+    "skill_invalid": "技能无效。",
+    "skill_name_conflict": "已存在同名技能。",
+    "skill_not_found": "未找到技能。"
   },
   "stages": {
     "title": "阶段",
@@ -638,8 +775,13 @@
       "retry_or_rollback": "重试或回滚",
       "mark_flag": "功能开关",
       "confirm_release": "确认发布",
-      "resolve_blocked": "已停止"
-    }
+      "resolve_blocked": "已停止",
+      "agent_not_configured": "配置智能体",
+      "connection_problem": "连接问题",
+      "mcp_problem": "MCP 服务器问题"
+    },
+    "agent": "智能体",
+    "agentHint": "尚未为智能体选择模型"
   },
   "issueType": {
     "idea": "想法",
@@ -1039,5 +1181,36 @@
     "moved": "已迁移",
     "discovery_updated": "分析已更新",
     "returned_after_rollback": "回滚后退回"
+  },
+  "llm": {
+    "errors": {
+      "insufficient_balance": "连接“{connection}”的余额已用完。请告知管理员。",
+      "auth": "连接“{connection}”未获授权。请告知管理员。",
+      "rate_limit": "提供商负载过高，请稍后再试。",
+      "unavailable": "提供商负载过高，请稍后再试。",
+      "bad_request": "模型未接受该请求。",
+      "context_overflow": "上下文过大。",
+      "agent_crashed": "智能体意外停止，请重试。"
+    },
+    "status": {
+      "unknown": "未检查",
+      "ok": "正常",
+      "insufficient_balance": "余额不足",
+      "auth": "授权错误",
+      "unavailable": "不可用",
+      "disabled": "已停用",
+      "error": "错误"
+    },
+    "scenario": {
+      "chat": "聊天",
+      "issue_analysis": "任务分析",
+      "gate_generation": "生成关卡",
+      "conformance_check": "一致性检查",
+      "codegen": "代码生成",
+      "review_update": "按评审修改",
+      "rollback_revert": "回滚发布"
+    },
+    "retry": "重试",
+    "theConnection": "LLM"
   }
 }
