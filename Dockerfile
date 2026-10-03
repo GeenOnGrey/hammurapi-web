@@ -2,7 +2,7 @@
 #   API_BASE_URL  — адрес API в /config.json (пусто — тот же origin);
 #   API_UPSTREAM  — если задан, nginx проксирует /api, /admin/api, /hooks на этот
 #                   адрес (docker compose); без него отдаётся только статика, а
-#                   API — на своём домене (Kubernetes, PLT.INFRA-0002).
+#                   API — на своём домене (Kubernetes, HMR.INFRA-0002).
 FROM node:24-alpine AS build
 WORKDIR /src
 COPY package.json package-lock.json ./

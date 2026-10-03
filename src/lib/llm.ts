@@ -1,6 +1,6 @@
 import type { TFunction } from "i18next";
 
-/** The user's text of an LLM error class (PLT.HMR-0004 design §4). */
+/** The user's text of an LLM error class (HMR.CMN-0004 design §4). */
 export function llmErrorText(t: TFunction, errorClass: string, connection = ""): string {
   return t(`llm.errors.${errorClass}`, { connection, defaultValue: t("llm.errors.bad_request") });
 }

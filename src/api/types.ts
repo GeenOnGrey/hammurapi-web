@@ -11,7 +11,7 @@ export type IssueStatus = "new" | "discovery" | "verification" | "accepted" | "r
 export type ReleaseStatus = "merging" | "deploying" | "enabling_flags" | "evaluating" | "awaiting_confirmation" | "succeeded" | "rolling_back" | "rolled_back";
 /** Who approves an area: product and design — product experts, the rest — technical. */
 export const approverKind = (a: Area): ExpertKind => (a === "product" || a === "design" ? "product" : "technical");
-/** Generated gates are written by the agent (PLT.HMR-0002 R12–R14). */
+/** Generated gates are written by the agent (HMR.CMN-0002 R12–R14). */
 export const isGenerated = (a: Area) => a === "tech" || a === "qa";
 export type Tone = "business" | "friendly" | "concise" | "mentor";
 export type ChatMode = "general" | "spec";
@@ -246,7 +246,7 @@ export interface ChatMessage {
   content: string;
   isVoice: boolean;
   attachments: AttachmentRef[];
-  /** PLT.HMR-0004: the model of an answer, the error class of a failed message, the repeated message. */
+  /** HMR.CMN-0004: the model of an answer, the error class of a failed message, the repeated message. */
   model?: string | null;
   errorClass?: string | null;
   retryOf?: string | null;
@@ -339,7 +339,7 @@ export interface ImportJob {
   results: ImportResult[];
 }
 
-// ─── PLT.HMR-0002: the closed cycle ──────────────────────────────────
+// ─── HMR.CMN-0002: the closed cycle ──────────────────────────────────
 
 export interface Activity {
   id: string;
@@ -582,7 +582,7 @@ export interface Focus {
   research: FocusItem[];
   development: FocusItem[];
   release: FocusItem[];
-  /** Global administrators: the agent needs attention (PLT.HMR-0004 R21). */
+  /** Global administrators: the agent needs attention (HMR.CMN-0004 R21). */
   agent?: FocusItem[];
 }
 
@@ -665,7 +665,7 @@ export interface CycleSettings {
   runnerExecutor: string;
 }
 
-// ─── PLT.HMR-0004: the agent (Pi) and its configuration ───────────
+// ─── HMR.CMN-0004: the agent (Pi) and its configuration ───────────
 
 export type AgentScenario = "chat" | "issue_analysis" | "gate_generation" | "conformance_check" | "codegen" | "review_update" | "rollback_revert";
 export const AGENT_SCENARIOS: AgentScenario[] = ["chat", "issue_analysis", "gate_generation", "conformance_check", "codegen", "review_update", "rollback_revert"];

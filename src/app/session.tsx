@@ -1,7 +1,21 @@
-import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
-import { approverKind, type Area, type ContextType, type ExpertKind, type Me, type Profile, type PublicConfig } from "../api/types";
+import {
+  createContext,
+  useContext,
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react";
+import {
+  approverKind,
+  type Area,
+  type ContextType,
+  type ExpertKind,
+  type Me,
+  type Profile,
+  type PublicConfig,
+} from "../api/types";
 
-// Roles (PLT.HMR-0002 §5): product and technical experts of domains, owners of
+// Roles (HMR.CMN-0002 §5): product and technical experts of domains, owners of
 // services, area administrators and the global administrator. Everybody reads
 // everything and creates issues.
 export interface Session {
@@ -19,12 +33,27 @@ export interface Session {
 
 const SessionCtx = createContext<Session | null>(null);
 
-export function SessionProvider({ me, profile, config, children }: { me: Me; profile: Profile; config: PublicConfig; children: ReactNode }) {
+export function SessionProvider({
+  me,
+  profile,
+  config,
+  children,
+}: {
+  me: Me;
+  profile: Profile;
+  config: PublicConfig;
+  children: ReactNode;
+}) {
   const value = useMemo<Session>(() => {
-    const kinds = (domain: string) => me.experts.find((e) => e.domain === domain)?.kinds ?? [];
-    const hasExpert = (domain: string, kind: ExpertKind) => kinds(domain).includes(kind);
+    const kinds = (domain: string) =>
+      me.experts.find((e) => e.domain === domain)?.kinds ?? [];
+    const hasExpert = (domain: string, kind: ExpertKind) =>
+      kinds(domain).includes(kind);
     return {
-      me, profile, config, hasExpert,
+      me,
+      profile,
+      config,
+      hasExpert,
       isExpertOf: (domain) => kinds(domain).length > 0,
       canApprove: (domain, area) => hasExpert(domain, approverKind(area)),
       isAnyExpert: me.experts.some((e) => e.kinds.length > 0),
@@ -69,22 +98,35 @@ export function ChatProvider({ children }: { children: ReactNode }) {
   const [area, setArea] = useState<Area | null>(null);
   const [open, setOpen] = useState(false);
   const [outbox, setOutbox] = useState<string | null>(null);
-  const value = useMemo<ChatContextValue>(() => ({
-    subject, area, open, setOpen, outbox,
-    setSubject: (s, a = null) => {
-      setS((prev) => (prev?.key === s?.key && prev?.title === s?.title && prev?.type === s?.type ? prev : s));
-      setArea(a);
-    },
-    send: (text) => {
-      setOutbox(text);
-      setOpen(true);
-    },
-    takeOutbox: () => {
-      const o = outbox;
-      if (o !== null) setOutbox(null);
-      return o;
-    },
-  }), [subject, area, open, outbox]);
+  const value = useMemo<ChatContextValue>(
+    () => ({
+      subject,
+      area,
+      open,
+      setOpen,
+      outbox,
+      setSubject: (s, a = null) => {
+        setS((prev) =>
+          prev?.key === s?.key &&
+          prev?.title === s?.title &&
+          prev?.type === s?.type
+            ? prev
+            : s,
+        );
+        setArea(a);
+      },
+      send: (text) => {
+        setOutbox(text);
+        setOpen(true);
+      },
+      takeOutbox: () => {
+        const o = outbox;
+        if (o !== null) setOutbox(null);
+        return o;
+      },
+    }),
+    [subject, area, open, outbox],
+  );
   return <ChatCtx.Provider value={value}>{children}</ChatCtx.Provider>;
 }
 

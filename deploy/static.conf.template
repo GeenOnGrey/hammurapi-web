@@ -1,6 +1,6 @@
 # Hammurapi web: только статика SPA. API — на отдельном домене (API_BASE_URL в
 # /config.json), маршрутизацию делает ingress. Используется, когда API_UPSTREAM
-# не задан (Kubernetes, PLT.INFRA-0002).
+# не задан (Kubernetes, HMR.INFRA-0002).
 server {
     listen 8080;
     server_name _;

@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Icon } from "../components/Icon";
 import { Avatar } from "../components/ui";
@@ -8,17 +14,22 @@ import { NewIssueModal } from "../pages/NewIssue";
 import { ProfileMenu } from "./ProfileMenu";
 import { useChatContext, useSession } from "./session";
 
-// Stages of the cycle are the navigation (PLT.HMR-0002 R36): General,
-// Discovery, Development, Delivery (PLT.HMR-0003); the main action is "New issue".
+// Stages of the cycle are the navigation (HMR.CMN-0002 R36): General,
+// Discovery, Development, Delivery (HMR.CMN-0003); the main action is "New issue".
 export const STAGES = [
   { to: "/", key: "general", match: ["/", "/overview"] },
   { to: "/research", key: "research", match: ["/research", "/issues"] },
-  { to: "/development", key: "development", match: ["/development", "/features", "/imports"] },
+  {
+    to: "/development",
+    key: "development",
+    match: ["/development", "/features", "/imports"],
+  },
   { to: "/delivery", key: "delivery", match: ["/delivery", "/releases"] },
 ] as const;
 
 export function stageOf(path: string): string {
-  for (const s of STAGES.slice(1)) if (s.match.some((m) => path.startsWith(m))) return s.key;
+  for (const s of STAGES.slice(1))
+    if (s.match.some((m) => path.startsWith(m))) return s.key;
   return path.startsWith("/admin") ? "" : "general";
 }
 
@@ -40,11 +51,17 @@ export function Shell() {
     if (v.startsWith("ISS.")) navigate(`/issues/${v}`);
     else if (v.startsWith("FTR.")) navigate(`/features/${v}`);
     else if (v.startsWith("RLS.")) navigate(`/releases/${v}`);
-    else navigate(`/development?q=${encodeURIComponent(v)}&domain=all&status=all`);
+    else
+      navigate(`/development?q=${encodeURIComponent(v)}&domain=all&status=all`);
   };
 
   const stageLinks = STAGES.map((s) => (
-    <NavLink key={s.key} to={s.to} end={s.to === "/"} className={current === s.key ? "on" : undefined}>
+    <NavLink
+      key={s.key}
+      to={s.to}
+      end={s.to === "/"}
+      className={current === s.key ? "on" : undefined}
+    >
       {t(`stages.${s.key}`)}
     </NavLink>
   ));
@@ -56,18 +73,30 @@ export function Shell() {
           <img src="/logo.png" alt="" />
           <span className="hide-m">Hammurapi</span>
         </Link>
-        <nav className="nav hide-m" aria-label={t("stages.title")}>{stageLinks}</nav>
+        <nav className="nav hide-m" aria-label={t("stages.title")}>
+          {stageLinks}
+        </nav>
         <form className="search" role="search" onSubmit={submitSearch}>
           <Icon name="search" />
-          <input value={q} onChange={(e) => setQ(e.target.value)} placeholder={t("top.search")} aria-label={t("top.search")} />
+          <input
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+            placeholder={t("top.search")}
+            aria-label={t("top.search")}
+          />
         </form>
         <div className="top-actions">
           <button className="btn primary sm" onClick={() => setCreating(true)}>
             <Icon name="plus" />
             <span className="hide-m">{t("top.newIssue")}</span>
           </button>
-          <button className="avatar" style={menu ? { boxShadow: "0 0 0 2px var(--violet)" } : undefined}
-            onClick={() => setMenu((v) => !v)} aria-label={t("profile.title")} aria-expanded={menu}>
+          <button
+            className="avatar"
+            style={menu ? { boxShadow: "0 0 0 2px var(--violet)" } : undefined}
+            onClick={() => setMenu((v) => !v)}
+            aria-label={t("profile.title")}
+            aria-expanded={menu}
+          >
             <Avatar name={me.displayName} url={me.avatarUrl} />
           </button>
         </div>
@@ -77,9 +106,14 @@ export function Shell() {
         <Outlet />
         <ChatPanel />
       </div>
-      <nav className="bnav show-m" aria-label={t("stages.title")}>{stageLinks}</nav>
+      <nav className="bnav show-m" aria-label={t("stages.title")}>
+        {stageLinks}
+      </nav>
       {!chat.open && (
-        <button className="btn primary chat-fab" onClick={() => chat.setOpen(true)}>
+        <button
+          className="btn primary chat-fab"
+          onClick={() => chat.setOpen(true)}
+        >
           <Icon name="msg" />
           {profile.agentName}
         </button>

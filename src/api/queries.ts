@@ -39,7 +39,7 @@ export const keys = {
   catalog: ["admin", "catalog"] as const,
   deploy: (env: string) => ["admin", "deploy", env] as const,
   metricSources: ["admin", "metricSources"] as const,
-  // PLT.HMR-0004: the Agent section and the chat model.
+  // HMR.CMN-0004: the Agent section and the chat model.
   agentConnections: ["admin", "agent", "connections"] as const,
   agentModels: ["admin", "agent", "models"] as const,
   agentResolved: ["admin", "agent", "resolved"] as const,
@@ -150,7 +150,7 @@ export function invalidateFeature(qc: QueryClient, id: string) {
 
 export function invalidateCycle(qc: QueryClient) {
   for (const k of [keys.focus, keys.overview(), keys.issues(), keys.features(), keys.releases(), ["issue"], ["release"], ["feature"],
-    ["discovery"], ["implementation"], ["validation"], ["requirements"]]) {
+  ["discovery"], ["implementation"], ["validation"], ["requirements"]]) {
     qc.invalidateQueries({ queryKey: k });
   }
 }

@@ -74,7 +74,7 @@ buffering disabled for the SSE stream and a 60 MB upload limit for archive impor
 Without `API_UPSTREAM` the image only serves static files, and the API lives on its own domain:
 the container writes `/config.json` from `API_BASE_URL` at start (`{ "apiBaseUrl": … }`), the
 SPA reads it before the first request and calls the API with credentials. One image fits any
-domain (PLT.INFRA-0002).
+domain (HMR.INFRA-0002).
 
 ```sh
 docker run -p 8080:8080 -e API_BASE_URL=https://api.example.org hammurapi-web
