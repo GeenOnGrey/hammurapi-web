@@ -1,4 +1,5 @@
-import { Navigate, NavLink, Route, Routes } from "react-router-dom";
+import { useState } from "react";
+import { Navigate, NavLink, Route, Routes, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useSession } from "../../app/session";
 import { Icon } from "../../components/Icon";
@@ -26,6 +27,11 @@ import { adminPath } from "./paths";
 export function AdminPage() {
   const { t } = useTranslation();
   const { me, isAnyAdmin } = useSession();
+  // The Agent group is open on its own pages; a click folds or unfolds it.
+  const onAgent = useLocation().pathname.startsWith("/admin/agent/");
+  const [toggled, setToggled] = useState<boolean | null>(null);
+  const agentOpen = toggled ?? onAgent;
+  const setAgentOpen = (f: (v: boolean) => boolean) => setToggled(f(agentOpen));
   if (!isAnyAdmin) {
     return (
       <main className="main">
@@ -82,24 +88,30 @@ export function AdminPage() {
         )}
         {global && (
           <>
-            <div className="lab" style={{ marginTop: 14 }}>
-              <Icon name="cpu" size={13} /> {t("admin.agent.title")}
-            </div>
-            <NavLink className="sub" to={adminPath("agent/connections")}>
-              {t("admin.agent.connections.title")}
-            </NavLink>
-            <NavLink className="sub" to={adminPath("agent/models")}>
-              {t("admin.agent.models.title")}
-            </NavLink>
-            <NavLink className="sub" to={adminPath("agent/skills")}>
-              {t("admin.agent.skills.title")}
-            </NavLink>
-            <NavLink className="sub" to={adminPath("agent/mcp")}>
-              {t("admin.agent.mcp.title")}
-            </NavLink>
-            <NavLink className="sub" to={adminPath("agent/usage")}>
-              {t("admin.agent.usage.title")}
-            </NavLink>
+            <button type="button" className="sidegroup" aria-expanded={agentOpen} onClick={() => setAgentOpen((v) => !v)}>
+              <Icon name="cpu" />
+              {t("admin.agent.title")}
+              <span className={`chev${agentOpen ? " open" : ""}`} aria-hidden>›</span>
+            </button>
+            {agentOpen && (
+              <>
+              <NavLink className="sub" to={adminPath("agent/connections")}>
+                {t("admin.agent.connections.title")}
+              </NavLink>
+              <NavLink className="sub" to={adminPath("agent/models")}>
+                {t("admin.agent.models.title")}
+              </NavLink>
+              <NavLink className="sub" to={adminPath("agent/skills")}>
+                {t("admin.agent.skills.title")}
+              </NavLink>
+              <NavLink className="sub" to={adminPath("agent/mcp")}>
+                {t("admin.agent.mcp.title")}
+              </NavLink>
+              <NavLink className="sub" to={adminPath("agent/usage")}>
+                {t("admin.agent.usage.title")}
+              </NavLink>
+              </>
+            )}
           </>
         )}
       </nav>

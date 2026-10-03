@@ -1178,7 +1178,8 @@ textarea.inp {
 }
 .seg {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
   background: var(--surface-2);
   border: 1px solid var(--border);
   border-radius: var(--r-m);
@@ -2525,3 +2526,12 @@ select.inp.inherit {
   .anchorbtn { display: none; }
 }
 .codeblock { font-family: var(--mono); font-size: 12px; background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--r-s); padding: 8px 10px; overflow-x: auto; margin: 6px 0; white-space: pre; }
+
+/* The Agent group header looks like a menu item (.side a). */
+.side .sidegroup { display: flex; align-items: center; gap: 8px; width: 100%; padding: 8px 10px; border: 0; border-radius: var(--r-m); background: none; color: var(--text-2); font: inherit; font-size: 14px; text-align: left; cursor: pointer; }
+.side .sidegroup:hover { background: var(--surface); }
+.side .sidegroup .chev { margin-left: auto; transition: transform .15s; }
+.side .sidegroup .chev.open { transform: rotate(90deg); }
+/* The search sits at the right, next to "New issue". */
+.topbar > .search { margin-left: auto; }
+.topbar > .search + .top-actions { margin-left: 0; }

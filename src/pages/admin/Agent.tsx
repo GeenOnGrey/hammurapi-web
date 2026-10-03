@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
 import { api, qs } from "../../api/client";
 import { keys } from "../../api/queries";
 import { AGENT_SCENARIOS, SCENARIO_STAGE } from "../../api/types";
@@ -640,6 +641,17 @@ function MCPModal({ s, onClose, onSaved }: { s: MCPServerInfo | null; onClose: (
 
 // ─── usage ───────────────────────────────────────────────────────────
 
+// Usage recorded before FTR.HMR.CMN-0004 has no scenario, only its old context.
+const LEGACY_CONTEXT: Record<string, string> = {
+  discovery: "stages.research", gate: "llm.scenario.gate_generation", check: "llm.scenario.conformance_check",
+  task: "llm.scenario.codegen", codegen: "llm.scenario.codegen",
+};
+
+function usageLabel(t: TFunction, key: string): string {
+  if (LEGACY_CONTEXT[key]) return t(LEGACY_CONTEXT[key]);
+  return t(`llm.scenario.${key}`, { defaultValue: key });
+}
+
 const PERIODS = { day: 1, week: 7, month: 30 } as const;
 type Period = keyof typeof PERIODS;
 
@@ -693,7 +705,7 @@ export function AgentUsageAdmin() {
         <div className="usagebars">
           {byScenario.data.rows.map((r) => (
             <div key={r.key.scenario}>
-              <span>{t(`llm.scenario.${r.key.scenario}`, { defaultValue: r.key.scenario })}</span>
+              <span>{usageLabel(t, r.key.scenario)}</span>
               <div className="bar"><i style={{ width: `${maxCost > 0 ? (r.costUsd / maxCost) * 100 : 0}%` }} /></div>
               <span className="mono small">{usd.format(r.costUsd)}</span>
             </div>
