@@ -2564,6 +2564,9 @@ select.inp.inherit {
 .side .sidegroup:hover { background: var(--surface); }
 .side .sidegroup .chev { margin-left: auto; transition: transform .15s; }
 .side .sidegroup .chev.open { transform: rotate(90deg); }
-/* The search sits at the right, next to "New issue". */
-.topbar > .search { margin-left: auto; }
-.topbar > .search + .top-actions { margin-left: 0; }
+/* The search sits at the right, next to "New issue". On phones the search is
+   hidden and .top-actions keeps its own margin-left: auto. */
+@media (min-width: 901px) {
+  .topbar > .search { margin-left: auto; }
+  .topbar > .search + .top-actions { margin-left: 0; }
+}
